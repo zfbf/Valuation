@@ -1,0 +1,4 @@
+Para fazer simulações, ou seja, análises horizontais e verticais de
+simulações, poderia-se
+
+Poderia-se ter um tipo de lançamento chamado simulação

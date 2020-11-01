@@ -1,0 +1,13 @@
+1 - Criar estrutura de diretórios
+2 - Criar a classe Empresa
+3 - Criar a classe DemonstrativosFinanceiros
+4 - Criar a classe DemonstrativoFinanceiro
+5 - Criar a classe BalancoPatrimonial
+6 - Criar a classe GrupoContas
+7 - Criar a classe Ativo:GrupoContas
+8 - Criar a classe Passivo:GrupoContas
+9 - Criar a classe PatrimonioLiquido:GrupoContas
+10 - Criar a classe ContaPatrimonial
+11 - Criar várias contas patrimoniais de cada grupo de contas
+12 - Criar vários métodos em BalancoPatrimonial para alimentar as contas patrimoniais
+ 
