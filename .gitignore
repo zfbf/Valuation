@@ -3,3 +3,4 @@ venv/
 *.log
 *.pyc
 *.pyo
+__pycache__/
