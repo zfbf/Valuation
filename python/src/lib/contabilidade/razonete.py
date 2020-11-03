@@ -1,9 +1,7 @@
-from datetime import datetime
-from functools import reduce
-
-from ..contabilidade.lancamento_contabil import LancamentoContabil
-
-
+#
+# O :Razonete foi pensado para contar listas de :LancamentoContabil,
+# uma para débitos e outra para créditos.
+#
 class Razonete:
     def __init__(self):
         super().__init__()

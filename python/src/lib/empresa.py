@@ -1,5 +1,5 @@
-import src.lib.utils as utils
-from src.lib.contabilidade.ciclo_contabil.ciclo_contabil_anual import CicloContabilAnual
+from .contabilidade.ciclo_contabil.ciclo_contabil_anual import CicloContabilAnual
+
 
 #
 # Para facilitar o processo de analise, se faz importante que um objeto :Empresa
@@ -7,8 +7,6 @@ from src.lib.contabilidade.ciclo_contabil.ciclo_contabil_anual import CicloConta
 # um outro plano de contas, então um outro objeto seria criado com este outro
 # plano de contas.
 #
-
-
 class Empresa:
 
     def __init__(self, nome):
@@ -18,8 +16,9 @@ class Empresa:
         self.plano_de_contas = None
 
     def init_ciclos_contabeis_anuais(self, ano_inicio, ano_fim):
-        self.ciclos_contabeis_anuais = [CicloContabilAnual(ano, self.plano_de_contas)
-                                        for ano in range(ano_inicio, ano_fim + 1)]
+        self.ciclos_contabeis_anuais = {
+                str(ano): CicloContabilAnual(ano, self.plano_de_contas)
+                for ano in range(ano_inicio, ano_fim + 1)}
 
     def get_ciclos_contabeis_anuais(self):
         return self.ciclos_contabeis_anuais
@@ -102,6 +101,10 @@ class Empresa:
 
         return linhas_ativo_nao_circulante
 
+    def __str__(self):
+        repr = self.nome
+        return repr
+
 
 
 
@@ -134,6 +137,3 @@ if __name__ == '__main__':
     bp_2019.ativo.nao_circulante.add_conta(investimentos_2019)
     valor = klabin.get_valor_conta_ativo_nao_circulante(2019, 'participacao_em_controladas')
     print('valor: {:.2f}'.format(valor))
-
-
-

@@ -1,4 +1,4 @@
-from src.lib.contabilidade.grupo_contas import GrupoContas
+from .grupo_contas import GrupoContas
 
 
 class AtivoNaoCirculante(GrupoContas):

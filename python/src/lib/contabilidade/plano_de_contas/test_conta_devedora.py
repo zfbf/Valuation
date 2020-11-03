@@ -1,7 +1,7 @@
 import unittest
 
 from .conta_devedora import ContaDevedora
-from .lancamento_contabil import LancamentoContabil
+from ..lancamento_contabil import LancamentoContabil
 
 
 class TestContaDevedora(unittest.TestCase):

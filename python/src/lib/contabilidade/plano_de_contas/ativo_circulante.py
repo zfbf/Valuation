@@ -1,5 +1,5 @@
-from src.lib.contabilidade.conta import Conta
-from src.lib.contabilidade.grupo_contas import GrupoContas
+from .conta_devedora import ContaDevedora
+from .grupo_contas import GrupoContas
 
 
 class AtivoCirculante(GrupoContas):
@@ -8,14 +8,7 @@ class AtivoCirculante(GrupoContas):
         self.init_conta_caixa()
 
     def init_conta_caixa(self):
-        self.add_conta(Conta('caixa', 'caixa'))
+        self.add_conta(ContaDevedora('caixa', 'caixa'))
 
     def rename_conta_caixa(self, nome):
         self.get_conta('caixa').rename_conta(nome)
-
-
-
-
-if __name__ == '__main__':
-    ativo_circulante = AtivoCirculante()
-    print(ativo_circulante)

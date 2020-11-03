@@ -23,7 +23,7 @@ class CicloContabil(ABC):
         self.partidas_dobradas.add(partida_dobrada)
 
     def __str__(self):
-        repr = "Exercício Social - {:s}".format(self.get_identificador())
+        repr = "\nExercício Social - {:s}".format(self.get_identificador())
         repr += "\n\tInício: {}".format(self.get_data_inicio().strftime('%d/%m/%Y'))
         repr += "\n\tInício: {}".format(self.get_data_fim().strftime('%d/%m/%Y'))
         return repr

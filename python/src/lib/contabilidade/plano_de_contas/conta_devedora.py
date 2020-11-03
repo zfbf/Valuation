@@ -1,5 +1,5 @@
 from .conta import Conta
-from .lancamento_contabil import LancamentoContabil
+from ..lancamento_contabil import LancamentoContabil
 #
 # Incorporar listas de débitos e créditos
 # criar atributo para natureza
@@ -33,12 +33,12 @@ class ContaDevedora(Conta):
                 valor_ajuste = saldo - saldo_atual
                 lancamento = LancamentoContabil(valor=valor_ajuste,
                                                 comentario=comentario)
-                super().add_debito(lancamento)
+                self.increase_saldo(lancamento)
             else:
                 valor_ajuste = saldo_atual - saldo
                 lancamento = LancamentoContabil(valor=valor_ajuste,
                                                 comentario=comentario)
-                super().add_credito(lancamento)
+                self.decrease_saldo(lancamento)
 
     def increase_saldo(self, lancamento):
         super().add_debito(lancamento)
