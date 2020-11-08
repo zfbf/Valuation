@@ -64,5 +64,6 @@ class TestConta(unittest.TestCase):
 
     def test_get_codigos_ascendentes(self):
         codigos_ascendentes = self.dummy.get_codigos_ascendentes()
-        print(codigos_ascendentes)
-        print('len(codigos_ascendentes): {}'.format(len(codigos_ascendentes)))
+        self.assertEqual(len(codigos_ascendentes), 2)
+        self.assertEqual(codigos_ascendentes[0], 'grupo_dummy_a')
+        self.assertEqual(codigos_ascendentes[1], 'grupo_dummy_a1')

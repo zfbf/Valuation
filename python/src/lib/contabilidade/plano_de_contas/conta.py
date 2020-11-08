@@ -27,20 +27,12 @@ class Conta(ABC, Razonete):
     def is_saldo_equals(self, valor):
         return abs(self.get_saldo() - valor) < 0.00001
 
-    def get_codigos_ascendentes(self, codigos_ascendentes=[], i=1):
-        print('Início - get_codigos_ascendentes, i: {}'.format(i))
-        print('Início - codigo: {}'.format(self.codigo))
-        print('Início - codigos_ascendentes: {}'.format(codigos_ascendentes))
-
+    def get_codigos_ascendentes(self, codigos_ascendentes=[]):
         if self.parent:
-            self.parent.get_codigos_ascendentes(codigos_ascendentes, i + 1)
+            self.parent.get_codigos_ascendentes(codigos_ascendentes)
             codigos_ascendentes.append(self.codigo)
         else:
             codigos_ascendentes.append(self.codigo)
-
-        print('Final - get_codigos_ascendentes, i: {}'.format(i))
-        print('Final - codigo: {}'.format(self.codigo))
-        print('Final - codigos_ascendentes: {}'.format(codigos_ascendentes))
 
         return codigos_ascendentes[:-1]
 
