@@ -2,8 +2,8 @@ from .conta import Conta
 
 
 class GrupoContas(Conta):
-    def __init__(self, codigo, nome):
-        super().__init__(codigo, nome)
+    def __init__(self, codigo, nome, parent):
+        super().__init__(codigo, nome, parent)
         self.contas = []
 
     def add_conta(self, conta):

@@ -1,13 +1,13 @@
 import unittest
 
-from .otp_factory import OtpFactory
+from .otp_ciclo_contabil_anual_factory import OtpCicloContabilAnualFactory
 
 
-class TestOtpFactory(unittest.TestCase):
+class TestOtpCicloContabilAnualFactory(unittest.TestCase):
     print_to_stdout = False
 
     def setUp(self):
-        self.otp_factory = OtpFactory()
+        self.otp_factory = OtpCicloContabilAnualFactory()
 
     def test_execute(self):
         self.otp_factory.execute()

@@ -16,13 +16,14 @@ class PlanoDeContasOtp(PlanoDeContas):
                ('outros', 'Outros ativos'))
 
         for pars in aux:
-            self.ativo.circulante.add_conta(ContaDevedora(pars[0], pars[1]))
+            self.ativo.circulante.add_conta(ContaDevedora(
+                    pars[0], pars[1], self.ativo.circulante))
 
         self.ativo.circulante.rename_conta_caixa('Caixa e equivalentes de caixa')
 
     def init_contas_ativo_nao_circulante(self):
-        realizavel_a_longo_prazo = GrupoContas(
-                'realizavel_a_longo_prazo', 'Realizável a longo prazo')
+        realizavel_a_longo_prazo = GrupoContas('realizavel_a_longo_prazo',
+                'Realizável a longo prazo', self.ativo.nao_circulante)
         aux = (('mantidos_para_negociacao', 'Ativos não circulantes mantidos para negociação'),
                ('aplicacoes_financeiras', 'Aplicações financeiras'),
                ('contas_a_receber', 'Contas a receber'),
@@ -32,7 +33,8 @@ class PlanoDeContasOtp(PlanoDeContas):
                ('outros', 'Outros ativos'))
 
         for pars in aux:
-            realizavel_a_longo_prazo.add_conta(ContaDevedora(pars[0], pars[1]))
+            realizavel_a_longo_prazo.add_conta(ContaDevedora(
+                    pars[0], pars[1], self.ativo.nao_circulante))
 
         self.ativo.nao_circulante.add_conta(realizavel_a_longo_prazo)
         aux = (('investimentos', 'Investimentos'),
@@ -40,4 +42,5 @@ class PlanoDeContasOtp(PlanoDeContas):
                ('intangivel', 'Intangível'))
 
         for pars in aux:
-            self.ativo.nao_circulante.add_conta(ContaDevedora(pars[0], pars[1]))
+            self.ativo.nao_circulante.add_conta(ContaDevedora(
+                    pars[0], pars[1], self.ativo.nao_circulante))

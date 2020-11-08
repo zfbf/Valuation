@@ -1,12 +1,13 @@
 import unittest
 
 from .conta import Conta
-from .lancamento_contabil import LancamentoContabil
+from .grupo_contas import GrupoContas
+from ..lancamento_contabil import LancamentoContabil
 
 
 class DummyConta(Conta):
-    def __init__(self, codigo, nome, saldo=0):
-        super().__init__(codigo, nome)
+    def __init__(self, codigo, nome, parent, saldo=0):
+        super().__init__(codigo, nome, parent)
         self.saldo = saldo
 
     def get_saldo(self):
@@ -25,7 +26,10 @@ class DummyConta(Conta):
 class TestConta(unittest.TestCase):
 
     def setUp(self):
-        self.dummy = DummyConta('dummy', 'dummy')
+        grupo_dummy_a = GrupoContas('grupo_dummy_a', 'Grupo Dummy A', None)
+        grupo_dummy_a1 = GrupoContas('grupo_dummy_a1', 'Grupo Dummy A1',
+                grupo_dummy_a)
+        self.dummy = DummyConta('dummy', 'dummy', grupo_dummy_a1)
         self.dummy.add_debito(LancamentoContabil(10))
         self.dummy.add_debito(LancamentoContabil(10))
         self.dummy.add_credito(LancamentoContabil(10))
@@ -57,3 +61,8 @@ class TestConta(unittest.TestCase):
 
     def test_is_saldo_devedor(self):
         self.assertTrue(self.dummy.is_saldo_devedor())
+
+    def test_get_codigos_ascendentes(self):
+        codigos_ascendentes = self.dummy.get_codigos_ascendentes()
+        print(codigos_ascendentes)
+        print('len(codigos_ascendentes): {}'.format(len(codigos_ascendentes)))
