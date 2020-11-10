@@ -4,7 +4,7 @@ from .grupo_contas import GrupoContas
 
 class AtivoCirculante(GrupoContas):
     def __init__(self, parent):
-        super().__init__('ativo_circulante', 'Circulante', parent)
+        super().__init__('circulante', 'Circulante', parent)
         self.init_conta_caixa()
 
     def init_conta_caixa(self):

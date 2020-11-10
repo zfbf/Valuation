@@ -7,7 +7,7 @@ from ..lancamento_contabil import LancamentoContabil
 #
 
 class ContaDevedora(Conta):
-    def __init__(self, codigo, nome, parent):
+    def __init__(self, codigo, nome, parent=None):
         super().__init__(codigo, nome, parent)
         self.codigo = codigo
         self.nome = nome

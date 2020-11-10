@@ -9,7 +9,7 @@ from ..razonete import Razonete
 # criar metodos para adicionar e subtrair o saldo, de acordo com a natureza
 #
 class Conta(ABC, Razonete):
-    def __init__(self, codigo, nome, parent):
+    def __init__(self, codigo, nome, parent=None):
         super().__init__()
         self.codigo = codigo
         self.nome = nome
@@ -27,14 +27,20 @@ class Conta(ABC, Razonete):
     def is_saldo_equals(self, valor):
         return abs(self.get_saldo() - valor) < 0.00001
 
-    def get_codigos_ascendentes(self, codigos_ascendentes=[]):
-        if self.parent:
-            self.parent.get_codigos_ascendentes(codigos_ascendentes)
-            codigos_ascendentes.append(self.codigo)
-        else:
-            codigos_ascendentes.append(self.codigo)
+    def get_codigos_ascendentes(self):
+        codigos_ascendentes = [grupo_ascendente.codigo for grupo_ascendente in
+                self.get_grupos_ascendentes()]
+        return codigos_ascendentes
 
-        return codigos_ascendentes[:-1]
+    def get_grupos_ascendentes(self):
+        grupos_ascendentes = []
+        grupo_ascendente = self.parent
+
+        while grupo_ascendente is not None:
+            grupos_ascendentes.append(grupo_ascendente)
+            grupo_ascendente = grupo_ascendente.parent
+
+        return grupos_ascendentes
 
     @abstractmethod
     def get_saldo(self):

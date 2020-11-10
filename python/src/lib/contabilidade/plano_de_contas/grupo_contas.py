@@ -2,11 +2,13 @@ from .conta import Conta
 
 
 class GrupoContas(Conta):
-    def __init__(self, codigo, nome, parent):
+    def __init__(self, codigo, nome, parent=None):
         super().__init__(codigo, nome, parent)
         self.contas = []
+        self.valor_verificacao = None
 
     def add_conta(self, conta):
+        conta.parent = self
         self.contas.append(conta)
 
     def add_nomes_valores(self, codigos, nomes, valores):
@@ -53,11 +55,22 @@ class GrupoContas(Conta):
     def decrease_saldo(self, lancamento):
         raise TypeError()
 
+    def verificar_saldo(self):
+        verificacao = False
+
+        try:
+            verificacao = self.is_saldo_equals(self.valor_verificacao)
+        except TypeError:
+            pass
+
+        return verificacao
+
     def __str__(self):
         return self.str_indent()
 
     def str_indent(self, level=1):
-        str = "\n{:s}{:s}: {:.2f}".format('\t' * level, self.nome, self.get_saldo())
+        str = '\n{:s}{:s}: {:.2f}'.format('\t' * level, self.nome, self.get_saldo())
+        str += '\t(valor para verificação: {})'.format(self.valor_verificacao)
 
         for conta in self.contas:
             str += '{}'.format(conta.str_indent(level + 1))
