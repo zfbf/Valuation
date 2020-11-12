@@ -5,6 +5,7 @@ from lib.contabilidade.plano_de_contas.conta_devedora import ContaDevedora
 from lib.contabilidade.plano_de_contas.conta_credora import ContaCredora
 from lib.contabilidade.plano_de_contas.grupo_contas import GrupoContas
 from lib.contabilidade.plano_de_contas.plano_de_contas import PlanoDeContas
+from lib.contabilidade.natureza import Natureza
 
 
 class PlanoDeContasOtp(PlanoDeContas):
@@ -23,7 +24,9 @@ class PlanoDeContasOtp(PlanoDeContas):
 
     def init_contas_ativo_nao_circulante(self):
         realizavel_a_longo_prazo = GrupoContas('realizavel_a_longo_prazo',
-                'Realizável a longo prazo', self.ativo.nao_circulante)
+                'Realizável a longo prazo', Natureza.DEVEDORA,
+                 self.ativo.nao_circulante)
+
         aux = (('mantidos_para_negociacao',
                     'Ativos não circulantes mantidos para negociação'),
                ('aplicacoes_financeiras', 'Aplicações financeiras'),

@@ -81,6 +81,9 @@ class PlanoDeContas(ABC):
         repr += str(self.ativo)
         repr += str(self.passivo)
         repr += str(self.patrimonio_liquido)
+        repr += '\n\tTotal Ativo: {:.2f}'.format(self.ativo.get_saldo())
+        repr += '\n\tTotal Passivo + Patrimônio Líquido: {:.2f}'.format(
+                self.passivo.get_saldo() + self.patrimonio_liquido.get_saldo())
         return repr
 
 

@@ -31,8 +31,8 @@ class CicloContabilAnualOtpFactory:
                                sheet_name='anuais',
                                header=None,
                                index_col=None,
-                               usecols='A:F, I',
-                               names=['g1', 'g2', 'g3', 'g4',
+                               usecols='A:G, J',
+                               names=['df', 'g1', 'g2', 'g3', 'g4',
                                       'codigo', 'nome', 'valor'])
 
         print(df)
@@ -60,7 +60,8 @@ class CicloContabilAnualOtpFactory:
 
     def feed_conta(self, conta, df):
         codigos_ascendentes = conta.get_codigos_ascendentes()
-        query = 'codigo == "{}"'.format(conta.codigo)
+        query = 'df == "balanco_patrimonial"'
+        query += ' & codigo == "{}"'.format(conta.codigo)
 
         for i, codigo_ascendente in enumerate(reversed(codigos_ascendentes), start=1):
             query += ' & g{} == "{}"'.format(i, codigo_ascendente)
@@ -70,8 +71,22 @@ class CicloContabilAnualOtpFactory:
         if conta_df.shape[0] > 0:
             valor = conta_df.iloc[0]["valor"]
 
-            try:
-                conta.set_saldo(valor)
-            except TypeError:
-                conta.valor_verificacao = valor
-                print(conta)
+            if pd.isnull(valor):
+                print('#feed_conta, conta.codigo: {}'.format(conta.codigo))
+                print('\n\tquery: {}'.format(query))
+                print('\n\tconta_df: {}'.format(conta_df))
+                print('\n\tconta_df.shape: {}'.format(conta_df.shape))
+                print('\n\tvalor: {}'.format(valor))
+            else:
+                try:
+                    conta.set_saldo(valor)
+                except TypeError:
+                    conta.valor_verificacao = valor
+                    print(conta)
+
+        if conta.codigo == 'circulante':
+            print('#feed_conta, conta.codigo: {}'.format(conta.codigo))
+            print('\n\tquery: {}'.format(query))
+            print('\n\tconta_df: {}'.format(conta_df))
+            print('\n\tconta_df.shape: {}'.format(conta_df.shape))
+            print('\n\tconta.valor_verificacao: {}'.format(conta.valor_verificacao))
