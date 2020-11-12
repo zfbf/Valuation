@@ -41,49 +41,33 @@ class OtpCicloContabilAnualFactory:
         return df
 
     def execute(self):
-        print('execute')
         plano_de_contas = PlanoDeContasOtp()
         ciclo_contabil_anual = CicloContabilAnual(2017, plano_de_contas)
         df = self.read_from_excel()
-
         ativo = plano_de_contas.ativo
-        self.feed_conta(ativo, df)
+        self.feed_conta_postorder(ativo, df)
+        return plano_de_contas
 
-        #for conta in plano_de_contas.ativo.contas:
-        #    self.feed_conta(conta, df)
+    def feed_conta_postorder(self, conta, df):
+        try:
+            for child in conta.contas:
+                self.feed_conta_postorder(child, df)
+        except:
+            self.feed_conta(conta, df)
 
     def feed_conta(self, conta, df):
-        print('feed_conta')
-        print(conta)
         codigos_ascendentes = conta.get_codigos_ascendentes()
-        print('codigos ascendentes: {}'.format(codigos_ascendentes))
-
         query = 'codigo == "{}"'.format(conta.codigo)
+
         for i, codigo_ascendente in enumerate(reversed(codigos_ascendentes), start=1):
             query += ' & g{} == "{}"'.format(i, codigo_ascendente)
 
-        #conta_df = df[(df['g1'] == get_codigos_ascendentes[0]) &
-        #              (df['g2'] == 'circulante') &
-        #              (df['codigo'] == 'caixa')]
-
-        print('query: {}'.format(query))
         conta_df = df.query(query)
-        print(conta_df)
-        print('type(conta_df): {}'.format(type(conta_df)))
-        print('conta_df.shape: {}'.format(conta_df.shape))
-        print('conta_df.shape[0]: {}'.format(conta_df.shape[0]))
-        print('type(conta_df.shape[0]): {}'.format(type(conta_df.shape[0])))
 
         if conta_df.shape[0] > 0:
-            print('type(conta_df.iloc[0]["valor"]): {}'.format(type(conta_df.iloc[0]["valor"])))
             valor = conta_df.iloc[0]["valor"]
 
             try:
                 conta.set_saldo(valor)
             except TypeError:
                 conta.valor_verificacao = valor
-
-        print(conta)
-
-        for child in conta.contas:
-            self.feed_conta(child, df)
