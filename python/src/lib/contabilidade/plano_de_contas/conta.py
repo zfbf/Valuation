@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from ..razonete import Razonete
+from ..lancamento_contabil import LancamentoContabil
 
 
 #
@@ -60,7 +61,7 @@ class Conta(ABC, Razonete):
     #        da natureza da conta.
     #
     def set_saldo(self, saldo):
-        if not super().is_saldo_equals(saldo):
+        if not self.is_saldo_equals(saldo):
             comentario = 'Ajuste de saldo para {:.2f}'.format(saldo)
             saldo_atual = self.get_saldo()
 

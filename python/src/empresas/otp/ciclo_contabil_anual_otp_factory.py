@@ -4,7 +4,7 @@ from .plano_de_contas_otp import PlanoDeContasOtp
 from lib.contabilidade.ciclo_contabil.ciclo_contabil_anual import CicloContabilAnual
 
 
-class OtpCicloContabilAnualFactory:
+class CicloContabilAnualOtpFactory:
     def __init__(self):
         super().__init__()
         self.config()

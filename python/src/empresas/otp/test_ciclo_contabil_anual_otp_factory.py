@@ -1,13 +1,13 @@
 import unittest
 
-from .otp_ciclo_contabil_anual_factory import OtpCicloContabilAnualFactory
+from .ciclo_contabil_anual_otp_factory import CicloContabilAnualOtpFactory
 
 
-class TestOtpCicloContabilAnualFactory(unittest.TestCase):
+class TestCicloContabilAnualOtpFactory(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.otp_factory = OtpCicloContabilAnualFactory()
+        self.otp_factory = CicloContabilAnualOtpFactory()
 
     def test_execute(self):
         plano_de_contas = self.otp_factory.execute()

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from .ativo import Ativo
+from .passivo import Passivo
 from .conta_devedora import ContaDevedora
 
 
@@ -26,6 +27,9 @@ class PlanoDeContas(ABC):
         self.ativo = Ativo()
         self.init_contas_ativo_circulante()
         self.init_contas_ativo_nao_circulante()
+        self.passivo = Passivo()
+        self.init_contas_passivo_circulante()
+        self.init_contas_passivo_nao_circulante()
 
     @abstractmethod
     def init_contas_ativo_circulante(self):
@@ -33,6 +37,14 @@ class PlanoDeContas(ABC):
 
     @abstractmethod
     def init_contas_ativo_nao_circulante(self):
+        pass
+
+    @abstractmethod
+    def init_contas_passivo_circulante(self):
+        pass
+
+    @abstractmethod
+    def init_contas_passivo_nao_circulante(self):
         pass
 
     def get_conta(self, codigo):
@@ -44,6 +56,12 @@ class PlanoDeContas(ABC):
 
     def add_conta_ativo_nao_circulante(self, conta):
         self.ativo.nao_circulante.add_conta(conta)
+
+    def add_conta_passivo_circulante(self, conta):
+        self.passivo.circulante.add_conta(conta)
+
+    def add_conta_passivo_nao_circulante(self, conta):
+        self.passivo.nao_circulante.add_conta(conta)
 
     def rename_conta_caixa(self, nome):
         self.ativo.circulante.rename_conta_caixa(nome)
