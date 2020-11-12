@@ -1,8 +1,11 @@
 import unittest
+#import pdb
 
 from .conta import Conta
 from .grupo_contas import GrupoContas
+from .conta_devedora import ContaDevedora
 from ..lancamento_contabil import LancamentoContabil
+from ..natureza import Natureza
 
 
 class DummyConta(Conta):
@@ -26,13 +29,14 @@ class DummyConta(Conta):
 class TestConta(unittest.TestCase):
 
     def setUp(self):
-        grupo_dummy_a = GrupoContas('grupo_dummy_a', 'Grupo Dummy A', None)
-        grupo_dummy_a1 = GrupoContas('grupo_dummy_a1', 'Grupo Dummy A1',
-                grupo_dummy_a)
-        self.dummy = DummyConta('dummy', 'dummy', grupo_dummy_a1)
+        self.grupo_a = GrupoContas('grupo_a', 'Grupo A', None)
+        grupo_a1 = GrupoContas('grupo_a1', 'Grupo A1', Natureza.DEVEDORA)
+        self.grupo_a.add_conta(grupo_a1)
+        self.dummy = ContaDevedora('dummy', 'Dummy')
         self.dummy.add_debito(LancamentoContabil(10))
         self.dummy.add_debito(LancamentoContabil(10))
         self.dummy.add_credito(LancamentoContabil(10))
+        grupo_a1.add_conta(self.dummy)
 
     def tearDown(self):
         pass
@@ -50,7 +54,7 @@ class TestConta(unittest.TestCase):
         self.assertAlmostEqual(self.dummy.get_total_creditos(), 10)
 
     def test_is_saldo_equals(self):
-        self.assertTrue(self.dummy.is_saldo_equals(0))
+        self.assertFalse(self.dummy.is_saldo_equals(0))
         self.dummy.set_saldo(10)
         self.assertTrue(self.dummy.is_saldo_equals(10))
         self.assertFalse(self.dummy.is_saldo_equals(10.0001))
@@ -63,10 +67,11 @@ class TestConta(unittest.TestCase):
         self.assertTrue(self.dummy.is_saldo_devedor())
 
     def test_get_codigos_ascendentes(self):
+        #pdb.set_trace()
         codigos_ascendentes = self.dummy.get_codigos_ascendentes()
         self.assertEqual(len(codigos_ascendentes), 2)
-        self.assertEqual(codigos_ascendentes[0], 'grupo_dummy_a1')
-        self.assertEqual(codigos_ascendentes[1], 'grupo_dummy_a')
+        self.assertEqual(codigos_ascendentes[0], 'grupo_a1')
+        self.assertEqual(codigos_ascendentes[1], 'grupo_a')
 
     def test_get_grupos_ascendentes(self):
         grupos_ascendentes = self.dummy.get_grupos_ascendentes()

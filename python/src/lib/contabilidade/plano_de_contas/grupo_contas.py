@@ -1,9 +1,10 @@
 from .conta import Conta
+from ..natureza import Natureza
 
 
 class GrupoContas(Conta):
-    def __init__(self, codigo, nome, parent=None):
-        super().__init__(codigo, nome, parent)
+    def __init__(self, codigo, nome, natureza, parent=None):
+        super().__init__(codigo, nome, natureza, parent)
         self.contas = []
         self.valor_verificacao = None
 
@@ -30,12 +31,31 @@ class GrupoContas(Conta):
         return founded
 
     def get_saldo(self):
+        totais = {
+            "debitos": 0,
+            "creditos": 0
+        }
+
+        self.set_totais_postorder(self, totais)
         saldo = 0
 
-        for conta in self.contas:
-            saldo += conta.get_saldo()
+        if self.is_natureza_devedora():
+            saldo = totais['debitos'] - totais['creditos']
+        else:
+            saldo = totais['creditos'] - totais['debitos']
 
         return saldo
+
+    def set_totais_postorder(self, conta, totais):
+        try:
+            for child in conta.contas:
+                self.set_totais_postorder(child, totais)
+        except Exception:
+            pass
+
+        totais['debitos'] += conta.get_total_debitos()
+        totais['creditos'] += conta.get_total_creditos()
+
 
     #
     # Por default, a utilização deste método é desabilitada

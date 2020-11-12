@@ -1,9 +1,10 @@
 from .conta import Conta
+from ..natureza import Natureza
 
 
 class ContaDevedora(Conta):
     def __init__(self, codigo, nome, parent=None):
-        super().__init__(codigo, nome, parent)
+        super().__init__(codigo, nome, Natureza.DEVEDORA, parent)
         self.codigo = codigo
         self.nome = nome
 

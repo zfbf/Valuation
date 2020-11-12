@@ -44,16 +44,19 @@ class CicloContabilAnualOtpFactory:
         plano_de_contas = PlanoDeContasOtp()
         ciclo_contabil_anual = CicloContabilAnual(2017, plano_de_contas)
         df = self.read_from_excel()
-        ativo = plano_de_contas.ativo
-        self.feed_conta_postorder(ativo, df)
+        self.feed_conta_postorder(plano_de_contas.ativo, df)
+        self.feed_conta_postorder(plano_de_contas.passivo, df)
+        self.feed_conta_postorder(plano_de_contas.patrimonio_liquido, df)
         return plano_de_contas
 
     def feed_conta_postorder(self, conta, df):
         try:
             for child in conta.contas:
                 self.feed_conta_postorder(child, df)
-        except:
-            self.feed_conta(conta, df)
+        except Exception:
+            pass
+
+        self.feed_conta(conta, df)
 
     def feed_conta(self, conta, df):
         codigos_ascendentes = conta.get_codigos_ascendentes()
@@ -71,3 +74,4 @@ class CicloContabilAnualOtpFactory:
                 conta.set_saldo(valor)
             except TypeError:
                 conta.valor_verificacao = valor
+                print(conta)

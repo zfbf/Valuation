@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from ..razonete import Razonete
 from ..lancamento_contabil import LancamentoContabil
+from ..natureza import Natureza
 
 
 #
@@ -10,10 +11,11 @@ from ..lancamento_contabil import LancamentoContabil
 # criar metodos para adicionar e subtrair o saldo, de acordo com a natureza
 #
 class Conta(ABC, Razonete):
-    def __init__(self, codigo, nome, parent=None):
+    def __init__(self, codigo, nome, natureza, parent=None):
         super().__init__()
         self.codigo = codigo
         self.nome = nome
+        self.natureza = natureza
         self.parent = parent
 
     def get_conta(self, codigo):
@@ -27,6 +29,12 @@ class Conta(ABC, Razonete):
 
     def is_saldo_equals(self, valor):
         return abs(self.get_saldo() - valor) < 0.00001
+
+    def is_natureza_devedora(self):
+        return self.natureza is Natureza.DEVEDORA
+
+    def is_natureza_credora(self):
+        return self.natureza is Natureza.CREDORA
 
     def get_codigos_ascendentes(self):
         codigos_ascendentes = [grupo_ascendente.codigo for grupo_ascendente in

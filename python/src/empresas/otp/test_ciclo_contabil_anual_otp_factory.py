@@ -1,4 +1,5 @@
 import unittest
+#import pdb
 
 from .ciclo_contabil_anual_otp_factory import CicloContabilAnualOtpFactory
 
@@ -10,6 +11,7 @@ class TestCicloContabilAnualOtpFactory(unittest.TestCase):
         self.otp_factory = CicloContabilAnualOtpFactory()
 
     def test_execute(self):
+        #pdb.set_trace()
         plano_de_contas = self.otp_factory.execute()
         self.assertIsNotNone(plano_de_contas)
 

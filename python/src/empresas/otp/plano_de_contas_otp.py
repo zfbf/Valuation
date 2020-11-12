@@ -17,8 +17,7 @@ class PlanoDeContasOtp(PlanoDeContas):
                ('outros', 'Outros ativos'))
 
         for pars in aux:
-            self.ativo.circulante.add_conta(ContaDevedora(
-                    pars[0], pars[1], self.ativo.circulante))
+            self.add_conta_ativo_circulante(ContaDevedora(pars[0], pars[1]))
 
         self.ativo.circulante.rename_conta_caixa('Caixa e equivalentes de caixa')
 
@@ -45,8 +44,7 @@ class PlanoDeContasOtp(PlanoDeContas):
                ('intangivel', 'Intangível'))
 
         for pars in aux:
-            self.ativo.nao_circulante.add_conta(ContaDevedora(
-                    pars[0], pars[1], self.ativo.nao_circulante))
+            self.add_conta_ativo_nao_circulante(ContaDevedora(pars[0], pars[1]))
 
     def init_contas_passivo_circulante(self):
         aux = (('emp_financ_debentures',
@@ -60,8 +58,7 @@ class PlanoDeContasOtp(PlanoDeContas):
                ('outros', 'Outros passivos'))
 
         for pars in aux:
-            self.passivo.circulante.add_conta(ContaCredora(
-                    pars[0], pars[1], self.ativo.circulante))
+            self.add_conta_passivo_circulante(ContaCredora(pars[0], pars[1]))
 
     def init_contas_passivo_nao_circulante(self):
         aux = (('emp_financ_debentures',
@@ -75,5 +72,14 @@ class PlanoDeContasOtp(PlanoDeContas):
                ('outros', 'Outros passivos'))
 
         for pars in aux:
-            self.passivo.nao_circulante.add_conta(ContaCredora(
-                    pars[0], pars[1], self.ativo.nao_circulante))
+            self.add_conta_passivo_nao_circulante(ContaCredora(pars[0], pars[1]))
+
+    def init_contas_patrimonio_liquido(self):
+        aux = (('capital_social', 'Capital social'),
+               ('reservas_de_capital', 'Reservas de capital'),
+               ('ajustes_de_avaliacao_patrimonial',
+                    'Ajustes de avaliação patrimonial'),
+               ('prejuizos_acumulados', 'Prejuízos acumulados'))
+
+        for pars in aux:
+            self.add_conta_patrimonio_liquido(ContaCredora(pars[0], pars[1]))
