@@ -84,7 +84,7 @@ class CicloContabilAnualOtpFactory:
                     conta.valor_verificacao = valor
                     print(conta)
 
-        if conta.codigo == 'circulante':
+        if conta.codigo == 'passivos_rel_ativos_nao_circulantes_mantidos_para_negociacao':
             print('#feed_conta, conta.codigo: {}'.format(conta.codigo))
             print('\n\tquery: {}'.format(query))
             print('\n\tconta_df: {}'.format(conta_df))
