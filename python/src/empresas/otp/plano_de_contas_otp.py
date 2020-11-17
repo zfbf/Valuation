@@ -94,3 +94,6 @@ class PlanoDeContasOtp(PlanoDeContas):
 
         for pars in aux:
             self.add_conta_patrimonio_liquido(ContaCredora(pars[0], pars[1]))
+
+    def get_contas_disponibilidade(self):
+        return [self.ativo.circulante.get_conta('caixa')]

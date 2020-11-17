@@ -54,6 +54,10 @@ class PlanoDeContas(ABC):
     def init_contas_patrimonio_liquido(self):
         pass
 
+    @abstractmethod
+    def get_contas_disponibilidade(self):
+        pass
+
     def get_conta(self, codigo):
         conta = self.ativo.get_conta(codigo)
         return conta
