@@ -2,7 +2,6 @@ from lib.contabilidade.plano_de_contas.passivo_circulante import PassivoCirculan
 from lib.contabilidade.plano_de_contas.conta_credora import ContaCredora
 
 
-
 class PassivoCirculanteOtp(PassivoCirculante):
     def __init__(self, parent):
         super().__init__(parent)
