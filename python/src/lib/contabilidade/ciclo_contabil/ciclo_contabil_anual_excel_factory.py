@@ -8,7 +8,6 @@ from .ciclo_contabil_anual_factory import CicloContabilAnualFactory
 class CicloContabilAnualExcelFactory(CicloContabilAnualFactory):
     def __init__(self):
         super().__init__()
-        #self.config()
 
     @abstractmethod
     def get_excel_file_dir(self):
@@ -28,21 +27,6 @@ class CicloContabilAnualExcelFactory(CicloContabilAnualFactory):
         self.feed_conta_postorder(plano_de_contas.passivo, df)
         self.feed_conta_postorder(plano_de_contas.patrimonio_liquido, df)
 
-    #@abstractmethod
-    #def config(self):
-    #    self.df_dir = '../../dados/demonstracoes_financeiras/'
-    #    self.df_file = ''
-    #    self.excel_config = {
-    #        'df_dir': '../../dados/demonstracoes_financeiras/',
-    #        'df_file': 'OTP_demonstracoes_financeiras.xlsx',
-    #        'column_mapping': {
-    #            '2019': 'I',
-    #            '2018': 'J',
-    #            '2017': 'K',
-    #            '2016': 'L'
-    #        }
-    #    }
-
     def read_from_excel(self, ano):
         file_path = path.join(self.get_excel_file_dir(),
                 self.get_excel_file_name())
@@ -60,15 +44,6 @@ class CicloContabilAnualExcelFactory(CicloContabilAnualFactory):
         #print(df.columns)
         #print('df.any(): {}'.format(df.any()))
         return df
-
-    #def execute(self, ano):
-    #    plano_de_contas = PlanoDeContasOtp()
-    #    ciclo_contabil_anual = CicloContabilAnual(ano, plano_de_contas)
-    #    df = self.read_from_excel(ano)
-    #    self.feed_conta_postorder(plano_de_contas.ativo, df)
-    #    self.feed_conta_postorder(plano_de_contas.passivo, df)
-    #    self.feed_conta_postorder(plano_de_contas.patrimonio_liquido, df)
-    #    return ciclo_contabil_anual
 
     def feed_conta_postorder(self, conta, df):
         try:
