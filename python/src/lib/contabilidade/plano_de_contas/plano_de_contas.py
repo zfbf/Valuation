@@ -25,57 +25,59 @@ from .conta_devedora import ContaDevedora
 class PlanoDeContas(ABC):
     def __init__(self):
         super().__init__()
-        self.ativo = Ativo()
-        self.init_contas_ativo_circulante()
-        self.init_contas_ativo_nao_circulante()
-        self.passivo = Passivo()
-        self.init_contas_passivo_circulante()
-        self.init_contas_passivo_nao_circulante()
-        self.patrimonio_liquido = PatrimonioLiquido()
-        self.init_contas_patrimonio_liquido()
+        self.build_ativo()
+        self.build_passivo()
+        self.build_patrimonio_liquido()
+        #self.passivo = Passivo()
+        #self.init_contas_passivo_circulante()
+        #self.init_contas_passivo_nao_circulante()
+        #self.patrimonio_liquido = PatrimonioLiquido()
+        #self.init_contas_patrimonio_liquido()
+        self.init_contas()
 
     @abstractmethod
-    def init_contas_ativo_circulante(self):
+    def build_ativo(self):
         pass
 
     @abstractmethod
-    def init_contas_ativo_nao_circulante(self):
+    def build_passivo(self):
         pass
 
     @abstractmethod
-    def init_contas_passivo_circulante(self):
+    def build_patrimonio_liquido(self):
         pass
 
-    @abstractmethod
-    def init_contas_passivo_nao_circulante(self):
-        pass
-
-    @abstractmethod
-    def init_contas_patrimonio_liquido(self):
-        pass
-
-    @abstractmethod
-    def get_contas_disponibilidade(self):
-        pass
+    def init_contas(self):
+        self.ativo.init_contas()
+        self.passivo.init_contas()
+        self.patrimonio_liquido.init_contas()
 
     def get_conta(self, codigo):
-        conta = self.ativo.get_conta(codigo)
+        conta = None
+        grupos = [self.ativo, self.passivo, self.patrimonio_liquido]
+
+        for grupo in grupos:
+            conta = grupo.get_conta(codigo)
+
+            if conta is not None:
+                break
+
         return conta
 
-    def add_conta_ativo_circulante(self, conta):
-        self.ativo.circulante.add_conta(conta)
+    #def add_conta_ativo_circulante(self, conta):
+    #    self.ativo.circulante.add_conta(conta)
 
-    def add_conta_ativo_nao_circulante(self, conta):
-        self.ativo.nao_circulante.add_conta(conta)
+    #def add_conta_ativo_nao_circulante(self, conta):
+    #    self.ativo.nao_circulante.add_conta(conta)
 
-    def add_conta_passivo_circulante(self, conta):
-        self.passivo.circulante.add_conta(conta)
+    #def add_conta_passivo_circulante(self, conta):
+    #    self.passivo.circulante.add_conta(conta)
 
-    def add_conta_passivo_nao_circulante(self, conta):
-        self.passivo.nao_circulante.add_conta(conta)
+    #def add_conta_passivo_nao_circulante(self, conta):
+    #    self.passivo.nao_circulante.add_conta(conta)
 
-    def add_conta_patrimonio_liquido(self, conta):
-        self.patrimonio_liquido.add_conta(conta)
+    #def add_conta_patrimonio_liquido(self, conta):
+    #    self.patrimonio_liquido.add_conta(conta)
 
     def rename_conta_caixa(self, nome):
         self.ativo.circulante.rename_conta_caixa(nome)
@@ -89,22 +91,3 @@ class PlanoDeContas(ABC):
         repr += '\n\tTotal Passivo + Patrimônio Líquido: {:.2f}'.format(
                 self.passivo.get_saldo() + self.patrimonio_liquido.get_saldo())
         return repr
-
-
-class DummyPlanoDeContas(PlanoDeContas):
-    def init_contas_ativo_circulante(self):
-        aux = (('duplicatas_a_receber', 'Duplicatas a Receber'),
-               ('estoques', 'Estoques'),
-               ('despesas_antecipadas', 'Despesas Antecipadas'),
-               ('outros_ativos_circulantes', 'Outros Ativos'))
-
-        for pars in aux:
-            self.ativo.circulante.add_conta(ContaDevedora(pars[0], pars[1]))
-
-    def init_contas_ativo_nao_circulante(self):
-        aux = (('depositos_judiciais', 'Depósitos judiciais'),
-               ('tributos_a_recuperar', 'Tributos a recuperar'),
-               ('outros_ativos_nao_circulates', 'Outros ativos'))
-
-        for pars in aux:
-            self.ativo.nao_circulante.add_conta(ContaDevedora(pars[0], pars[1]))

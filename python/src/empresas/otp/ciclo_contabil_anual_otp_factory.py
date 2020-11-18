@@ -35,19 +35,19 @@ class CicloContabilAnualOtpFactory:
                                names=['df', 'g1', 'g2', 'g3', 'g4',
                                       'codigo', 'nome', 'valor'])
 
-        print(df)
-        print(df.columns)
-        print('df.any(): {}'.format(df.any()))
+        #print(df)
+        #print(df.columns)
+        #print('df.any(): {}'.format(df.any()))
         return df
 
-    def execute(self):
+    def execute(self, ano):
         plano_de_contas = PlanoDeContasOtp()
-        ciclo_contabil_anual = CicloContabilAnual(2017, plano_de_contas)
+        ciclo_contabil_anual = CicloContabilAnual(ano, plano_de_contas)
         df = self.read_from_excel()
         self.feed_conta_postorder(plano_de_contas.ativo, df)
         self.feed_conta_postorder(plano_de_contas.passivo, df)
         self.feed_conta_postorder(plano_de_contas.patrimonio_liquido, df)
-        return plano_de_contas
+        return ciclo_contabil_anual
 
     def feed_conta_postorder(self, conta, df):
         try:
@@ -72,21 +72,22 @@ class CicloContabilAnualOtpFactory:
             valor = conta_df.iloc[0]["valor"]
 
             if pd.isnull(valor):
-                print('#feed_conta, conta.codigo: {}'.format(conta.codigo))
-                print('\n\tquery: {}'.format(query))
-                print('\n\tconta_df: {}'.format(conta_df))
-                print('\n\tconta_df.shape: {}'.format(conta_df.shape))
-                print('\n\tvalor: {}'.format(valor))
+                #print('#feed_conta, conta.codigo: {}'.format(conta.codigo))
+                #print('\n\tquery: {}'.format(query))
+                #print('\n\tconta_df: {}'.format(conta_df))
+                #print('\n\tconta_df.shape: {}'.format(conta_df.shape))
+                #print('\n\tvalor: {}'.format(valor))
+                pass
             else:
                 try:
                     conta.set_saldo(valor)
                 except TypeError:
                     conta.valor_verificacao = valor
-                    print(conta)
+                    #print(conta)
 
-        if conta.codigo == 'passivos_rel_ativos_nao_circulantes_mantidos_para_negociacao':
-            print('#feed_conta, conta.codigo: {}'.format(conta.codigo))
-            print('\n\tquery: {}'.format(query))
-            print('\n\tconta_df: {}'.format(conta_df))
-            print('\n\tconta_df.shape: {}'.format(conta_df.shape))
-            print('\n\tconta.valor_verificacao: {}'.format(conta.valor_verificacao))
+        #if conta.codigo == 'passivos_rel_ativos_nao_circulantes_mantidos_para_negociacao':
+        #    print('#feed_conta, conta.codigo: {}'.format(conta.codigo))
+        #    print('\n\tquery: {}'.format(query))
+        #    print('\n\tconta_df: {}'.format(conta_df))
+        #    print('\n\tconta_df.shape: {}'.format(conta_df.shape))
+        #    print('\n\tconta.valor_verificacao: {}'.format(conta.valor_verificacao))

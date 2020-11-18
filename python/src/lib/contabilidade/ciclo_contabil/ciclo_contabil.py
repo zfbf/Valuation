@@ -26,4 +26,5 @@ class CicloContabil(ABC):
         repr = "\nExercício Social - {:s}".format(self.get_identificador())
         repr += "\n\tInício: {}".format(self.get_data_inicio().strftime('%d/%m/%Y'))
         repr += "\n\tInício: {}".format(self.get_data_fim().strftime('%d/%m/%Y'))
+        repr += "\n\tPlano de Contas: {}".format(self.plano_de_contas)
         return repr
