@@ -28,11 +28,6 @@ class PlanoDeContas(ABC):
         self.build_ativo()
         self.build_passivo()
         self.build_patrimonio_liquido()
-        #self.passivo = Passivo()
-        #self.init_contas_passivo_circulante()
-        #self.init_contas_passivo_nao_circulante()
-        #self.patrimonio_liquido = PatrimonioLiquido()
-        #self.init_contas_patrimonio_liquido()
         self.init_contas()
 
     @abstractmethod
@@ -63,21 +58,6 @@ class PlanoDeContas(ABC):
                 break
 
         return conta
-
-    #def add_conta_ativo_circulante(self, conta):
-    #    self.ativo.circulante.add_conta(conta)
-
-    #def add_conta_ativo_nao_circulante(self, conta):
-    #    self.ativo.nao_circulante.add_conta(conta)
-
-    #def add_conta_passivo_circulante(self, conta):
-    #    self.passivo.circulante.add_conta(conta)
-
-    #def add_conta_passivo_nao_circulante(self, conta):
-    #    self.passivo.nao_circulante.add_conta(conta)
-
-    #def add_conta_patrimonio_liquido(self, conta):
-    #    self.patrimonio_liquido.add_conta(conta)
 
     def rename_conta_caixa(self, nome):
         self.ativo.circulante.rename_conta_caixa(nome)

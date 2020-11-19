@@ -26,6 +26,16 @@ class AtivoCirculante(GrupoContas, ABC):
     def get_contas_disponibilidades(self):
         pass
 
+    def get_saldo_disponibilidades(self):
+        return self.get_saldo_contas(self.get_contas_disponibilidades())
+
+    @abstractmethod
+    def get_contas_estoques(self):
+        pass
+
+    def get_saldo_estoques(self):
+        return self.get_saldo_contas(self.get_contas_estoques())
+
     @abstractmethod
     def init_contas(self):
         pass

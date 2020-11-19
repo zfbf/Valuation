@@ -4,7 +4,7 @@ from lib.contabilidade.plano_de_contas.grupo_contas import GrupoContas
 from lib.contabilidade.natureza import Natureza
 
 
-class AtivoNaoCirculanteOtp(AtivoNaoCirculante):
+class AtivoNaoCirculanteDummy(AtivoNaoCirculante):
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -22,7 +22,7 @@ class AtivoNaoCirculanteOtp(AtivoNaoCirculante):
                ('ir_e_cs_diferidos',
                     'Imposto de renda e contribuição social diferidos'),
                ('outros', 'Outros ativos'))
-
+        
         for pars in aux:
             realizavel_a_longo_prazo.add_conta(ContaDevedora(
                     pars[0], pars[1], self))

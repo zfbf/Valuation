@@ -2,7 +2,7 @@ from lib.contabilidade.plano_de_contas.ativo_circulante import AtivoCirculante
 from lib.contabilidade.plano_de_contas.conta_devedora import ContaDevedora
 
 
-class AtivoCirculanteOtp(AtivoCirculante):
+class AtivoCirculanteDummy(AtivoCirculante):
     def __init__(self, parent):
         super().__init__(parent)
 

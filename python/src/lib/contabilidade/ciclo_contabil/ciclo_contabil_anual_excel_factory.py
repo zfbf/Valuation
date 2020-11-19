@@ -30,7 +30,7 @@ class CicloContabilAnualExcelFactory(CicloContabilAnualFactory):
     def read_from_excel(self, ano):
         file_path = path.join(self.get_excel_file_dir(),
                 self.get_excel_file_name())
-
+        
         with open(file_path, 'rb') as excel_file:
             df = pd.read_excel(excel_file,
                                sheet_name='anuais',

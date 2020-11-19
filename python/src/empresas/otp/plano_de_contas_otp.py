@@ -1,5 +1,3 @@
-from abc import ABC, abstractmethod
-
 from lib.contabilidade.plano_de_contas.plano_de_contas import PlanoDeContas
 from .ativo_otp import AtivoOtp
 from .passivo_otp import PassivoOtp

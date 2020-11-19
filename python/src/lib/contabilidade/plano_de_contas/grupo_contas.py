@@ -46,6 +46,24 @@ class GrupoContas(Conta):
 
         return saldo
 
+    def get_saldo_contas(self, contas):
+        totais = {
+            "debitos": 0,
+            "creditos": 0
+        }
+
+        for conta in contas:
+            self.set_totais_postorder(conta, totais)
+
+        saldo = 0
+
+        if self.is_natureza_devedora():
+            saldo = totais['debitos'] - totais['creditos']
+        else:
+            saldo = totais['creditos'] - totais['debitos']
+
+        return saldo
+
     def set_totais_postorder(self, conta, totais):
         try:
             for child in conta.contas:
@@ -55,7 +73,6 @@ class GrupoContas(Conta):
 
         totais['debitos'] += conta.get_total_debitos()
         totais['creditos'] += conta.get_total_creditos()
-
 
     #
     # Por default, a utilização deste método é desabilitada
