@@ -14,6 +14,8 @@ class PassivoNaoCirculanteDummy(PassivoNaoCirculante):
                ('arrendamento_mercantil', 'Arrendamento mercantil'),
                ('fornecedores', 'Fornecedores'),
                ('partes_relacionadas', 'Partes relacionadas'),
+               ('credor_pela_aquisicao_da_concessao',
+                    'Credor pela aquisição da concessão'),
                ('prov_civeis_trabalhistas_e_previdenciarias',
                     'Provisões cíveis, trabalhistas e previdenciárias'),
                ('prov_conserva_especial', 'Provisão para conserva especial'),

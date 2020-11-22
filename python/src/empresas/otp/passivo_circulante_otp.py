@@ -16,6 +16,8 @@ class PassivoCirculanteOtp(PassivoCirculante):
                ('fornecedores', 'Fornecedores'),
                ('obrigacoes_sociais_e_trabalhistas',
                     'Obrigações sociais e trabalhistas'),
+               ('credor_pela_aquisicao_da_concessao',
+                    'Credor pela aquisição da concessão'),
                ('impostos_taxas_e_contribuições_sociais',
                     'Impostos, taxas e contribuições sociais'),
                ('outros', 'Outros passivos'),
