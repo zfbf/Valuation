@@ -2,3 +2,32 @@ Para fazer simulações, ou seja, análises horizontais e verticais de
 simulações, poderia-se
 
 Poderia-se ter um tipo de lançamento chamado simulação
+
+
+
+-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+
+Procurou-se fazer um certo esforço para separar a lógica de importação dos
+dados de forma a deixar espaço para futuras customizações de fontes diferentes.
+Por exemplo: Economática, Relatórios específicos da empresa, etc.
+
+Para isso usou-se um diretório separado para cada tipo de fonte de dados.
+
+
+
+EconomaticaDadosAnuais
+
+
+
+-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+
+Para os testes foi utilizado o framework unittest
+As classes de testes unitários ficaram no mesmo nível das classes a serem testadas.
+
+O uso de um frameword de testes facilita o uso de relative imports pois as classes
+são importadas pelo unittest e não chamadas diretamente.
+
+
+-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+
+-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
