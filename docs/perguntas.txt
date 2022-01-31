@@ -1,0 +1,1 @@
+Verificou-se que no plano de contas IFRS conforme apresentado pela plataforma Economática, a conta Realizável a Longo Prazo não compõe a soma do ativo não circulante, muito embora aparece dentro desse grupo.

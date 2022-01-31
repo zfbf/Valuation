@@ -1,0 +1,328 @@
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'caixa_e_equivalentes'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'aplicacoes_financeiras'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'contas_a_receber'), saldo: -
+conta_index: ('bp', 'ativo', 'circulante', 'estoques'), saldo: 199883000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Estoques: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 199883000
+#2 - conta: Estoques: 199883000.00
+Razonete:
+	Total de débitos: 199883000.00
+	Total de créditos: 0.00
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'ativos_biologicos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'impostos_a_recuperar'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'despesas_antecipadas'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'outros'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'aplicacao_financeira_custo_amortizado'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'contas_a_receber'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'estoques'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'ativos_biologicos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'impostos_diferidos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'despesas_antecipadas'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'partes_relacionadas'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'outros'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'investimentos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'intangiveis_liquido', 'intangiveis'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'intangiveis_liquido', 'goodwill'), saldo: -
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'obrigacoes_sociais'), saldo: -
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'impostos_a_pagar'), saldo: -
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'emprestimos_e_financiamentos', 'arrendamento_financeiro'), saldo: -
+type(outras_obrigacoes: <class 'src.lib.contabilidade.plano_de_contas.grupo_contas.GrupoContas'>)
+conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'dividendos'))
+saldo: 20399000)
+type(conta: <class 'src.lib.contabilidade.plano_de_contas.conta_credora.ContaCredora'>)
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'outros'), saldo: -
+conta_index: ('bp', 'ativo', 'circulante', 'caixa_e_equivalentes'), saldo: 57639000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Caixa e equivalentes de caixa: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 57639000
+#2 - conta: Caixa e equivalentes de caixa: 57639000.00
+Razonete:
+	Total de débitos: 57639000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'aplicacoes_financeiras'), saldo: 265481000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Aplicações financeiras: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 265481000
+#2 - conta: Aplicações financeiras: 265481000.00
+Razonete:
+	Total de débitos: 265481000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'contas_a_receber'), saldo: 252661000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Contas a receber: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 252661000
+#2 - conta: Contas a receber: 252661000.00
+Razonete:
+	Total de débitos: 252661000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'estoques'), saldo: 321035000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Estoques: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 321035000
+#2 - conta: Estoques: 321035000.00
+Razonete:
+	Total de débitos: 321035000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'ativos_biologicos'), saldo: 0
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Ativos Biológicos: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 0
+#2 - conta: Ativos Biológicos: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'impostos_a_recuperar'), saldo: 26479000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Impostos a recuperar: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 26479000
+#2 - conta: Impostos a recuperar: 26479000.00
+Razonete:
+	Total de débitos: 26479000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'despesas_antecipadas'), saldo: 779000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Despesas antecipadas: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 779000
+#2 - conta: Despesas antecipadas: 779000.00
+Razonete:
+	Total de débitos: 779000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'outros'), saldo: 17350000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Outros ativos: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 17350000
+#2 - conta: Outros ativos: 17350000.00
+Razonete:
+	Total de débitos: 17350000.00
+	Total de créditos: 0.00
+type(outras_obrigacoes: <class 'src.lib.contabilidade.plano_de_contas.grupo_contas.GrupoContas'>)
+conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'dividendos'))
+saldo: 60737000)
+type(conta: <class 'src.lib.contabilidade.plano_de_contas.conta_credora.ContaCredora'>)
+conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'outros'))
+saldo: 109696000)
+type(conta: <class 'src.lib.contabilidade.plano_de_contas.conta_credora.ContaCredora'>)
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'caixa_e_equivalentes'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'aplicacoes_financeiras'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'contas_a_receber'), saldo: -
+conta_index: ('bp', 'ativo', 'circulante', 'estoques'), saldo: 199883000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Estoques: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 199883000
+#2 - conta: Estoques: 199883000.00
+Razonete:
+	Total de débitos: 199883000.00
+	Total de créditos: 0.00
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'ativos_biologicos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'impostos_a_recuperar'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'despesas_antecipadas'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'circulante', 'outros'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'aplicacao_financeira_custo_amortizado'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'contas_a_receber'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'estoques'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'ativos_biologicos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'impostos_diferidos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'despesas_antecipadas'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'partes_relacionadas'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'outros'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'investimentos'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'intangiveis_liquido', 'intangiveis'), saldo: -
+Not a number: conta_index: ('bp', 'ativo', 'nao_circulante', 'intangiveis_liquido', 'goodwill'), saldo: -
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'obrigacoes_sociais'), saldo: -
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'impostos_a_pagar'), saldo: -
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'emprestimos_e_financiamentos', 'arrendamento_financeiro'), saldo: -
+type(outras_obrigacoes: <class 'src.lib.contabilidade.plano_de_contas.grupo_contas.GrupoContas'>)
+conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'dividendos'))
+saldo: 20399000)
+type(conta: <class 'src.lib.contabilidade.plano_de_contas.conta_credora.ContaCredora'>)
+Not a number: conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'outros'), saldo: -
+conta_index: ('bp', 'ativo', 'circulante', 'caixa_e_equivalentes'), saldo: 57639000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Caixa e equivalentes de caixa: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 57639000
+#2 - conta: Caixa e equivalentes de caixa: 57639000.00
+Razonete:
+	Total de débitos: 57639000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'aplicacoes_financeiras'), saldo: 265481000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Aplicações financeiras: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 265481000
+#2 - conta: Aplicações financeiras: 265481000.00
+Razonete:
+	Total de débitos: 265481000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'contas_a_receber'), saldo: 252661000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Contas a receber: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 252661000
+#2 - conta: Contas a receber: 252661000.00
+Razonete:
+	Total de débitos: 252661000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'estoques'), saldo: 321035000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Estoques: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 321035000
+#2 - conta: Estoques: 321035000.00
+Razonete:
+	Total de débitos: 321035000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'ativos_biologicos'), saldo: 0
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Ativos Biológicos: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 0
+#2 - conta: Ativos Biológicos: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'impostos_a_recuperar'), saldo: 26479000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Impostos a recuperar: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 26479000
+#2 - conta: Impostos a recuperar: 26479000.00
+Razonete:
+	Total de débitos: 26479000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'despesas_antecipadas'), saldo: 779000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Despesas antecipadas: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 779000
+#2 - conta: Despesas antecipadas: 779000.00
+Razonete:
+	Total de débitos: 779000.00
+	Total de créditos: 0.00
+conta_index: ('bp', 'ativo', 'circulante', 'outros'), saldo: 17350000
+type(conta): <class 'src.lib.contabilidade.plano_de_contas.conta_devedora.ContaDevedora'>
+#1 - conta: Outros ativos: 0.00
+Razonete:
+	Total de débitos: 0.00
+	Total de créditos: 0.00
+conta.get_saldo(): 17350000
+#2 - conta: Outros ativos: 17350000.00
+Razonete:
+	Total de débitos: 17350000.00
+	Total de créditos: 0.00
+type(outras_obrigacoes: <class 'src.lib.contabilidade.plano_de_contas.grupo_contas.GrupoContas'>)
+conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'dividendos'))
+saldo: 60737000)
+type(conta: <class 'src.lib.contabilidade.plano_de_contas.conta_credora.ContaCredora'>)
+conta_index: ('bp', 'passivo', 'circulante', 'outras_obrigacoes', 'outros_cp', 'outros'))
+saldo: 109696000)
+type(conta: <class 'src.lib.contabilidade.plano_de_contas.conta_credora.ContaCredora'>)
+
+valuation: Valuation - Iochpe
+	Total de períodos: 2
+	Último período: 2010
+	Plano de Contas:
+- Balanço Patrimonial:
+
+	Ativo: 2252378000.00	(valor para verificação: None)
+		Circulante: 941424000.00	(valor para verificação: 941424000)
+			Caixa e equivalentes de caixa: 57639000.00
+			Aplicações financeiras: 265481000.00
+			Contas a receber: 252661000.00
+			Estoques: 321035000.00
+			Ativos Biológicos: 0.00
+			Impostos a recuperar: 26479000.00
+			Despesas antecipadas: 779000.00
+			Outros ativos: 17350000.00
+		Não Circulante: 1310954000.00	(valor para verificação: 1142974000)
+			Realizável: 167980000.00
+			Aplicação financeira a custo amortizado: 0.00
+			Contas a receber: 331000.00
+			Estoques: 0.00
+			Ativos biológicos: 0.00
+			Impostos diferidos: 91933000.00
+			Despesas antecipadas: 0.00
+			Partes relacionadas: 0.00
+			outros: 75716000.00
+			Investimentos: 233000.00
+			Imobilizado: 948178000.00
+			Intangíveis líquido: 26583000.00	(valor para verificação: 26583000)
+				Intangíveis: 26583000.00
+				Goodwill: 0.00
+	Passivo: 544107000.00	(valor para verificação: None)
+		Circulante: 544107000.00	(valor para verificação: 544107000)
+			Obrigações Sociais: 72659000.00
+			Fornecedores: 150106000.00
+			Impostos a Pagar: 12506000.00
+			Provisões: 0.00
+			Empréstimos e Financiamentos: 138403000.00	(valor para verificação: 138403000)
+				Financiamentos: 138403000.00
+				Debêntures: 0.00
+				Arrendamento Financeiro: 0.00
+			Outras Obrigações: 170433000.00	(valor para verificação: 170433000)
+				Outros: 170433000.00	(valor para verificação: 170433000)
+					Dividendos: 60737000.00
+					Outros: 109696000.00
+		Não Circulante: 0.00	(valor para verificação: None)
+			Empréstimos, financiamentos e debêntures: 0.00
+			Arrendamento mercantil: 0.00
+			Fornecedores: 0.00
+			Partes relacionadas: 0.00
+			Credor pela aquisição da concessão: 0.00
+			Provisões cíveis, trabalhistas e previdenciárias: 0.00
+			Provisão para conserva especial: 0.00
+			Outros passivos: 0.00
+	Patrimônio Líquido: 0.00	(valor para verificação: None)
+		Capital social: 0.00
+		Reservas de capital: 0.00
+		Ajustes de avaliação patrimonial: 0.00
+		Prejuízos acumulados: 0.00
+		Participação dos acionistas não controladores: 0.00
+		Participação dos acionistas não controladores em ativos mantidos para negociação: 0.00
+	Total Ativo: 2252378000.00
+	Total Passivo + Patrimônio Líquido: 544107000.00
