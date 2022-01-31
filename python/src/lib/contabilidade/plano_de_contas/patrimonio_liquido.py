@@ -8,7 +8,7 @@ class PatrimonioLiquido(GrupoContas, ABC):
     def __init__(self):
         super().__init__('patrimonio_liquido', 'Patrimônio Líquido',
                 Natureza.CREDORA, None)
-
+                
     @abstractmethod
     def init_contas(self):
         pass

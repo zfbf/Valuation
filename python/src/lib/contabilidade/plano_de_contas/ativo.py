@@ -9,10 +9,6 @@ from ..natureza import Natureza
 class Ativo(GrupoContas, ABC):
     def __init__(self):
         super().__init__('ativo', 'Ativo', Natureza.DEVEDORA, None)
-        self.circulante = self.build_ativo_circulante()
-        self.add_conta(self.circulante)
-        self.nao_circulante = self.build_ativo_nao_circulante()
-        self.add_conta(self.nao_circulante)
 
     @abstractmethod
     def build_ativo_circulante(self):
@@ -26,5 +22,10 @@ class Ativo(GrupoContas, ABC):
         return self.circulante.get_contas_disponibilidades()
 
     def init_contas(self):
+        self.circulante = self.build_ativo_circulante()
+        self.add_conta(self.circulante)
+        self.circulante.init_conta_caixa()
         self.circulante.init_contas()
+        self.nao_circulante = self.build_ativo_nao_circulante()
+        self.add_conta(self.nao_circulante)
         self.nao_circulante.init_contas()

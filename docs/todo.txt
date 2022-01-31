@@ -10,4 +10,9 @@
 10 - Criar a classe ContaPatrimonial
 11 - Criar várias contas patrimoniais de cada grupo de contas
 12 - Criar vários métodos em BalancoPatrimonial para alimentar as contas patrimoniais
- 
+
+
+
+13 - Refactoring das classes que fazem referência ao termo Economatica para IFRS
+
+14 - Verificar o comportamento do atributo valor_verificacao em GrupoContas;

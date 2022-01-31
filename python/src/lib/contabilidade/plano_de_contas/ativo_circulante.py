@@ -8,13 +8,15 @@ from ..natureza import Natureza
 class AtivoCirculante(GrupoContas, ABC):
     def __init__(self, parent):
         super().__init__('circulante', 'Circulante', Natureza.DEVEDORA, parent)
-        self.init_conta_caixa()
 
     def init_conta_caixa(self):
-        self.add_conta(ContaDevedora('caixa', 'caixa', self))
+        self.add_conta(ContaDevedora('caixa_e_equivalentes', 'Caixa e Equivalentes', self))
 
     def rename_conta_caixa(self, nome):
-        self.get_conta('caixa').rename_conta(nome)
+        self.get_conta('caixa_e_equivalentes').rename_conta(nome)
+
+    def get_conta_caixa(self):
+        return self.get_conta('caixa_e_equivalentes')
 
     #
     # Assume-se que todas as contas que compoe o grupo de

@@ -8,7 +8,7 @@ from ..natureza import Natureza
 
 
 class TestGrupoContas(unittest.TestCase):
-    print_to_stdout = False
+    print_to_stdout = True
 
     def setUp(self):
         self.gc1 = GrupoContas('grupo_1', 'Grupo 1', Natureza.DEVEDORA)

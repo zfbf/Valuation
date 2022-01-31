@@ -10,6 +10,7 @@ class EconomaticaDados(ABC):
     def __init__(self, nome_empresa):
         super().__init__()
         self.nome_empresa = nome_empresa
+        self.prepare()
 
     @abstractmethod
     def get_identificador(self):
@@ -23,19 +24,40 @@ class EconomaticaDados(ABC):
     def get_data_fim(self):
         pass
 
+    @abstractmethod
+    def get_periodos(self):
+        pass
+
     def import_from_excel(self):
-        dados_empresa_file = os.path.join(self.get_dados_empresa_file_path(),
-                                          self.get_dados_empresa_file_name())
+        dados_empresa_file_name = os.path.join(self.get_dados_empresa_file_path(),
+                                               self.get_dados_empresa_file_name())
         rows_to_skip = {}
-        df = pd.read_excel(open(dados_empresa_file, 'rb'),
-                                sheet_name=self.get_sheet_name(),
-                                names=['Conta'] + [str(ano) for ano in range(2009, 2021)],
-                                usecols='A, B, C, D, E, F, G, H, I, J, K, L, M',
-                                skiprows=range(1, 8))
-                                #dtype={'ret_Cemig': float, 'ret_Bovespa': int, 'ret_Dow_Jones': int},
-                                #skiprows=[0],
-                                #nrows=36)
+        codigos = ['codigo_{}'.format(i) for i in range(8)]
+        column_names = codigos + ['conta'] + [str(ano) for ano in range(2009, 2021)]
+
+        with open(dados_empresa_file_name, 'rb') as dados_empresa_file:
+            df = pd.read_excel(dados_empresa_file,
+                               sheet_name=self.get_sheet_name(),
+                               names=column_names,
+                               usecols='A:U',
+                               skiprows=range(1, 8))
+
         return df
+
+    def prepare(self):
+        multi_index = ['codigo_0', 'codigo_1', 'codigo_2', 'codigo_3',
+                       'codigo_4', 'codigo_5', 'codigo_6', 'codigo_7']
+        aux_df = self.import_from_excel().set_index(multi_index).sort_index()
+        aux_index = aux_df.index.dropna(how='all')
+        self.df = aux_df.loc[aux_index]
+        self.df.sort_index(inplace=True)
+
+    def query(self, codigos):
+        result = self.df.loc[codigos, :]
+        return result
+
+    def get_valor(self, index, periodo):
+        return self.df.loc[index, periodo][-1]
 
     def read_row():
         fs = '{} \t& {} \t& {} \t& {} \t& {} \t& {} \t& {} \\\\'
@@ -69,5 +91,4 @@ class EconomaticaDados(ABC):
         repr = "\nExercício Social - {:s}".format(self.get_identificador())
         repr += "\n\tInício: {}".format(self.get_data_inicio().strftime('%d/%m/%Y'))
         repr += "\n\tInício: {}".format(self.get_data_fim().strftime('%d/%m/%Y'))
-        repr += "\n\tPlano de Contas: {}".format(self.plano_de_contas)
         return repr

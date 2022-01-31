@@ -25,22 +25,16 @@ class Razonete:
     def get_total_debitos(self):
         total_debitos = 0
 
-        if len(self.debitos) == 1:
-            total_debitos = self.debitos[0].valor
-        elif len(self.debitos) > 1:
-            for debito in self.debitos:
-                total_debitos += debito.valor
+        for debito in self.debitos:
+            total_debitos += debito.valor
 
         return total_debitos
 
     def get_total_creditos(self):
         total_creditos = 0
 
-        if len(self.creditos) == 1:
-            total_creditos = self.creditos[0].valor
-        elif len(self.creditos) > 1:
-            for credito in self.creditos:
-                total_creditos += credito.valor
+        for credito in self.creditos:
+            total_creditos += credito.valor
 
         return total_creditos
 

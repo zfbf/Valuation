@@ -13,10 +13,7 @@ Por exemplo: Economática, Relatórios específicos da empresa, etc.
 
 Para isso usou-se um diretório separado para cada tipo de fonte de dados.
 
-
-
 EconomaticaDadosAnuais
-
 
 
 -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
@@ -30,4 +27,61 @@ são importadas pelo unittest e não chamadas diretamente.
 
 -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
 
+Importação dados Economática:
+
+1 - Elaborar códigos para as contas que devem ser importadas de modo a
+    diferenciar as contas com nomes iguais e que pertencem a grupos
+    diferentes.    Exemplo: contas_a_receber em ativo.circulante e
+                            ativo.nao_circulante.
+2 - Importar todas as linhas sem usar índices;
+3 - Eliminar as linhas com o conteúdo do código em branco;
+4 - Adicionar o índice para o código.
+5 - Ignorar contas do tipo passivo + patrimônio líquido.
+
+
 -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-
+
+
+Modelo de Classes:
+
+Os seguintes conceitos foram implementados em classes:
+
+
+  - Demonstrativo Financeiro: Pode ser dos seguintes tipos:
+    - Balanço Patrimonial;
+    - DRE;
+    - Fluxo de Caixa.
+
+1 - Conta: Representa uma conta de algum demonstrativo financeiro.
+    Elas podem ter natureza credora ou devedora.
+
+2 - Grupo de contas
+
+3 - Balanco Patrimonial: Possui os seguintes grupos de contas:
+    3.1 - Ativo
+    3.2 - Passivo
+    3.3 - Patrimônio Líquido
+
+4 - DRE: Possui ...
+
+5 - Fluxo de Caixa: Possui ...
+
+
+
+
+
+
+
+Concepção da classe AnaliseEconomicoFinanceira:
+
+  1 - Alguns indicadores, como por exemplo o ROE, necessitam de dados tanto do
+      balanço patrimonial quanto da DRE, desta forma há uma necessidade de
+      reunir estas fontes de informação em um local comum;
+
+  2 - Para realizar análise horizontal, ou seja, verificar qual a variação
+      percentual entre um exercício e o outro, é preciso ter acesso a esses
+      dois exercícios, porém não necessariamente os exercícios precisam começar
+      na mesma data base.    É possível, ainda que não seja o mais recomendável
+      devido a fatores sazonais, comparar um exercício anual com início em
+      primeiro de janeiro com outro anualizado com início em primeiro de abril,
+      ou seja, no início do segundo trimestre.

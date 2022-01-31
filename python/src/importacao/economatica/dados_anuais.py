@@ -27,3 +27,7 @@ class EconomaticaDadosAnuais(EconomaticaDados):
     def get_data_fim(self):
         data = datetime(self.ano_final, 12, 31)
         return data
+
+    def get_periodos(self):
+        return [str(periodo) for periodo in range(self.ano_inicial, self.ano_final + 1)]
+        

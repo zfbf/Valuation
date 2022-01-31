@@ -12,7 +12,8 @@ from ..natureza import Natureza
 #
 class Conta(ABC, Razonete):
     def __init__(self, codigo, nome, natureza, parent=None):
-        super().__init__()
+        ABC.__init__(self)
+        Razonete.__init__(self)
         self.codigo = codigo
         self.nome = nome
         self.natureza = natureza
