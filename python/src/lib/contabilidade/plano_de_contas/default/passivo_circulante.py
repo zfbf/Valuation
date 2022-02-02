@@ -8,9 +8,6 @@ class PassivoCirculanteDefault(PassivoCirculante):
     def __init__(self, parent):
         super().__init__(parent)
 
-    def get_contas_disponibilidades(self):
-        return [self.get_conta('caixa')]
-
     def init_contas(self):
         contas = (('obrigacoes_sociais', 'Obrigações Sociais'),
                   ('fornecedores', 'Fornecedores'),

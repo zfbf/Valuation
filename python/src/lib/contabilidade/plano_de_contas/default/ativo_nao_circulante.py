@@ -9,16 +9,29 @@ class AtivoNaoCirculanteDefault(AtivoNaoCirculante):
         super().__init__(parent)
 
     def init_contas(self):
-        contas = (('realizavel_lp', 'Realizável'),
-                  ('aplicacao_financeira_custo_amortizado', 'Aplicação financeira a custo amortizado'),
+        realizavel_lp = GrupoContas('realizavel_lp',
+                                    'Realizável a Longo Prazo',
+                                    Natureza.DEVEDORA,
+                                    self)
+
+        self.add_conta(realizavel_lp)
+
+        contas = (('aplicacao_financeira_valor_justo',
+                        'Aplicação financeira a valor justo'),
+                  ('aplicacao_financeira_custo_amortizado',
+                        'Aplicação financeira a custo amortizado'),
                   ('contas_a_receber', 'Contas a receber'),
                   ('estoques', 'Estoques'),
                   ('ativos_biologicos', 'Ativos biológicos'),
                   ('impostos_diferidos', 'Impostos diferidos'),
                   ('despesas_antecipadas', 'Despesas antecipadas'),
                   ('partes_relacionadas', 'Partes relacionadas'),
-                  ('outros', 'outros'),
-                  ('investimentos', 'Investimentos'),
+                  ('outros', 'outros'))
+
+        for conta in contas:
+            realizavel_lp.add_conta(ContaDevedora(conta[0], conta[1]))
+
+        contas = (('investimentos', 'Investimentos'),
                   ('imobilizado', 'Imobilizado'))
 
         for conta in contas:

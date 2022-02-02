@@ -9,17 +9,47 @@ class PassivoNaoCirculanteDefault(PassivoNaoCirculante):
         super().__init__(parent)
 
     def init_contas(self):
-        aux = (('emp_financ_debentures',
-                    'Empréstimos, financiamentos e debêntures'),
-               ('arrendamento_mercantil', 'Arrendamento mercantil'),
-               ('fornecedores', 'Fornecedores'),
-               ('partes_relacionadas', 'Partes relacionadas'),
-               ('credor_pela_aquisicao_da_concessao',
-                    'Credor pela aquisição da concessão'),
-               ('prov_civeis_trabalhistas_e_previdenciarias',
-                    'Provisões cíveis, trabalhistas e previdenciárias'),
-               ('prov_conserva_especial', 'Provisão para conserva especial'),
-               ('outros', 'Outros passivos'))
+        contas = (('impostos_diferidos', 'Impostos Diferidos'),
+                  ('provisoes', 'Provisões'),
+                  ('lucros_e_receitas_a_apropriar', 'Lucros e Receitas a Apropriar'))
 
-        for pars in aux:
-            self.add_conta(ContaCredora(pars[0], pars[1]))
+        for conta in contas:
+            self.add_conta(ContaCredora(conta[0], conta[1]))
+
+        emp_e_fin = GrupoContas('emprestimos_e_financiamentos',
+                                'Empréstimos e Financiamentos',
+                                Natureza.CREDORA,
+                                self)
+
+        self.add_conta(emp_e_fin)
+
+        financiamentos = GrupoContas('financiamentos',
+                                     'Financiamentos',
+                                     Natureza.CREDORA,
+                                     self)
+
+        emp_e_fin.add_conta(financiamentos)
+
+        contas = (('nacional', 'Nacional'),
+                  ('estrangeiro', 'Estrangeiro'))
+
+        for conta in contas:
+            financiamentos.add_conta(ContaCredora(conta[0], conta[1]))
+
+        contas = (('debentures', 'Debêntures'),
+                  ('arrendamento_financeiro', 'Arrendamento Financeiro'))
+
+        for conta in contas:
+            emp_e_fin.add_conta(ContaCredora(conta[0], conta[1]))
+
+        outras_obrig = GrupoContas('outras_obrigacoes',
+                                   'Outras Obrigações',
+                                   Natureza.CREDORA,
+                                   self)
+
+        self.add_conta(outras_obrig)
+        contas = (('partes_relacionadas', 'Partes Relacionadas'),
+                  ('outros_lp', 'Outros'))
+
+        for conta in contas:
+            outras_obrig.add_conta(ContaCredora(conta[0], conta[1]))
