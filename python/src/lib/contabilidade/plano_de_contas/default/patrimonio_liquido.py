@@ -7,15 +7,17 @@ class PatrimonioLiquidoDefault(PatrimonioLiquido):
         super().__init__()
 
     def init_contas(self):
-        aux = (('capital_social', 'Capital social'),
-               ('reservas_de_capital', 'Reservas de capital'),
-               ('ajustes_de_avaliacao_patrimonial',
-                    'Ajustes de avaliação patrimonial'),
-               ('prejuizos_acumulados', 'Prejuízos acumulados'),
-               ('particip_acionistas_n_controladores',
-                    'Participação dos acionistas não controladores'),
-                ('particip_acionistas_n_controladores_em_ativos_mantidos_para_negociacao',
-                     'Participação dos acionistas não controladores em ativos mantidos para negociação'))
+        contas = (('capital_social', 'Capital social'),
+                  ('reservas_de_capital', 'Reservas de capital'),
+                  ('reservas_de_reavaliacao', 'Reservas de Reavaliação'),
+                  ('reservas_de_lucros', 'Reservas de Lucros'),
+                  ('lucros_acumulados', 'Lucros acumulados'),
+                  ('ajustes_avaliacao_patrimonial',
+                        'Ajustes Avaliação Patrimonial'),
+                  ('ajustes_acumulados_conversao',
+                        'Ajustes Acumulados Conversão'),
+                  ('outros_resultados_abrangentes',
+                        'Outros Resultados Abrangentes'))
 
-        for pars in aux:
-            self.add_conta(ContaCredora(pars[0], pars[1]))
+        for conta in contas:
+            self.add_conta(ContaCredora(conta[0], conta[1]))

@@ -8,6 +8,7 @@ class TestPatrimonioLiquidoDefault(unittest.TestCase):
 
     def setUp(self):
         self.patrimonio_liquido = PatrimonioLiquidoDefault()
+        self.patrimonio_liquido.init_contas()
 
     def test_get_conta(self):
         self.assertIsNotNone(self.patrimonio_liquido.get_conta('capital_social'))
