@@ -31,21 +31,14 @@ class GrupoContas(Conta):
         return founded
 
     def get_saldo(self):
-        totais = {
-            "debitos": 0,
-            "creditos": 0
-        }
+        saldo = self.get_total_debitos() - self.get_total_creditos()
 
-        self.set_totais_postorder(self, totais)
-        saldo = 0
-
-        if self.is_natureza_devedora():
-            saldo = totais['debitos'] - totais['creditos']
-        else:
-            saldo = totais['creditos'] - totais['debitos']
+        if self.is_natureza_credora():
+            saldo = saldo * -1
 
         return saldo
 
+    #TODO: Verificar se esse método ainda é usado
     def get_saldo_contas(self, contas):
         totais = {
             "debitos": 0,
@@ -102,10 +95,26 @@ class GrupoContas(Conta):
 
         return verificacao
 
+    def get_total_creditos(self):
+        total_creditos = 0
+
+        for conta in self.contas:
+            total_creditos += conta.get_total_creditos()
+
+        return total_creditos
+
+    def get_total_debitos(self):
+        total_debitos = 0
+
+        for conta in self.contas:
+            total_debitos += conta.get_total_debitos()
+
+        return total_debitos
+
     def __str__(self):
         return self.str_indent()
 
-    def str_indent(self, level=1):
+    def str_indent(self, level=0):
         str = '\n{:s}{:s}: {:.2f}'.format('\t' * level, self.nome, self.get_saldo())
         str += '\t(valor para verificação: {})'.format(self.valor_verificacao)
 

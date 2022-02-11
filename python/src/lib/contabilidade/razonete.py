@@ -45,7 +45,7 @@ class Razonete:
         return self.get_total_creditos() < self.get_total_debitos()
 
     def __str__(self):
-        repr = '\nRazonete:'
+        repr = '\n\tRazonete:'
         repr += '\n\tTotal de débitos: {:.2f}\n\tTotal de créditos: {:.2f}'.format(
                 self.get_total_debitos(),
                 self.get_total_creditos())

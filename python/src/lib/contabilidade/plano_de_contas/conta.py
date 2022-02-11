@@ -39,10 +39,10 @@ class Conta(ABC, Razonete):
 
     def get_codigos_ascendentes(self):
         codigos_ascendentes = [grupo_ascendente.codigo for grupo_ascendente in
-                self.get_grupos_ascendentes()]
+                self.get_linha_ascendente()]
         return codigos_ascendentes
 
-    def get_grupos_ascendentes(self):
+    def get_linha_ascendente(self):
         grupos_ascendentes = []
         grupo_ascendente = self.parent
 

@@ -1,10 +1,5 @@
 from abc import ABC, abstractmethod
 
-from .ativo import Ativo
-from .passivo import Passivo
-from .patrimonio_liquido import PatrimonioLiquido
-from .conta_devedora import ContaDevedora
-
 
 #
 # O BalancoPatrimonial foi concebido para:

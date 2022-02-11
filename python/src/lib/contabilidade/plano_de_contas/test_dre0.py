@@ -5,36 +5,34 @@ from .conta_devedora import ContaDevedora
 from .conta_credora import ContaCredora
 from ..lancamento_contabil import LancamentoContabil
 from ..natureza import Natureza
+from .dre import DRE
 
 
-class TestGrupoContas(unittest.TestCase):
+class TestDRE(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.gc1 = GrupoContas('grupo_1', 'Grupo 1', Natureza.DEVEDORA)
-        self.gc1.valor_verificacao = 15.3
-        conta_11 = ContaDevedora('conta_1', 'Conta 1')
-        conta_11.set_saldo(10.3)
-        self.gc1.add_conta(conta_11)
-        conta_12 = ContaDevedora('conta_2', 'Conta 2')
-        conta_12.set_saldo(5)
-        self.gc1.add_conta(conta_12)
+        self.dre = DRE()
+        self.dre.init_contas()
 
-        self.gc2 = GrupoContas('grupo_2', 'Grupo 2', Natureza.DEVEDORA)
-        conta_21 = ContaDevedora('conta_1', 'Conta 1')
-        conta_21.set_saldo(10.3)
-        self.gc2.add_conta(conta_21)
-        conta_22 = ContaDevedora('conta_2', 'Conta 2')
-        conta_22.set_saldo(5)
-        self.gc2.add_conta(conta_22)
-        conta_23 = ContaDevedora('conta_3', 'Conta 3')
-        conta_23.set_saldo(30)
-        self.gc2.add_conta(conta_23)
-        self.gc2.valor_verificacao = 45.3
+    def test_lucro_bruto(self):
+        self.dre.receita_liquida_operacional.add_credito(
+                LancamentoContabil(1500))
+        print('receita_liquida_operacional: {}'.format(
+              self.dre.receita_liquida_operacional))
 
-    def test_get_conta(self):
-        self.assertIsNotNone(self.gc1.get_conta('conta_1'))
-        self.assertIsNone(self.gc1.get_conta('conta_a'))
+        self.dre.custo_produtos_vendidos.add_debito(
+                LancamentoContabil(500))
+        print('custo_produtos_vendidos: {}'.format(
+              self.dre.custo_produtos_vendidos))
+              
+        self.dre.lucro_bruto.valor_verificacao = 1000
+        print('lucro_bruto: {}'.format(
+              self.dre.lucro_bruto))
+        saldo_lucro_bruto = self.dre.lucro_bruto.get_saldo()
+        print('saldo_lucro_bruto: {}'.format(saldo_lucro_bruto))
+        self.assertAlmostEqual(saldo_lucro_bruto, 1000)
+        self.assertTrue(self.dre.lucro_bruto.verificar_saldo())
 
     def test_get_saldo_1(self):
         self.assertAlmostEqual(self.gc1.get_saldo(), 15.3)
@@ -69,7 +67,7 @@ class TestGrupoContas(unittest.TestCase):
         self.assertTrue(self.gc2.verificar_saldo())
 
     def test_verificar_saldo(self):
-        self.assertTrue(self.gc1.verificar_saldo())
+        self.assertFalse(self.gc1.verificar_saldo())
         self.assertTrue(self.gc2.verificar_saldo())
 
     def test_get_codigos_ascendentes(self):
@@ -89,26 +87,9 @@ class TestGrupoContas(unittest.TestCase):
         self.assertEqual(len(codigos_ascendentes), 1)
         self.assertEqual(codigos_ascendentes[0], 'grupo_1')
 
-    def test_get_linha_ascendente(self):
-        linha_ascendente = self.gc1.get_linha_ascendente()
-        self.assertEqual(len(linha_ascendente), 0)
-
-    def test_get_total_creditos(self):
-        total_creditos = self.gc1.get_total_creditos()
-        print('total_creditos: {}'.format(total_creditos))
-        print('self.gc1: {}'.format(self.gc1))
-        print('self.gc1 - conta_1: {}'.format(self.gc1.get_conta('conta_1')))
-        print('self.gc1 - conta_2: {}'.format(self.gc1.get_conta('conta_2')))
-        self.assertEqual(total_creditos, 0)
-
-    def test_get_total_debitos(self):
-        print('\nDentro de test_get_total_debitos')
-        total_debitos = self.gc1.get_total_debitos()
-        print('total_debitos: {}'.format(total_debitos))
-        print('self.gc1: {}'.format(self.gc1))
-        print('self.gc1 - conta_1: {}'.format(self.gc1.get_conta('conta_1')))
-        print('self.gc1 - conta_2: {}'.format(self.gc1.get_conta('conta_2')))
-        self.assertEqual(total_debitos, 15.3)
+    def test_get_grupos_ascendentes(self):
+        grupos_ascendentes = self.gc1.get_grupos_ascendentes()
+        self.assertEqual(len(grupos_ascendentes), 0)
 
     @unittest.skipUnless(print_to_stdout, 'making_clear_tests')
     def test_to_str(self):
