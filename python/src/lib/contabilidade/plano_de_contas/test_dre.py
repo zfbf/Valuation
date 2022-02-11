@@ -75,7 +75,40 @@ class TestDRE(unittest.TestCase):
         self.dre.lair.valor_verificacao = 900
         self.assertTrue(self.dre.lair.verificar_saldo())
 
+    def test_ircs(self):
+        self.dre.ircs.valor_verificacao = 200
+        provisao_ir = self.dre.ircs.get_conta('provisao_ir')
+        provisao_ir.add_debito(LancamentoContabil(120))
+        ir_diferido = self.dre.ircs.get_conta('ir_diferido')
+        ir_diferido.add_debito(LancamentoContabil(80))
+        self.assertTrue(self.dre.ircs.verificar_saldo())
+
+    def test_lucro_oper_continuadas(self):
+        self.dre.receita_liquida_operacional.add_credito(
+                LancamentoContabil(1500))
+        self.dre.custo_produtos_vendidos.add_debito(
+                LancamentoContabil(500))
+        self.dre.despesas_operacionais.valor_verificacao = 50
+        despesas_com_vendas = self.dre.despesas_operacionais.get_conta('despesas_com_vendas')
+        despesas_com_vendas.add_debito(LancamentoContabil(50))
+        self.dre.resultado_financeiro.valor_verificacao = -50
+        receitas_financeiras = self.dre.resultado_financeiro.get_conta(
+                'receitas_financeiras')
+        receitas_financeiras.add_credito(LancamentoContabil(100))
+        despesas_financeiras = self.dre.resultado_financeiro.get_conta(
+                'despesas_financeiras')
+        despesas_financeiras.add_debito(LancamentoContabil(150))
+        self.dre.lair.valor_verificacao = 900
+        self.assertTrue(self.dre.lair.verificar_saldo())
+        self.dre.ircs.valor_verificacao = 200
+        provisao_ir = self.dre.ircs.get_conta('provisao_ir')
+        provisao_ir.add_debito(LancamentoContabil(120))
+        ir_diferido = self.dre.ircs.get_conta('ir_diferido')
+        ir_diferido.add_debito(LancamentoContabil(80))
+        self.dre.lucro_oper_continuadas.valor_verificacao = 700
+        self.assertTrue(self.dre.lucro_oper_continuadas.verificar_saldo())
+
     @unittest.skipUnless(print_to_stdout, 'making_clear_tests')
     def test_to_str(self):
-        self.test_lair()
+        self.test_lucro_oper_continuadas()
         print(self.dre)

@@ -59,6 +59,24 @@ class DRE:
         self.lair.add_conta(self.lajir)
         self.lair.add_conta(self.resultado_financeiro)
 
+        self.ircs = GrupoContas(
+                'icrs',
+                'Imposto de Renda e Contribuição Social',
+                Natureza.DEVEDORA,
+                self)
+
+        contas = (ContaDevedora('provisao_ir', 'Provisão de Imposto de Renda'),
+                  ContaDevedora('ir_diferido', 'Imposto de Renda Diferido'))
+
+        for conta in contas:
+            self.ircs.add_conta(conta)
+
+        self.lucro_oper_continuadas = ContaResultadoCredora(
+                'lucro_oper_continuadas',
+                'Lucro Operações Continuadas')
+        self.lucro_oper_continuadas.add_conta(self.lair)
+        self.lucro_oper_continuadas.add_conta(self.ircs)
+
     def get_conta(self, codigo):
         conta = None
         grupos = [self.ativo, self.passivo, self.patrimonio_liquido]
@@ -84,4 +102,6 @@ class DRE:
         repr += str(self.lajir)
         repr += str(self.resultado_financeiro)
         repr += str(self.lair)
+        repr += str(self.ircs)
+        repr += str(self.lucro_oper_continuadas)
         return repr
