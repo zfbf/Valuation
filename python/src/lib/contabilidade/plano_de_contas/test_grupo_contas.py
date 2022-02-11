@@ -8,7 +8,7 @@ from ..natureza import Natureza
 
 
 class TestGrupoContas(unittest.TestCase):
-    print_to_stdout = True
+    print_to_stdout = False
 
     def setUp(self):
         self.gc1 = GrupoContas('grupo_1', 'Grupo 1', Natureza.DEVEDORA)
@@ -95,19 +95,10 @@ class TestGrupoContas(unittest.TestCase):
 
     def test_get_total_creditos(self):
         total_creditos = self.gc1.get_total_creditos()
-        print('total_creditos: {}'.format(total_creditos))
-        print('self.gc1: {}'.format(self.gc1))
-        print('self.gc1 - conta_1: {}'.format(self.gc1.get_conta('conta_1')))
-        print('self.gc1 - conta_2: {}'.format(self.gc1.get_conta('conta_2')))
         self.assertEqual(total_creditos, 0)
 
     def test_get_total_debitos(self):
-        print('\nDentro de test_get_total_debitos')
         total_debitos = self.gc1.get_total_debitos()
-        print('total_debitos: {}'.format(total_debitos))
-        print('self.gc1: {}'.format(self.gc1))
-        print('self.gc1 - conta_1: {}'.format(self.gc1.get_conta('conta_1')))
-        print('self.gc1 - conta_2: {}'.format(self.gc1.get_conta('conta_2')))
         self.assertEqual(total_debitos, 15.3)
 
     @unittest.skipUnless(print_to_stdout, 'making_clear_tests')

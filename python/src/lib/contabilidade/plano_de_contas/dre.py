@@ -39,10 +39,25 @@ class DRE:
         for conta in contas:
             self.despesas_operacionais.add_conta(ContaDevedora(conta[0], conta[1]))
 
+        self.lajir = ContaResultadoCredora('lajir', 'LAJIR')
+        self.lajir.add_conta(self.lucro_bruto)
+        self.lajir.add_conta(self.despesas_operacionais)
+
+        self.resultado_financeiro = GrupoContas(
+                'resultado_financeiro',
+                'Resultado Financeiro',
+                Natureza.CREDORA,
+                self)
+
+        contas = (ContaCredora('receitas_financeiras', 'Receitas Financeiras'),
+                  ContaDevedora('despesas_financeiras', 'Despesas Financeiras'))
+
+        for conta in contas:
+            self.resultado_financeiro.add_conta(conta)
+
         self.lair = ContaResultadoCredora('lair', 'LAIR')
-        self.lair.add_conta(self.receita_liquida_operacional)
-        self.lair.add_conta(self.custo_produtos_vendidos)
-        self.lair.add_conta(self.despesas_operacionais)
+        self.lair.add_conta(self.lajir)
+        self.lair.add_conta(self.resultado_financeiro)
 
     def get_conta(self, codigo):
         conta = None
@@ -66,5 +81,7 @@ class DRE:
         repr += str(self.custo_produtos_vendidos)
         repr += str(self.lucro_bruto)
         repr += str(self.despesas_operacionais)
+        repr += str(self.lajir)
+        repr += str(self.resultado_financeiro)
         repr += str(self.lair)
         return repr
