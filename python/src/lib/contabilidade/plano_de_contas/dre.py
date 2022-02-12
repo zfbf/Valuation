@@ -77,6 +77,26 @@ class DRE:
         self.lucro_oper_continuadas.add_conta(self.lair)
         self.lucro_oper_continuadas.add_conta(self.ircs)
 
+        self.operacoes_descontinuadas = ContaCredora(
+                'operacoes_descontinuadas',
+                'Operações Descontinuadas')
+
+        self.lucro_consolidado = ContaResultadoCredora(
+                'lucro_consolidado',
+                'Lucro Consolidado')
+        self.lucro_consolidado.add_conta(self.lucro_oper_continuadas)
+        self.lucro_consolidado.add_conta(self.operacoes_descontinuadas)
+
+        self.participacao_minoritaria = ContaDevedora(
+                'participacao_minoritaria',
+                'Participação Minoritária')
+
+        self.lucro_liquido = ContaResultadoCredora(
+                'lucro_liquido',
+                'Lucro Líquido')
+        self.lucro_liquido.add_conta(self.lucro_consolidado)
+        self.lucro_liquido.add_conta(self.participacao_minoritaria)
+
     def get_conta(self, codigo):
         conta = None
         grupos = [self.ativo, self.passivo, self.patrimonio_liquido]
@@ -104,4 +124,9 @@ class DRE:
         repr += str(self.lair)
         repr += str(self.ircs)
         repr += str(self.lucro_oper_continuadas)
+        repr += str(self.operacoes_descontinuadas)
+        repr += str(self.lucro_consolidado)
+        repr += '\n'
+        repr += str(self.participacao_minoritaria)
+        repr += str(self.lucro_liquido)
         return repr
