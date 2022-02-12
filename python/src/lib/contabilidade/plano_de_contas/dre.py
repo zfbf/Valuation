@@ -8,6 +8,7 @@ from ..natureza import Natureza
 class DRE:
     def __init__(self):
         super().__init__()
+        self.init_contas()
 
     def init_contas(self):
         self.receita_liquida_operacional = ContaCredora(
@@ -32,12 +33,16 @@ class DRE:
         contas = (('despesas_com_vendas', 'Despesas com Vendas'),
                   ('despesas_administrativas', 'Despesas Administrativas'),
                   ('perdas_recuperacao_de_ativos', 'Perdas Recuperação de Ativos'),
-                  ('outras_receitas_operacionais', 'Outras Receitas Operacionais'),
-                  ('outras_despesas_operacionais', 'Outras Despesas Operacionais'),
-                  ('equivalencia_patrimonial', 'Equivalência Patrimonial'))
+                  ('outras_despesas_operacionais', 'Outras Despesas Operacionais'))
 
         for conta in contas:
             self.despesas_operacionais.add_conta(ContaDevedora(conta[0], conta[1]))
+
+        contas = (('outras_receitas_operacionais', 'Outras Receitas Operacionais'),
+                  ('equivalencia_patrimonial', 'Equivalência Patrimonial'))
+
+        for conta in contas:
+            self.despesas_operacionais.add_conta(ContaCredora(conta[0], conta[1]))
 
         self.lajir = ContaResultadoCredora('lajir', 'LAJIR')
         self.lajir.add_conta(self.lucro_bruto)
@@ -124,6 +129,7 @@ class DRE:
         repr += str(self.lair)
         repr += str(self.ircs)
         repr += str(self.lucro_oper_continuadas)
+        repr += '\n'
         repr += str(self.operacoes_descontinuadas)
         repr += str(self.lucro_consolidado)
         repr += '\n'

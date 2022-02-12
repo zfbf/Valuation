@@ -13,7 +13,6 @@ class TestDRE(unittest.TestCase):
 
     def setUp(self):
         self.dre = DRE()
-        self.dre.init_contas()
 
     def set_values(self):
         self.dre.receita_liquida_operacional.add_credito(

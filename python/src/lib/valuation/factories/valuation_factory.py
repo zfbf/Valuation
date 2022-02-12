@@ -2,11 +2,13 @@
 from ..periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
 from ...contabilidade.plano_de_contas.default.balanco_patrimonial import BalancoPatrimonialDefault
+from ...contabilidade.plano_de_contas.dre import DRE
 from .ativo_circulante_loader import AtivoCirculanteDefaultLoader
 from .ativo_nao_circulante_loader import AtivoNaoCirculanteDefaultLoader
 from .passivo_circulante_loader import PassivoCirculanteDefaultLoader
 from .passivo_nao_circulante_loader import PassivoNaoCirculanteDefaultLoader
 from .patrimonio_liquido_loader import PatrimonioLiquidoDefaultLoader
+from .dre_loader import DRELoader
 
 
 class ValuationDefaultFactory():
@@ -19,9 +21,11 @@ class ValuationDefaultFactory():
 
         for periodo in economatica_dados.get_periodos():
             bp = BalancoPatrimonialDefault()
+            dre = DRE()
             valuation.append_periodo({
                 'identificador': periodo,
-                'bp': bp})
+                'bp': bp,
+                'dre': dre})
 
         return valuation
 
@@ -31,6 +35,7 @@ class ValuationDefaultFactory():
         pc_loader = PassivoCirculanteDefaultLoader()
         pnc_loader = PassivoNaoCirculanteDefaultLoader()
         pl_loader = PatrimonioLiquidoDefaultLoader()
+        dre_loader = DRELoader()
 
         for periodo in valuation.get_periodos():
             identificador = periodo['identificador']
@@ -40,3 +45,5 @@ class ValuationDefaultFactory():
             pc_loader.load(bp.passivo.circulante, identificador, economatica_dados)
             pnc_loader.load(bp.passivo.nao_circulante, identificador, economatica_dados)
             pl_loader.load(bp.patrimonio_liquido, identificador, economatica_dados)
+            dre = periodo['dre']
+            dre_loader.load(dre, identificador, economatica_dados)

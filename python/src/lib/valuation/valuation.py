@@ -40,4 +40,5 @@ class Valuation(ABC):
         ultimo_periodo = self.periodos[-1]
         repr += '\n\tÚltimo período: {}'.format(ultimo_periodo['identificador'])
         repr += '\n\t{}'.format(ultimo_periodo['bp'])
+        repr += '\n\t{}'.format(ultimo_periodo['dre'].lucro_liquido)
         return repr
