@@ -4,6 +4,7 @@ from src.lib.contabilidade.passivo import Passivo
 from src.lib.contabilidade.patrimonio_liquido import PatrimonioLiquido
 
 
+#TODO Verificar se esta classe está sendo usada e caso não esteja remover
 class BalancoPatrimonial(DemonstrativoFinanceiro):
     def __init__(self, ano):
         super().__init__(ano)
