@@ -57,6 +57,24 @@ class TestDFC(unittest.TestCase):
                 'venda_ativos_permanentes')
         venda_ativos_permanentes.add_debito(LancamentoContabil(40))
 
+        financiamentos = self.dfc.financiamentos
+        financiamentos.valor_verificacao = 450
+
+        financiamentos_liquido = financiamentos.get_conta(
+                'financiamentos_liquido')
+        financiamentos_liquido.valor_verificacao = 300
+
+        financiamentos_obtidos = financiamentos_liquido.get_conta(
+                'financiamentos_obtidos')
+        financiamentos_obtidos.add_credito(LancamentoContabil(1000))
+
+        financiamentos_pagos = financiamentos_liquido.get_conta(
+                'financiamentos_pagos')
+        financiamentos_pagos.add_debito(LancamentoContabil(700))
+
+
+
+
     def test_operacao(self):
         self.set_values()
         operacao = self.dfc.operacional.get_conta('operacao')

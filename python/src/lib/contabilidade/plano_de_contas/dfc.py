@@ -13,6 +13,7 @@ class DFC:
     def init_contas(self):
         self.init_operacional()
         self.init_investimentos()
+        self.init_financiamentos()
 
     def init_operacional(self):
         self.operacional = GrupoContas(
@@ -69,20 +70,20 @@ class DFC:
                 Natureza.CREDORA,
                 self)
 
-        self.compra_liquida_ativos_permanentes = GrupoContas(
+        compra_liquida_ativos_permanentes = GrupoContas(
                 'compra_liquida_ativos_permanentes',
                 'Compra Líquida Ativos Permanentes',
                 Natureza.CREDORA,
                 self)
 
-        self.investimentos.add_conta(self.compra_liquida_ativos_permanentes)
+        self.investimentos.add_conta(compra_liquida_ativos_permanentes)
 
         contas = (('compra_investimentos_permanentes', 'Compra Investimentos Permanentes'),
                   ('compra_ativos_fixos', 'Compra Ativos Fixos'),
                   ('venda_ativos_permanentes', 'Venda Ativos Permanentes'))
 
         for conta in contas:
-            self.compra_liquida_ativos_permanentes.add_conta(ContaCredora(conta[0], conta[1]))
+            compra_liquida_ativos_permanentes.add_conta(ContaCredora(conta[0], conta[1]))
 
         contas = (('dividendos_recebidos', 'Dividendos Recebidos'),
                   ('resgate_aplicacao_financeira_liquida',
@@ -91,6 +92,47 @@ class DFC:
 
         for conta in contas:
             self.investimentos.add_conta(ContaCredora(conta[0], conta[1]))
+
+    def init_financiamentos(self):
+        self.financiamentos = GrupoContas(
+                'financiamentos',
+                'Financiamentos',
+                Natureza.CREDORA,
+                self)
+
+        financiamentos_liquido = GrupoContas(
+                'financiamentos_liquido',
+                'Financiamentos Líquido',
+                Natureza.CREDORA,
+                self)
+
+        self.financiamentos.add_conta(financiamentos_liquido)
+
+        contas = (('financiamentos_obtidos', 'Financiamentos Obtidos'),
+                  ('financiamentos_pagos', 'Financiamentos Pagos'))
+
+        for conta in contas:
+            financiamentos_liquido.add_conta(ContaCredora(conta[0], conta[1]))
+
+        aumento_liquido_de_capital = GrupoContas(
+                'aumento_liquido_de_capital',
+                'Aumento Líquido de Capital',
+                Natureza.CREDORA,
+                self)
+
+        self.financiamentos.add_conta(aumento_liquido_de_capital)
+
+        contas = (('aumento_de_capital', 'Aumento de Capital'),
+                  ('reducao_de_capital', 'Redução de Capital'))
+
+        for conta in contas:
+            aumento_liquido_de_capital.add_conta(ContaCredora(conta[0], conta[1]))
+
+        self.financiamentos.add_conta(ContaCredora('dividendos_pagos',
+                'Dividendos Pagos'))
+
+        self.financiamentos.add_conta(ContaCredora('outros',
+                'Outros'))
 
     def get_conta(self, codigo):
         conta = None
@@ -111,4 +153,5 @@ class DFC:
         repr = 'Plano de Contas:\n- DFC:\n'
         repr += str(self.operacional)
         repr += str(self.investimentos)
+        repr += str(self.financiamentos)
         return repr
