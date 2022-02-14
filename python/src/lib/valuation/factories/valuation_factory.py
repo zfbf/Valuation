@@ -3,6 +3,7 @@ from ..periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
 from ...contabilidade.plano_de_contas.default.balanco_patrimonial import BalancoPatrimonialDefault
 from ...contabilidade.plano_de_contas.dre import DRE
+from ...contabilidade.plano_de_contas.dfc import DFC
 from .ativo_circulante_loader import AtivoCirculanteDefaultLoader
 from .ativo_nao_circulante_loader import AtivoNaoCirculanteDefaultLoader
 from .passivo_circulante_loader import PassivoCirculanteDefaultLoader
@@ -22,10 +23,12 @@ class ValuationDefaultFactory():
         for periodo in economatica_dados.get_periodos():
             bp = BalancoPatrimonialDefault()
             dre = DRE()
+            dfc = DFC()
             valuation.append_periodo({
                 'identificador': periodo,
                 'bp': bp,
-                'dre': dre})
+                'dre': dre,
+                'dfc': dfc})
 
         return valuation
 
