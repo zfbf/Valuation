@@ -39,7 +39,7 @@ class TestDFC(unittest.TestCase):
         outros_operacional.add_credito(LancamentoContabil(100))
 
         investimentos = self.dfc.investimentos
-        investimentos.valor_verificacao = 300
+        investimentos.valor_verificacao = 200
 
         compra_liquida_ativ_perm = investimentos.get_conta(
                 'compra_liquida_ativos_permanentes')
@@ -58,7 +58,7 @@ class TestDFC(unittest.TestCase):
         venda_ativos_permanentes.add_debito(LancamentoContabil(40))
 
         financiamentos = self.dfc.financiamentos
-        financiamentos.valor_verificacao = 450
+        financiamentos.valor_verificacao = 300
 
         financiamentos_liquido = financiamentos.get_conta(
                 'financiamentos_liquido')
@@ -71,9 +71,6 @@ class TestDFC(unittest.TestCase):
         financiamentos_pagos = financiamentos_liquido.get_conta(
                 'financiamentos_pagos')
         financiamentos_pagos.add_debito(LancamentoContabil(700))
-
-
-
 
     def test_operacao(self):
         self.set_values()
@@ -89,6 +86,14 @@ class TestDFC(unittest.TestCase):
     def test_operacional(self):
         self.set_values()
         self.assertTrue(self.dfc.operacional.verificar_saldo())
+
+    def test_investimentos(self):
+        self.set_values()
+        self.assertTrue(self.dfc.investimentos.verificar_saldo())
+
+    def test_financiamentos(self):
+        self.set_values()
+        self.assertTrue(self.dfc.financiamentos.verificar_saldo())
 
     @unittest.skipUnless(print_to_stdout, 'making_clear_tests')
     def test_to_str(self):

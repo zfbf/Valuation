@@ -14,6 +14,16 @@ class DFC:
         self.init_operacional()
         self.init_investimentos()
         self.init_financiamentos()
+        self.efeito_cambial = ContaCredora('efeito_cambial', 'Efeito Cambial')
+        self.outras_variacoes = ContaCredora('outras_variacoes', 'Outras Variações')
+        self.variacao_liquida_de_caixa = ContaResultadoCredora(
+                'variacao_liquida_de_caixa',
+                'Variação Líquida de Caixa')
+        self.variacao_liquida_de_caixa.add_conta(self.operacional)
+        self.variacao_liquida_de_caixa.add_conta(self.investimentos)
+        self.variacao_liquida_de_caixa.add_conta(self.financiamentos)
+        self.variacao_liquida_de_caixa.add_conta(self.efeito_cambial)
+        self.variacao_liquida_de_caixa.add_conta(self.outras_variacoes)
 
     def init_operacional(self):
         self.operacional = GrupoContas(
@@ -154,4 +164,9 @@ class DFC:
         repr += str(self.operacional)
         repr += str(self.investimentos)
         repr += str(self.financiamentos)
+        repr += '\n'
+        repr += str(self.efeito_cambial)
+        repr += '\n'
+        repr += str(self.outras_variacoes)
+        repr += str(self.variacao_liquida_de_caixa)
         return repr
