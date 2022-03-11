@@ -1,7 +1,7 @@
 import unittest
 
 from .valuation_factory import ValuationDefaultFactory
-from ...importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
+from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
 
 
 class TestValuationDefault(unittest.TestCase):
