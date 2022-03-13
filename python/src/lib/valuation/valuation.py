@@ -28,7 +28,7 @@ class Valuation(ABC):
         target = None
 
         for periodo in self.periodos:
-            if periodo.identificador == identificador:
+            if periodo['identificador'] == identificador:
                 target = periodo
                 break
 

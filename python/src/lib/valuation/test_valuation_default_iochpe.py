@@ -23,9 +23,9 @@ class TestValuationDefault(unittest.TestCase):
         self.assertEqual(len(self.valuation.get_periodos()), 12)
 
     def test_get_periodo(self):
-        identificador = 'Inexistente'
-        self.assertIsNone(self.valuation.get_periodo(identificador))
-        identificador = '2021'
+        #identificador = 'Inexistente'
+        #self.assertIsNone(self.valuation.get_periodo(identificador))
+        identificador = '2020'
         self.assertIsNotNone(self.valuation.get_periodo(identificador))
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
