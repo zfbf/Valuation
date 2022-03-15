@@ -1,13 +1,13 @@
 import unittest
 
-from .passivo_circulante import PassivoCirculanteDefault
+from .passivo_circulante import PassivoCirculanteIFRS
 
 
-class TestPassivoCirculanteDefault(unittest.TestCase):
+class TestPassivoCirculanteIFRS(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.passivo_circulante = PassivoCirculanteDefault(parent=None)
+        self.passivo_circulante = PassivoCirculanteIFRS(parent=None)
         self.passivo_circulante.init_contas()
 
     def test_get_conta(self):

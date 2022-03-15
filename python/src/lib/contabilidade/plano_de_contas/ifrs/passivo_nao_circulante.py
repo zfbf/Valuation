@@ -4,7 +4,7 @@ from ..grupo_contas import GrupoContas
 from ...natureza import Natureza
 
 
-class PassivoNaoCirculanteDefault(PassivoNaoCirculante):
+class PassivoNaoCirculanteIFRS(PassivoNaoCirculante):
     def __init__(self, parent):
         super().__init__(parent)
 

@@ -1,12 +1,12 @@
 import numbers
 
-from ..periodo_contabil import PeriodoContabil
+from ...contabilidade.periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
-from ...contabilidade.plano_de_contas.default.balanco_patrimonial import BalancoPatrimonialDefault
+from ...contabilidade.plano_de_contas.ifrs.balanco_patrimonial import BalancoPatrimonialIFRS
 from ...contabilidade.lancamento_contabil import LancamentoContabil
 
 
-class PatrimonioLiquidoDefaultLoader():
+class PatrimonioLiquidoIFRSLoader():
     def __init__(self):
         super().__init__()
 
@@ -28,14 +28,15 @@ class PatrimonioLiquidoDefaultLoader():
 
         for conta in contas:
             conta_index = patrimonio_liquido_index + (conta, )
-            print('conta_index: {}'.format(conta_index))
+            #print('conta_index: {}'.format(conta_index))
             saldo = economatica_dados.get_valor(conta_index, periodo)
-            print('saldo: {}'.format(saldo))
+            #print('saldo: {}'.format(saldo))
 
             if isinstance(saldo, numbers.Number):
                 conta = patrimonio_liquido.get_conta(conta)
-                print('conta: {}'.format(conta))
+                #print('conta: {}'.format(conta))
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))

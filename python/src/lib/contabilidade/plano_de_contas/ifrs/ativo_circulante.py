@@ -2,7 +2,7 @@ from ..ativo_circulante import AtivoCirculante
 from ..conta_devedora import ContaDevedora
 
 
-class AtivoCirculanteDefault(AtivoCirculante):
+class AtivoCirculanteIFRS(AtivoCirculante):
     def __init__(self, parent):
         super().__init__(parent)
 

@@ -1,12 +1,12 @@
 import numbers
 
-from ..periodo_contabil import PeriodoContabil
+from ...contabilidade.periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
-from ...contabilidade.plano_de_contas.default.balanco_patrimonial import BalancoPatrimonialDefault
+from ...contabilidade.plano_de_contas.ifrs.balanco_patrimonial import BalancoPatrimonialIFRS
 from ...contabilidade.lancamento_contabil import LancamentoContabil
 
 
-class PassivoNaoCirculanteDefaultLoader():
+class PassivoNaoCirculanteIFRSLoader():
     def __init__(self):
         super().__init__()
 
@@ -29,8 +29,9 @@ class PassivoNaoCirculanteDefaultLoader():
                 conta = passivo_nao_circulante.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
         conta = passivo_nao_circulante.get_conta('emprestimos_e_financiamentos')
         self.load_emprestimo_e_financiamentos(conta, periodo, economatica_dados)
@@ -61,8 +62,9 @@ class PassivoNaoCirculanteDefaultLoader():
                 conta = emprestimos_e_financiamentos.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
         financiamentos_index = emp_e_fin_index + ('financiamentos', )
         financiamentos = emprestimos_e_financiamentos.get_conta('financiamentos')
@@ -83,8 +85,9 @@ class PassivoNaoCirculanteDefaultLoader():
                 conta = financiamentos.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
     def load_outras_obrigacoes(self,
                                outras_obrigacoes,
@@ -108,5 +111,6 @@ class PassivoNaoCirculanteDefaultLoader():
                 conta = outras_obrigacoes.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))

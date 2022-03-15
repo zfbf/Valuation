@@ -1,13 +1,12 @@
 import numbers
 
-#from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
-from ..periodo_contabil import PeriodoContabil
+from ...contabilidade.periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
-from ...contabilidade.plano_de_contas.default.balanco_patrimonial import BalancoPatrimonialDefault
+from ...contabilidade.plano_de_contas.ifrs.balanco_patrimonial import BalancoPatrimonialIFRS
 from ...contabilidade.lancamento_contabil import LancamentoContabil
 
 
-class AtivoNaoCirculanteDefaultLoader():
+class AtivoNaoCirculanteIFRSLoader():
     def __init__(self):
         super().__init__()
 
@@ -44,8 +43,9 @@ class AtivoNaoCirculanteDefaultLoader():
                 conta = realizavel_lp.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
         contas = ('investimentos',
                   'imobilizado')
@@ -58,8 +58,9 @@ class AtivoNaoCirculanteDefaultLoader():
                 conta = ativo_nao_circulante.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
         intangiveis_liquido_index = ('bp', 'ativo', 'nao_circulante',
                                      'intangiveis_liquido')
@@ -80,7 +81,8 @@ class AtivoNaoCirculanteDefaultLoader():
                 conta = intangiveis.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
         #TODO: Realizável a longo prazo náo está no ativo não circulante do IFRS.

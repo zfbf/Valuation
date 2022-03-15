@@ -1,13 +1,13 @@
 import unittest
 
-from .passivo_nao_circulante import PassivoNaoCirculanteDefault
+from .passivo_nao_circulante import PassivoNaoCirculanteIFRS
 
 
-class TestPassivoNaoCirculanteDefault(unittest.TestCase):
+class TestPassivoNaoCirculanteIFRS(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.passivo_nao_circulante = PassivoNaoCirculanteDefault(parent=None)
+        self.passivo_nao_circulante = PassivoNaoCirculanteIFRS(parent=None)
         self.passivo_nao_circulante.init_contas()
 
     def test_get_conta(self):

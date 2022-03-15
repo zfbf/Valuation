@@ -1,13 +1,13 @@
 import numbers
 
 #from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
-from ..periodo_contabil import PeriodoContabil
+from ...contabilidade.periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
-from ...contabilidade.plano_de_contas.default.balanco_patrimonial import BalancoPatrimonialDefault
+from ...contabilidade.plano_de_contas.ifrs.balanco_patrimonial import BalancoPatrimonialIFRS
 from ...contabilidade.lancamento_contabil import LancamentoContabil
 
 
-class PassivoCirculanteDefaultLoader():
+class PassivoCirculanteIFRSLoader():
     def __init__(self):
         super().__init__()
 
@@ -31,8 +31,9 @@ class PassivoCirculanteDefaultLoader():
                 conta = passivo_circulante.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
         conta = passivo_circulante.get_conta('emprestimos_e_financiamentos')
         self.load_emprestimo_e_financiamentos(conta, periodo, economatica_dados)
@@ -64,8 +65,9 @@ class PassivoCirculanteDefaultLoader():
                 conta = emprestimos_e_financiamentos.get_conta(conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))
 
     def load_outras_obrigacoes(self,
                                outras_obrigacoes,
@@ -75,7 +77,7 @@ class PassivoCirculanteDefaultLoader():
                                    'outras_obrigacoes')
         saldo = economatica_dados.get_valor(outras_obrigacoes_index, periodo)
 
-        print('type(outras_obrigacoes: {})'.format(type(outras_obrigacoes)))
+        #print('type(outras_obrigacoes: {})'.format(type(outras_obrigacoes)))
 
         if isinstance(saldo, numbers.Number):
             outras_obrigacoes.valor_verificacao = saldo
@@ -97,10 +99,11 @@ class PassivoCirculanteDefaultLoader():
 
             if isinstance(saldo, numbers.Number):
                 conta = outros_oo.get_conta(conta)
-                print('conta_index: {})'.format(conta_index))
-                print('saldo: {})'.format(saldo))
-                print('type(conta: {})'.format(type(conta)))
+                #print('conta_index: {})'.format(conta_index))
+                #print('saldo: {})'.format(saldo))
+                #print('type(conta: {})'.format(type(conta)))
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))

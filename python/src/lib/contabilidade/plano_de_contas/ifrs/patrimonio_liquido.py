@@ -2,7 +2,7 @@ from ..patrimonio_liquido import PatrimonioLiquido
 from ..conta_credora import ContaCredora
 
 
-class PatrimonioLiquidoDefault(PatrimonioLiquido):
+class PatrimonioLiquidoIFRS(PatrimonioLiquido):
     def __init__(self):
         super().__init__()
 

@@ -1,8 +1,8 @@
 import unittest
 
 from .valuation_factory import ValuationDefaultFactory
-from .ativo_circulante_loader import AtivoCirculanteDefaultLoader
-from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
+from .ativo_circulante_loader import AtivoCirculanteIFRSLoader
+from ...importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
 
 
 class TestAtivoCirculanteDefaultLoader(unittest.TestCase):
@@ -13,8 +13,8 @@ class TestAtivoCirculanteDefaultLoader(unittest.TestCase):
         valuation_factory = ValuationDefaultFactory()
         self.valuation = valuation_factory.build(self.economatica_dados)
         periodos = self.valuation.get_periodos()
-        self.ativo_circulante_2010 = periodos[1]['bp'].ativo.circulante
-        self.ativo_circulante_loader = AtivoCirculanteDefaultLoader()
+        self.ativo_circulante_2010 = periodos[1].bp_ifrs.ativo.circulante
+        self.ativo_circulante_loader = AtivoCirculanteIFRSLoader()
 
     def test_load(self):
         self.assertIsNotNone(self.valuation)

@@ -1,13 +1,13 @@
 import unittest
 
-from .balanco_patrimonial import BalancoPatrimonialDefault
+from .balanco_patrimonial import BalancoPatrimonialIFRS
 
 
-class TestBalancoPatrimonialDefault(unittest.TestCase):
+class TestBalancoPatrimonialIFRS(unittest.TestCase):
     print_to_stdout = False
 
     def setUp(self):
-        self.balanco_patrimonial = BalancoPatrimonialDefault()
+        self.balanco_patrimonial = BalancoPatrimonialIFRS()
 
     def test_attributes(self):
         self.assertIsNotNone(self.balanco_patrimonial.ativo)

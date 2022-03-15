@@ -1,13 +1,13 @@
 import unittest
 
-from .patrimonio_liquido import PatrimonioLiquidoDefault
+from .patrimonio_liquido import PatrimonioLiquidoIFRS
 
 
-class TestPatrimonioLiquidoDefault(unittest.TestCase):
+class TestPatrimonioLiquidoIFRS(unittest.TestCase):
     print_to_stdout = False
 
     def setUp(self):
-        self.patrimonio_liquido = PatrimonioLiquidoDefault()
+        self.patrimonio_liquido = PatrimonioLiquidoIFRS()
         self.patrimonio_liquido.init_contas()
 
     def test_get_conta(self):

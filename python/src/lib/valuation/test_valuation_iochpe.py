@@ -1,7 +1,7 @@
 import unittest
 
 from .valuation_default import ValuationDefault
-from .periodo_contabil import PeriodoContabil
+from ..contabilidade.periodo_contabil import PeriodoContabil
 from ..importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
 from .factories.valuation_factory import ValuationDefaultFactory
 

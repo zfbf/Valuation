@@ -1,11 +1,11 @@
 import unittest
 
 from .valuation_factory import ValuationDefaultFactory
-from .patrimonio_liquido_loader import PatrimonioLiquidoDefaultLoader
-from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
+from .patrimonio_liquido_loader import PatrimonioLiquidoIFRSLoader
+from ...importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
 
 
-class TestPatrimonioLiquidoDefaultLoader(unittest.TestCase):
+class TestPatrimonioLiquidoIFRSLoader(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
@@ -13,8 +13,8 @@ class TestPatrimonioLiquidoDefaultLoader(unittest.TestCase):
         valuation_factory = ValuationDefaultFactory()
         self.valuation = valuation_factory.build(self.economatica_dados)
         periodos = self.valuation.get_periodos()
-        self.patrimonio_liquido_2010 = periodos[1]['bp'].patrimonio_liquido
-        self.patrimonio_liquido_loader = PatrimonioLiquidoDefaultLoader()
+        self.patrimonio_liquido_2010 = periodos[1].bp_ifrs.patrimonio_liquido
+        self.patrimonio_liquido_loader = PatrimonioLiquidoIFRSLoader()
 
     def test_load(self):
         self.assertIsNotNone(self.valuation)

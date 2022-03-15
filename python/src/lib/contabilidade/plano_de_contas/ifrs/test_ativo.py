@@ -1,13 +1,13 @@
 import unittest
 
-from .ativo import AtivoDefault
+from .ativo import AtivoIFRS
 
 
-class TestAtivoDefault(unittest.TestCase):
+class TestAtivoIFRS(unittest.TestCase):
     print_to_stdout = False
 
     def setUp(self):
-        self.ativo = AtivoDefault()
+        self.ativo = AtivoIFRS()
         self.ativo.init_contas()
 
     def test_get_conta(self):

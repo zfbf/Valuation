@@ -1,13 +1,13 @@
 import unittest
 
-from .ativo_circulante import AtivoCirculanteDefault
+from .ativo_circulante import AtivoCirculanteIFRS
 
 
-class TestAtivoCirculanteDefault(unittest.TestCase):
+class TestAtivoCirculanteIFRS(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.ativo_circulante = AtivoCirculanteDefault(parent=None)
+        self.ativo_circulante = AtivoCirculanteIFRS(parent=None)
         self.ativo_circulante.init_conta_caixa()
         self.ativo_circulante.init_contas()
 

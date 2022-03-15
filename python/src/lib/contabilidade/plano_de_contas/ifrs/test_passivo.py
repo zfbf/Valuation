@@ -1,13 +1,13 @@
 import unittest
 
-from .passivo import PassivoDefault
+from .passivo import PassivoIFRS
 
 
-class TestPassivoDefault(unittest.TestCase):
+class TestPassivoIFRS(unittest.TestCase):
     print_to_stdout = False
 
     def setUp(self):
-        self.passivo = PassivoDefault()
+        self.passivo = PassivoIFRS()
 
     def test_get_conta(self):
         self.assertIsNotNone(self.passivo.get_conta('nao_circulante'))

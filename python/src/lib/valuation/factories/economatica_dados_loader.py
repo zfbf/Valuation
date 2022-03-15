@@ -2,8 +2,7 @@ import numbers
 
 from abc import ABC, abstractmethod
 
-#from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
-from ..periodo_contabil import PeriodoContabil
+from ...contabilidade.periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
 from ...contabilidade.plano_de_contas.dre import DRE
 from ...contabilidade.lancamento_contabil import LancamentoContabil

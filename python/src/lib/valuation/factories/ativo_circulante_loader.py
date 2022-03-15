@@ -1,13 +1,13 @@
 import numbers
 
 #from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
-from ..periodo_contabil import PeriodoContabil
+from ...contabilidade.periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
-from ...contabilidade.plano_de_contas.default.balanco_patrimonial import BalancoPatrimonialDefault
+from ...contabilidade.plano_de_contas.ifrs.balanco_patrimonial import BalancoPatrimonialIFRS
 from ...contabilidade.lancamento_contabil import LancamentoContabil
 
 
-class AtivoCirculanteDefaultLoader():
+class AtivoCirculanteIFRSLoader():
     def __init__(self):
         super().__init__()
 
@@ -36,13 +36,14 @@ class AtivoCirculanteDefaultLoader():
             saldo = economatica_dados.get_valor(conta_index, periodo)
 
             if isinstance(saldo, numbers.Number):
-                print('conta_index: {}, saldo: {}'.format(conta_index, saldo))
+                #print('conta_index: {}, saldo: {}'.format(conta_index, saldo))
                 conta = ativo_circulante.get_conta(conta)
-                print('type(conta): {}'.format(type(conta)))
-                print('#1 - conta: {}'.format(conta))
+                #print('type(conta): {}'.format(type(conta)))
+                #print('#1 - conta: {}'.format(conta))
                 conta.increase_saldo(LancamentoContabil(saldo, ano=ano))
-                print('conta.get_saldo(): {}'.format(conta.get_saldo()))
-                print('#2 - conta: {}'.format(conta))
+                #print('conta.get_saldo(): {}'.format(conta.get_saldo()))
+                #print('#2 - conta: {}'.format(conta))
             else:
-                print('Not a number: conta_index: {}, saldo: {}'.format(
-                        conta_index, saldo))
+                pass
+                #print('Not a number: conta_index: {}, saldo: {}'.format(
+                #        conta_index, saldo))

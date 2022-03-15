@@ -2,7 +2,7 @@ import unittest
 
 from .valuation_factory import ValuationDefaultFactory
 from .dfc_loader import DFCLoader
-from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
+from ...importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
 
 
 class TestDFCLoader(unittest.TestCase):
@@ -13,7 +13,7 @@ class TestDFCLoader(unittest.TestCase):
         valuation_factory = ValuationDefaultFactory()
         self.valuation = valuation_factory.build(self.economatica_dados)
         periodos = self.valuation.get_periodos()
-        self.dfc_2010 = periodos[1]['dfc']
+        self.dfc_2010 = periodos[1].dfc
         self.dfc_loader = DFCLoader()
 
     def test_load(self):

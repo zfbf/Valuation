@@ -28,7 +28,7 @@ class Valuation(ABC):
         target = None
 
         for periodo in self.periodos:
-            if periodo['identificador'] == identificador:
+            if periodo.identificador == identificador:
                 target = periodo
                 break
 
@@ -38,7 +38,7 @@ class Valuation(ABC):
         repr = 'Valuation - {}'.format(self.get_empresa())
         repr += '\n\tTotal de períodos: {}'.format(len(self.get_periodos()))
         ultimo_periodo = self.periodos[-1]
-        repr += '\n\tÚltimo período: {}'.format(ultimo_periodo['identificador'])
-        repr += '\n\t{}'.format(ultimo_periodo['bp'])
-        repr += '\n\t{}'.format(ultimo_periodo['dre'].lucro_liquido)
+        repr += '\n\tÚltimo período: {}'.format(ultimo_periodo.identificador)
+        repr += '\n\t{}'.format(ultimo_periodo.bp_ifrs)
+        repr += '\n\t{}'.format(ultimo_periodo.dre.lucro_liquido)
         return repr

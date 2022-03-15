@@ -1,13 +1,13 @@
 import unittest
 
-from .ativo_nao_circulante import AtivoNaoCirculanteDefault
+from .ativo_nao_circulante import AtivoNaoCirculanteIFRS
 
 
-class TestAtivoNaoCirculanteDefault(unittest.TestCase):
+class TestAtivoNaoCirculanteIFRS(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.ativo_nao_circulante = AtivoNaoCirculanteDefault(parent=None)
+        self.ativo_nao_circulante = AtivoNaoCirculanteIFRS(parent=None)
         self.ativo_nao_circulante.init_contas()
 
     def test_get_conta(self):
