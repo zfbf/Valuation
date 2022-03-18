@@ -10,6 +10,7 @@ from .passivo_circulante_loader import PassivoCirculanteIFRSLoader
 from .passivo_nao_circulante_loader import PassivoNaoCirculanteIFRSLoader
 from .patrimonio_liquido_loader import PatrimonioLiquidoIFRSLoader
 from .dre_loader import DRELoader
+from .dfc_loader import DFCLoader
 
 
 class ValuationDefaultFactory():
@@ -45,4 +46,4 @@ class ValuationDefaultFactory():
             dre = periodo.dre
             dre_loader.load(dre, identificador, economatica_dados)
             dfc = periodo.dfc
-            dfc_loader.load(dfc. identificador, economatica_dados)
+            dfc_loader.load(dfc, identificador, economatica_dados)
