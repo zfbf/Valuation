@@ -18,7 +18,8 @@ class TestReporter(unittest.TestCase):
         valuation_factory = ValuationDefaultFactory()
         valuation = valuation_factory.build(iochpe_economatica_dados)
         valuation_factory.load(valuation, iochpe_economatica_dados)
-        self.reporter.execute(valuation)
+        report = self.reporter.execute(valuation)
+        self.assertIsNotNone(report)
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):

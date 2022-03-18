@@ -40,7 +40,7 @@ class Valuation(ABC):
     # usar sem que essa classe tenha conhecimento deste objeto, bastando
     # que ele passe um objeto que tenha a interface report()
     def report(self, reporter):
-        reporter.execute(self)
+        return reporter.execute(self)
 
     def __str__(self):
         repr = 'Valuation - {}'.format(self.get_empresa())

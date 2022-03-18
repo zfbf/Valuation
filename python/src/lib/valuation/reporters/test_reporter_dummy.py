@@ -15,7 +15,8 @@ class TestReporter(unittest.TestCase):
         valuation = ValuationDefault('Default')
         periodo = PeriodoContabil('2021')
         valuation.append_periodo(periodo)
-        self.reporter.execute(valuation)
+        report = self.reporter.execute(valuation)
+        self.assertIsNotNone(report)
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):

@@ -4,6 +4,7 @@ from ..valuation_default import ValuationDefault
 from ...contabilidade.plano_de_contas.ifrs.balanco_patrimonial import BalancoPatrimonialIFRS
 from ...contabilidade.plano_de_contas.dre import DRE
 from ...contabilidade.plano_de_contas.dfc import DFC
+from .ativo_loader import AtivoIFRSLoader
 from .ativo_circulante_loader import AtivoCirculanteIFRSLoader
 from .ativo_nao_circulante_loader import AtivoNaoCirculanteIFRSLoader
 from .passivo_circulante_loader import PassivoCirculanteIFRSLoader
@@ -27,6 +28,7 @@ class ValuationDefaultFactory():
         return valuation
 
     def load(self, valuation, economatica_dados):
+        a_loader = AtivoIFRSLoader()
         ac_loader = AtivoCirculanteIFRSLoader()
         anc_loader = AtivoNaoCirculanteIFRSLoader()
         pc_loader = PassivoCirculanteIFRSLoader()
@@ -38,6 +40,7 @@ class ValuationDefaultFactory():
         for periodo in valuation.get_periodos():
             identificador = periodo.identificador
             bp_ifrs = periodo.bp_ifrs
+            a_loader.load(bp_ifrs.ativo, identificador, economatica_dados)
             ac_loader.load(bp_ifrs.ativo.circulante, identificador, economatica_dados)
             anc_loader.load(bp_ifrs.ativo.nao_circulante, identificador, economatica_dados)
             pc_loader.load(bp_ifrs.passivo.circulante, identificador, economatica_dados)
