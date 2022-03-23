@@ -1,15 +1,15 @@
 import os.path
 from datetime import datetime
 
-from .dados_anuais import EconomaticaDadosAnuais
+from .dados_trimestrais_anualizados import EconomaticaDadosTrimestraisAnualizados
 
 
-class IochpeDadosAnuais(EconomaticaDadosAnuais):
-    def __init__(self, ano_inicial, ano_final):
-        super().__init__('Iochpe', ano_inicial, ano_final)
+class Iochpe2009T12021T4(EconomaticaDadosTrimestraisAnualizados):
+    def __init__(self):
+        super().__init__('Iochpe', 2009, 1, 2021, 4)
 
     def get_dados_empresa_file_path(self):
-        relative_path = 'economatica/iochpe/economatica/'
+        relative_path = 'economatica/iochpe/'
         return os.path.join(super().get_dados_dir(), relative_path)
 
     def get_dados_empresa_file_name(self):

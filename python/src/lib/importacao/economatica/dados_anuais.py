@@ -1,4 +1,5 @@
 import os.path
+import os.environ
 from datetime import datetime
 
 from .dados import EconomaticaDados
@@ -17,7 +18,9 @@ class EconomaticaDadosAnuais(EconomaticaDados):
         self.ano_final = ano_final
 
     def get_dados_dir(self):
-        return os.path.abspath('/home/zenon/dev/projects/Valuation/dados')
+        dados_dir = os.environ['VALUATION_DADOS_DIR']
+        return dados_dir
+        #return os.environ.abspath('/home/zenon/dev/projects/Valuation/dados')
 
     def get_identificador(self):
         return '{}_{}_{}'.format(self.nome_empresa,
@@ -34,3 +37,9 @@ class EconomaticaDadosAnuais(EconomaticaDados):
 
     def get_periodos(self):
         return [str(periodo) for periodo in range(self.ano_inicial, self.ano_final + 1)]
+
+    def __str__(self):
+        repr = "\nExercício Social - {:s}".format(self.get_identificador())
+        repr += "\n\tInício: {}".format(self.get_data_inicio().strftime('%d/%m/%Y'))
+        repr += "\n\tFinal: {}".format(self.get_data_fim().strftime('%d/%m/%Y'))
+        return repr

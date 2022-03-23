@@ -10,22 +10,13 @@ class EconomaticaDados(ABC):
     def __init__(self, nome_empresa):
         super().__init__()
         self.nome_empresa = nome_empresa
-        self.prepare()
 
     @abstractmethod
     def get_identificador(self):
         pass
 
     @abstractmethod
-    def get_data_inicio(self):
-        pass
-
-    @abstractmethod
-    def get_data_fim(self):
-        pass
-
-    @abstractmethod
-    def get_periodos(self):
+    def get_codigos_periodos(self):
         pass
 
     def import_from_excel(self):
@@ -33,13 +24,13 @@ class EconomaticaDados(ABC):
                                                self.get_dados_empresa_file_name())
         rows_to_skip = {}
         codigos = ['codigo_{}'.format(i) for i in range(8)]
-        column_names = codigos + ['conta'] + [str(ano) for ano in range(2009, 2021)]
+        column_names = codigos + ['conta'] + self.get_codigos_periodos()
 
         with open(dados_empresa_file_name, 'rb') as dados_empresa_file:
             df = pd.read_excel(dados_empresa_file,
                                sheet_name=self.get_sheet_name(),
                                names=column_names,
-                               usecols='A:U',
+                               #usecols='A:BI',
                                skiprows=range(1, 8))
 
         return df
@@ -57,6 +48,8 @@ class EconomaticaDados(ABC):
         return result
 
     def get_valor(self, index, periodo):
+        print('Dentro de EconomaticaDados.get_valor()')
+        print('periodo: <{}>'.format(periodo))
         return self.df.loc[index, periodo][-1]
 
     def read_row():
