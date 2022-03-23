@@ -11,9 +11,9 @@ class PassivoCirculanteIFRSLoader():
     def __init__(self):
         super().__init__()
 
-    def load(self, passivo_circulante, periodo, economatica_dados):
+    def load(self, passivo_circulante, codigo_periodo, economatica_dados):
         passivo_circulante_index = ('bp', 'passivo', 'circulante')
-        saldo = economatica_dados.get_valor(passivo_circulante_index, periodo)
+        saldo = economatica_dados.get_valor(passivo_circulante_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
             passivo_circulante.valor_verificacao = saldo
@@ -25,7 +25,7 @@ class PassivoCirculanteIFRSLoader():
 
         for conta in contas:
             conta_index = passivo_circulante_index + (conta, )
-            saldo = economatica_dados.get_valor(conta_index, periodo)
+            saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
                 conta = passivo_circulante.get_conta(conta)
@@ -36,19 +36,19 @@ class PassivoCirculanteIFRSLoader():
                 #        conta_index, saldo))
 
         conta = passivo_circulante.get_conta('emprestimos_e_financiamentos')
-        self.load_emprestimo_e_financiamentos(conta, periodo, economatica_dados)
+        self.load_emprestimo_e_financiamentos(conta, codigo_periodo, economatica_dados)
 
         conta = passivo_circulante.get_conta('outras_obrigacoes')
-        self.load_outras_obrigacoes(conta, periodo, economatica_dados)
+        self.load_outras_obrigacoes(conta, codigo_periodo, economatica_dados)
 
     def load_emprestimo_e_financiamentos(self,
                                          emprestimos_e_financiamentos,
-                                         periodo,
+                                         codigo_periodo,
                                          economatica_dados):
 
         emp_e_fin_index = ('bp', 'passivo', 'circulante',
                            'emprestimos_e_financiamentos')
-        saldo = economatica_dados.get_valor(emp_e_fin_index, periodo)
+        saldo = economatica_dados.get_valor(emp_e_fin_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
             emprestimos_e_financiamentos.valor_verificacao = saldo
@@ -59,7 +59,7 @@ class PassivoCirculanteIFRSLoader():
 
         for conta in contas:
             conta_index = emp_e_fin_index + (conta, )
-            saldo = economatica_dados.get_valor(conta_index, periodo)
+            saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
                 conta = emprestimos_e_financiamentos.get_conta(conta)
@@ -71,11 +71,11 @@ class PassivoCirculanteIFRSLoader():
 
     def load_outras_obrigacoes(self,
                                outras_obrigacoes,
-                               periodo,
+                               codigo_periodo,
                                economatica_dados):
         outras_obrigacoes_index = ('bp', 'passivo', 'circulante',
                                    'outras_obrigacoes')
-        saldo = economatica_dados.get_valor(outras_obrigacoes_index, periodo)
+        saldo = economatica_dados.get_valor(outras_obrigacoes_index, codigo_periodo)
 
         #print('type(outras_obrigacoes: {})'.format(type(outras_obrigacoes)))
 
@@ -85,7 +85,7 @@ class PassivoCirculanteIFRSLoader():
         outros_oo = outras_obrigacoes.get_conta('outros_cp')
         outros_oo_index = ('bp', 'passivo', 'circulante',
                            'outras_obrigacoes', 'outros_cp')
-        saldo = economatica_dados.get_valor(outros_oo_index, periodo)
+        saldo = economatica_dados.get_valor(outros_oo_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
             outros_oo.valor_verificacao = saldo
@@ -95,7 +95,7 @@ class PassivoCirculanteIFRSLoader():
 
         for conta in contas:
             conta_index = outros_oo_index + (conta, )
-            saldo = economatica_dados.get_valor(conta_index, periodo)
+            saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
                 conta = outros_oo.get_conta(conta)

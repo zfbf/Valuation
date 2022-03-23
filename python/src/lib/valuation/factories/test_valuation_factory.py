@@ -1,14 +1,15 @@
 import unittest
 
 from .valuation_factory import ValuationDefaultFactory
-from ...importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
+from ...importacao.economatica.iochpe_dados_trimestrais_anualizados import Iochpe2009T12021T4
 
 
 class TestValuationDefault(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.economatica_dados = IochpeDadosAnuais(2009, 2010)
+        self.economatica_dados = Iochpe2009T12021T4()
+        self.economatica_dados.prepare()
         self.valuation_factory = ValuationDefaultFactory()
 
     def test_build(self):

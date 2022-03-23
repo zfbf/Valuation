@@ -47,10 +47,10 @@ class EconomaticaDados(ABC):
         result = self.df.loc[codigos, :]
         return result
 
-    def get_valor(self, index, periodo):
-        print('Dentro de EconomaticaDados.get_valor()')
-        print('periodo: <{}>'.format(periodo))
-        return self.df.loc[index, periodo][-1]
+    def get_valor(self, index, codigo_periodo):
+        #print('Dentro de EconomaticaDados.get_valor()')
+        #print('codigo_periodo: <{}>'.format(codigo_periodo))
+        return self.df.loc[index, codigo_periodo][-1]
 
     def read_row():
         fs = '{} \t& {} \t& {} \t& {} \t& {} \t& {} \t& {} \\\\'

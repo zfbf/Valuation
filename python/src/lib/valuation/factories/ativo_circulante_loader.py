@@ -29,7 +29,7 @@ class AtivoCirculanteIFRSLoader():
                   'despesas_antecipadas',
                   'outros')
 
-        ano = int(periodo)
+        ano = int(periodo[:4])
 
         for conta in contas:
             conta_index = ativo_circulante_index + (conta, )

@@ -1,5 +1,4 @@
-import os.path
-import os.environ
+import os
 from datetime import datetime
 
 from .dados import EconomaticaDados
@@ -35,7 +34,7 @@ class EconomaticaDadosAnuais(EconomaticaDados):
         data = datetime(self.ano_final, 12, 31)
         return data
 
-    def get_periodos(self):
+    def get_codigos_periodos(self):
         return [str(periodo) for periodo in range(self.ano_inicial, self.ano_final + 1)]
 
     def __str__(self):

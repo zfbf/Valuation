@@ -10,16 +10,16 @@ class AtivoNaoCirculanteIFRSLoader():
     def __init__(self):
         super().__init__()
 
-    def load(self, ativo_nao_circulante, periodo, economatica_dados):
+    def load(self, ativo_nao_circulante, codigo_periodo, economatica_dados):
         ativo_nao_circulante_index = ('bp', 'ativo', 'nao_circulante')
-        saldo = economatica_dados.get_valor(ativo_nao_circulante_index, periodo)
+        saldo = economatica_dados.get_valor(ativo_nao_circulante_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
             ativo_nao_circulante.valor_verificacao = saldo
 
         realizavel_lp_index = ('bp', 'ativo', 'nao_circulante',
                                'realizavel_lp')
-        saldo = economatica_dados.get_valor(realizavel_lp_index, periodo)
+        saldo = economatica_dados.get_valor(realizavel_lp_index, codigo_periodo)
         realizavel_lp = ativo_nao_circulante.get_conta('realizavel_lp')
 
         if isinstance(saldo, numbers.Number):
@@ -37,7 +37,7 @@ class AtivoNaoCirculanteIFRSLoader():
 
         for conta in contas:
             conta_index = realizavel_lp_index + (conta, )
-            saldo = economatica_dados.get_valor(conta_index, periodo)
+            saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
                 conta = realizavel_lp.get_conta(conta)
@@ -52,7 +52,7 @@ class AtivoNaoCirculanteIFRSLoader():
 
         for conta in contas:
             conta_index = ativo_nao_circulante_index + (conta, )
-            saldo = economatica_dados.get_valor(conta_index, periodo)
+            saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
                 conta = ativo_nao_circulante.get_conta(conta)
@@ -64,7 +64,7 @@ class AtivoNaoCirculanteIFRSLoader():
 
         intangiveis_liquido_index = ('bp', 'ativo', 'nao_circulante',
                                      'intangiveis_liquido')
-        saldo = economatica_dados.get_valor(intangiveis_liquido_index, periodo)
+        saldo = economatica_dados.get_valor(intangiveis_liquido_index, codigo_periodo)
         intangiveis = ativo_nao_circulante.get_conta('intangiveis_liquido')
 
         if isinstance(saldo, numbers.Number):
@@ -75,7 +75,7 @@ class AtivoNaoCirculanteIFRSLoader():
 
         for conta in contas:
             conta_index = intangiveis_liquido_index + (conta, )
-            saldo = economatica_dados.get_valor(conta_index, periodo)
+            saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
                 conta = intangiveis.get_conta(conta)

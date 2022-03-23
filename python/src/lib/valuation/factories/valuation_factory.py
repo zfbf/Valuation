@@ -21,8 +21,8 @@ class ValuationDefaultFactory():
     def build(self, economatica_dados):
         valuation = ValuationDefault(economatica_dados.nome_empresa)
 
-        for periodo_id in economatica_dados.get_periodos():
-            periodo_cont = PeriodoContabil(periodo_id)
+        for codigo_periodo in economatica_dados.get_codigos_periodos():
+            periodo_cont = PeriodoContabil(codigo_periodo)
             valuation.append_periodo(periodo_cont)
 
         return valuation
