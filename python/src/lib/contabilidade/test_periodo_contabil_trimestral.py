@@ -1,17 +1,17 @@
 import unittest
 
-from .periodo_contabil import PeriodoContabil
+from .periodo_contabil_trimestral import PeriodoContabilTrimestral
 
 
-class TestPeriodoContabil(unittest.TestCase):
-    print_to_stdout = False
+class TestPeriodoContabilTrimestral(unittest.TestCase):
+    print_to_stdout = True
 
     def setUp(self):
-        self.periodo = PeriodoContabil('2021')
+        self.periodo = PeriodoContabilTrimestral(2021, 3)
 
     def test_get_identificador(self):
         self.assertIsNotNone(self.periodo.identificador)
-        self.assertEqual(self.periodo.identificador, '2021')
+        self.assertEqual(self.periodo.identificador, '2021T3')
 
     def test_bp_ifrs(self):
         self.assertIsNotNone(self.periodo.bp_ifrs)
@@ -24,4 +24,4 @@ class TestPeriodoContabil(unittest.TestCase):
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):
-        print('\nPeriodoContabil: {}'.format(self.periodo))
+        print('\nPeriodoContabilTrimestral: {}'.format(self.periodo))

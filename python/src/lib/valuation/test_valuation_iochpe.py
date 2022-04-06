@@ -3,7 +3,7 @@ import unittest
 from .valuation_default import ValuationDefault
 from ..contabilidade.periodo_contabil import PeriodoContabil
 from ..importacao.economatica.iochpe_dados_trimestrais_anualizados import Iochpe2009T12021T4
-from .factories.valuation_factory import ValuationDefaultFactory
+from .factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 
 
 class TestValuationDefault(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestValuationDefault(unittest.TestCase):
     def setUp(self):
         iochpe_economatica_dados = Iochpe2009T12021T4()
         iochpe_economatica_dados.prepare()
-        valuation_factory = ValuationDefaultFactory()
+        valuation_factory = ValuationPeriodoTrimestralFactory()
         self.valuation = valuation_factory.build(iochpe_economatica_dados)
         valuation_factory.load(self.valuation, iochpe_economatica_dados)
 

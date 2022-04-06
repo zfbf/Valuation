@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 #from ....importacao.economatica.iochpe_dados_anuais import IochpeDadosAnuais
 from ...contabilidade.periodo_contabil import PeriodoContabil
 from ..valuation_default import ValuationDefault
@@ -14,19 +16,14 @@ from .dre_loader import DRELoader
 from .dfc_loader import DFCLoader
 
 
-class ValuationDefaultFactory():
+class ValuationFactory(ABC):
     def __init__(self):
         super().__init__()
 
+    @abstractmethod
     def build(self, economatica_dados):
-        valuation = ValuationDefault(economatica_dados.nome_empresa)
-
-        for codigo_periodo in economatica_dados.get_codigos_periodos():
-            periodo_cont = PeriodoContabil(codigo_periodo)
-            valuation.append_periodo(periodo_cont)
-
-        return valuation
-
+        pass
+    
     def load(self, valuation, economatica_dados):
         a_loader = AtivoIFRSLoader()
         ac_loader = AtivoCirculanteIFRSLoader()

@@ -7,10 +7,11 @@ class AtivoCirculanteIFRS(AtivoCirculante):
         super().__init__(parent)
 
     def get_contas_disponibilidades(self):
-        return [self.get_conta_caixa()]
+        return [self.get_conta_caixa(),
+                self.get_conta('aplicacoes_financeiras')]
 
     def get_contas_estoques(self):
-        return []
+        return [self.get_conta('estoques')]
 
     def init_contas(self):
         self.rename_conta_caixa('Caixa e equivalentes de caixa')

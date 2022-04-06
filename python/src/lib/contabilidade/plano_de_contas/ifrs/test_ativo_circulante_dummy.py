@@ -32,7 +32,12 @@ class TestAtivoCirculanteIFRS(unittest.TestCase):
     def test_get_contas_disponibilidades(self):
         contas_disponibilidades = self.ativo_circulante.get_contas_disponibilidades()
         self.assertIsNotNone(contas_disponibilidades)
-        self.assertEqual(len(contas_disponibilidades), 1)
+        self.assertEqual(len(contas_disponibilidades), 2)
+
+    def test_get_saldo_disponibilidades(self):
+        saldo = self.ativo_circulante.get_saldo_disponibilidades()
+        self.assertIsNotNone(saldo)
+        self.assertEqual(saldo, 0)
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):

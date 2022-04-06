@@ -3,7 +3,7 @@ import unittest
 from .valuation_default import ValuationDefault
 from ..contabilidade.periodo_contabil import PeriodoContabil
 from ..importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
-from .factories.valuation_factory import ValuationDefaultFactory
+from .factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 
 
 class TestValuationDefault(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestValuationDefault(unittest.TestCase):
     def setUp(self):
         oi_economatica_dados = Oi2009T12021T3()
         oi_economatica_dados.prepare()
-        valuation_factory = ValuationDefaultFactory()
+        valuation_factory = ValuationPeriodoTrimestralFactory()
         self.valuation = valuation_factory.build(oi_economatica_dados)
         valuation_factory.load(self.valuation, oi_economatica_dados)
 
@@ -32,3 +32,4 @@ class TestValuationDefault(unittest.TestCase):
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):
         print('\nvaluation: {}'.format(self.valuation))
+        
