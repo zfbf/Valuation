@@ -57,6 +57,10 @@ class GrupoContas(Conta):
 
         return saldo
 
+    #TODO: Este método precisa ser reverificado pois a lógica das
+    #      contas faz com que os nós pais já sejam o resultado
+    #      dos nós filhos de forma que somá-los provocaria
+    #      uma conta dobrada.
     def set_totais_postorder(self, conta, totais):
         try:
             for child in conta.contas:

@@ -16,3 +16,14 @@ class AtivoNaoCirculante(GrupoContas, ABC):
     @abstractmethod
     def get_conta_realizavel_a_longo_prazo(self):
         pass
+
+    def get_saldo_realizavel_a_longo_prazo(self):
+        return self.get_conta_realizavel_a_longo_prazo().get_saldo()
+
+    def get_saldo(self):
+        saldo = self.get_total_debitos() - self.get_total_creditos()
+
+        if self.is_natureza_credora():
+            saldo = saldo * -1
+
+        return saldo
