@@ -1,16 +1,15 @@
 import unittest
 
+from ..test_indice import TestIndice
 from .geral import LiquidezGeral
-from ....importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
-from ...factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 
 
-class TestLiquidezGeral(unittest.TestCase):
+class TestLiquidezGeral(TestIndice):
     print_to_stdout = True
 
     def setUp(self):
         self.liquidez_geral = LiquidezGeral(
-                TestLiquidezGeral.periodo_contabil)
+                TestLiquidezGeral.valuation, 2020, 4)
 
     def test_get_valor(self):
         valor = self.liquidez_geral.get_valor()
@@ -20,22 +19,3 @@ class TestLiquidezGeral(unittest.TestCase):
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):
         print('\nliquidez_geral: {}'.format(self.liquidez_geral))
-
-    @classmethod
-    def setUpClass(cls):
-        cls.periodo_contabil = cls.build_periodo_contabil()
-
-    @classmethod
-    def build_periodo_contabil(cls):
-        oi_economatica_dados = Oi2009T12021T3()
-        oi_economatica_dados.prepare()
-        valuation_factory = ValuationPeriodoTrimestralFactory()
-        valuation = valuation_factory.build(oi_economatica_dados)
-        valuation_factory.load(valuation, oi_economatica_dados)
-        codigo_periodo = '2020T4'
-        periodo_contabil = valuation.get_periodo(codigo_periodo)
-        return periodo_contabil
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.periodo_contabil = None
