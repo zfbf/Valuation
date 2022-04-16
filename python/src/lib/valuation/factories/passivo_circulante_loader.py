@@ -53,16 +53,16 @@ class PassivoCirculanteIFRSLoader():
         if isinstance(saldo, numbers.Number):
             emprestimos_e_financiamentos.valor_verificacao = saldo
 
-        contas = ('financiamentos',
-                  'debentures',
-                  'arrendamento_financeiro')
+        codigos_contas = ('financiamentos',
+                          'debentures',
+                          'arrendamento_financeiro')
 
-        for conta in contas:
-            conta_index = emp_e_fin_index + (conta, )
+        for codigo_conta in codigos_contas:
+            conta_index = emp_e_fin_index + (codigo_conta, )
             saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
-                conta = emprestimos_e_financiamentos.get_conta(conta)
+                conta = emprestimos_e_financiamentos.get_conta(codigo_conta)
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
                 pass
@@ -82,28 +82,40 @@ class PassivoCirculanteIFRSLoader():
         if isinstance(saldo, numbers.Number):
             outras_obrigacoes.valor_verificacao = saldo
 
-        outros_oo = outras_obrigacoes.get_conta('outros_cp')
-        outros_oo_index = ('bp', 'passivo', 'circulante',
+        outros_cp = outras_obrigacoes.get_conta('outros_cp')
+        outros_cp_index = ('bp', 'passivo', 'circulante',
                            'outras_obrigacoes', 'outros_cp')
-        saldo = economatica_dados.get_valor(outros_oo_index, codigo_periodo)
+        saldo = economatica_dados.get_valor(outros_cp_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
-            outros_oo.valor_verificacao = saldo
+            outros_cp.valor_verificacao = saldo
 
-        contas = ('dividendos',
-                  'outros')
+        codigos_contas = ('dividendos',
+                          'outros')
 
-        for conta in contas:
-            conta_index = outros_oo_index + (conta, )
+        for codigo_conta in codigos_contas:
+            conta_index = outros_cp_index + (codigo_conta, )
+            #print('\n##########################################')
+            #print('codigo_periodo: {}'.format(codigo_periodo))
+            #print('codigo_conta: {}'.format(codigo_conta))
+            #print('conta_index: {}'.format(conta_index))
+
             saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
+            #print('saldo: {}'.format(saldo))
+
             if isinstance(saldo, numbers.Number):
-                conta = outros_oo.get_conta(conta)
+                conta = outros_cp.get_conta(codigo_conta)
+                #print('conta: {}'.format(conta))
                 #print('conta_index: {})'.format(conta_index))
                 #print('saldo: {})'.format(saldo))
                 #print('type(conta: {})'.format(type(conta)))
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                pass
-                #print('Not a number: conta_index: {}, saldo: {}'.format(
-                #        conta_index, saldo))
+                msg = 'Not a number: codigo_periodo: {}'.format(codigo_periodo)
+                msg += ',\tconta_index: {}'.format(conta_index)
+                msg += ',\tsaldo: {}'.format(saldo)
+                print(msg)
+
+            #print('saldo: {}'.format(saldo))
+            #print('##########################################\n')

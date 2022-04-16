@@ -9,12 +9,18 @@ class TestLiquidezCorrente(TestIndice):
 
     def setUp(self):
         self.liquidez_corrente = LiquidezCorrente(
-                TestLiquidezCorrente.valuation, 2020, 4)
+                TestLiquidezCorrente.valuation)
 
     def test_get_valor(self):
-        valor = self.liquidez_corrente.get_valor()
+        ano = 2020
+        trimestre = 4
+        valor = self.liquidez_corrente.get_valor(ano, trimestre)
         self.assertIsNotNone(valor)
         self.assertTrue(valor > 0)
+
+        if TestLiquidezCorrente.print_to_stdout:
+            print('{} - {}T{}: {}'.format(self.liquidez_corrente, ano,
+                    trimestre, valor))
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):

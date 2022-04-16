@@ -13,7 +13,7 @@ class Oi2009T12021T3(EconomaticaDadosTrimestraisAnualizados):
         return os.path.join(super().get_dados_dir(), relative_path)
 
     def get_dados_empresa_file_name(self):
-        return 'economatica_Oi_trimestral_anualizado_2009-2021.xls'
+        return 'economatica_Oi_2009T1-2021T3.xls'
 
     def get_sheet_name(self):
         return 'OIBR3'

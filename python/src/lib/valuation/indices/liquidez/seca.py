@@ -2,11 +2,13 @@ from ..indice import Indice
 
 
 class LiquidezSeca(Indice):
-    def __init__(self, valuation, ano, trimestre):
-        super().__init__('Liquidez Seca', valuation, ano, trimestre)
+    def __init__(self, valuation):
+        super().__init__('Liquidez Seca', valuation)
 
-    def get_valor(self):
-        bp = self.get_periodo_contabil().bp_ifrs
+    # (Ativo Circulante - Estoques) / Passivo Circulante
+    def get_valor(self, ano, trimestre):
+        periodo_contabil = self.get_periodo_contabil(ano, trimestre)
+        bp = periodo_contabil.bp_ifrs
         ativo_circulante = bp.ativo.circulante
         saldo_estoques = ativo_circulante.get_saldo_estoques()
         passivo_circulante = bp.passivo.circulante
@@ -14,7 +16,5 @@ class LiquidezSeca(Indice):
                 passivo_circulante.get_saldo())
         return liquidez_seca
 
-    def str_comp(self):
-        ativo_circulante = self.get_periodo_contabil().bp_ifrs.ativo.circulante
-        repr = '\n\tativo_circulante: {}'.format(ativo_circulante)
-        return repr
+    def str_comp(self, ano, trimestre):
+        pass

@@ -11,18 +11,32 @@ class TestPrazoMedioPagamento(TestIndice):
 
     def setUp(self):
         self.prazo_medio_pagamento = PrazoMedioPagamento(
-                TestPrazoMedioPagamento.valuation, 2020, 4)
+                TestPrazoMedioPagamento.valuation)
 
     # A receita líquida operacional pode ser negativa
     def test_get_giro(self):
-        giro = self.prazo_medio_pagamento.get_giro()
+        ano = 2020
+        trimestre = 4
+        giro = self.prazo_medio_pagamento.get_giro(ano, trimestre)
         self.assertIsNotNone(giro)
         self.assertTrue(giro != 0)
 
+        if TestPrazoMedioPagamento.print_to_stdout:
+            print('test_get_giro, ano: {}, trimestre: {}'.format(
+                    ano, trimestre))
+            print('\tgiro: {}'.format(giro))
+
     def test_get_valor(self):
-        valor = self.prazo_medio_pagamento.get_valor()
+        ano = 2020
+        trimestre = 4
+        valor = self.prazo_medio_pagamento.get_valor(ano, trimestre)
         self.assertIsNotNone(valor)
         self.assertTrue(valor != 0)
+
+        if TestPrazoMedioPagamento.print_to_stdout:
+            print('test_get_valor, ano: {}, trimestre: {}'.format(
+                    ano, trimestre))
+            print('\tvalor: {}'.format(valor))
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):

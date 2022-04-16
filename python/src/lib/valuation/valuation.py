@@ -1,4 +1,9 @@
 from abc import ABC, abstractmethod
+from .indices.liquidez.geral import LiquidezGeral
+from .indices.liquidez.corrente import LiquidezCorrente
+from .indices.liquidez.seca import LiquidezSeca
+from .indices.liquidez.imediata import LiquidezImediata
+from .indices.atividade.prazo_medio_pagamento import PrazoMedioPagamento
 
 
 class Valuation(ABC):
@@ -33,6 +38,84 @@ class Valuation(ABC):
                 break
 
         return target
+
+    def get_indices_liquidez(self, ano_inicial, trimestre_inicial,
+            ano_final, trimestre_final):
+        print('Dentro de get_indices_liquidez')
+        liquidez_geral = LiquidezGeral(self)
+        liquidez_corrente = LiquidezCorrente(self)
+        liquidez_seca = LiquidezSeca(self)
+        liquidez_imediata = LiquidezImediata(self)
+        ano_array = []
+        trimestre_array = []
+        il_geral_array = []
+        il_corrente_array = []
+        il_seca_array = []
+        il_imediata_array = []
+        trimestre = trimestre_inicial
+
+        for ano in range(ano_inicial, ano_final):
+            #print('ano: {}'.format(ano))
+            while trimestre <= 4:
+                ano_array.append(ano)
+                trimestre_array.append(trimestre)
+                il_geral_array.append(liquidez_geral.get_valor(ano, trimestre))
+                il_corrente_array.append(liquidez_corrente.get_valor(ano, trimestre))
+                il_seca_array.append(liquidez_seca.get_valor(ano, trimestre))
+                il_imediata_array.append(liquidez_imediata.get_valor(ano, trimestre))
+                trimestre += 1
+
+            trimestre = 1
+
+        ano = ano_final
+        print('ano: {}'.format(ano))
+
+        for trimestre in range(1, trimestre_final + 1):
+            ano_array.append(ano)
+            trimestre_array.append(trimestre)
+            il_geral_array.append(liquidez_geral.get_valor(ano, trimestre))
+            il_corrente_array.append(liquidez_corrente.get_valor(ano, trimestre))
+            il_seca_array.append(liquidez_seca.get_valor(ano, trimestre))
+            il_imediata_array.append(liquidez_imediata.get_valor(ano, trimestre))
+
+        keys = ['ano', 'trimestre', 'liquidez_geral', 'liquidez_corrente',
+                'liquidez_seca', 'liquidez_Imediata']
+        values = [ano_array, trimestre_array, il_geral_array, il_corrente_array,
+                il_seca_array, il_imediata_array]
+        indices_liquidez = dict(zip(keys, values))
+        return indices_liquidez
+
+    def get_indices_atividade(self, ano_inicial, trimestre_inicial,
+            ano_final, trimestre_final):
+        print('Dentro de get_indices_atividade')
+        prazo_medio_pagamento = PrazoMedioPagamento(self)
+        ano_array = []
+        trimestre_array = []
+        pmp_array = []
+        trimestre = trimestre_inicial
+
+        for ano in range(ano_inicial, ano_final):
+            #print('ano: {}'.format(ano))
+            while trimestre <= 4:
+                ano_array.append(ano)
+                trimestre_array.append(trimestre)
+                pmp_array.append(prazo_medio_pagamento.get_valor(ano, trimestre))
+                trimestre += 1
+
+            trimestre = 1
+
+        ano = ano_final
+        print('ano: {}'.format(ano))
+
+        for trimestre in range(1, trimestre_final + 1):
+            ano_array.append(ano)
+            trimestre_array.append(trimestre)
+            pmp_array.append(prazo_medio_pagamento.get_valor(ano, trimestre))
+
+        keys = ['ano', 'trimestre', 'prazo_medio_pagamento']
+        values = [ano_array, trimestre_array, pmp_array]
+        indices_atividade = dict(zip(keys, values))
+        return indices_atividade
 
     # A ideia desse método é dar flexibilidade ao usuário
     # de usar os objetor que o convém sem provocar acoplamento.

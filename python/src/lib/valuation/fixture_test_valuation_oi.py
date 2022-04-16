@@ -1,10 +1,10 @@
 import unittest
 
-from ...importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
-from ..factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
+from ..importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
+from .factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 
 
-class TestIndice(unittest.TestCase):
+class FixtureValuationOi2009T12021T3(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):

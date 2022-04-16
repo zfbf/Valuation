@@ -13,7 +13,7 @@ class Iochpe2009T12021T4(EconomaticaDadosTrimestraisAnualizados):
         return os.path.join(super().get_dados_dir(), relative_path)
 
     def get_dados_empresa_file_name(self):
-        return 'economatica_Iochpe_trimestral_anualizado_2009-2021.xls'
+        return 'economatica_Iochpe_2009T1-2021T4.xls'
 
     def get_sheet_name(self):
         return 'MYPK3'

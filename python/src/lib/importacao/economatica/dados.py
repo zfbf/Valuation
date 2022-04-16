@@ -49,8 +49,16 @@ class EconomaticaDados(ABC):
 
     def get_valor(self, index, codigo_periodo):
         #print('Dentro de EconomaticaDados.get_valor()')
-        #print('codigo_periodo: <{}>'.format(codigo_periodo))
-        return self.df.loc[index, codigo_periodo][-1]
+        #print('index: {}, codigo_periodo: <{}>'.format(index, codigo_periodo))
+        valor = None
+
+        try:
+            valor = self.df.loc[index, codigo_periodo].values[-1]
+        except:
+            print('Exception')
+            pass
+        finally:
+            return valor
 
     def read_row():
         fs = '{} \t& {} \t& {} \t& {} \t& {} \t& {} \t& {} \\\\'

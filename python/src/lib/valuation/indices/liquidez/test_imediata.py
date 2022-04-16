@@ -9,12 +9,18 @@ class TestLiquidezImediata(TestIndice):
 
     def setUp(self):
         self.liquidez_imediata = LiquidezImediata(
-                TestLiquidezImediata.valuation, 2020, 4)
+                TestLiquidezImediata.valuation)
 
     def test_get_valor(self):
-        valor = self.liquidez_imediata.get_valor()
+        ano = 2020
+        trimestre = 4
+        valor = self.liquidez_imediata.get_valor(ano, trimestre)
         self.assertIsNotNone(valor)
         self.assertTrue(valor > 0)
+
+        if TestLiquidezImediata.print_to_stdout:
+            print('{} - {}T{}: {}'.format(self.liquidez_imediata, ano,
+                    trimestre, valor))
 
     def tearDown(self):
         self.liquidez_imediata = None
