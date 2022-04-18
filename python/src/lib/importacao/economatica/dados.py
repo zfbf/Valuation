@@ -55,7 +55,6 @@ class EconomaticaDados(ABC):
         try:
             valor = self.df.loc[index, codigo_periodo].values[-1]
         except:
-            print('Exception')
             pass
         finally:
             return valor

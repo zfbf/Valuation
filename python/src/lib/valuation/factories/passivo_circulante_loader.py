@@ -112,10 +112,11 @@ class PassivoCirculanteIFRSLoader():
                 #print('type(conta: {})'.format(type(conta)))
                 conta.increase_saldo(LancamentoContabil(saldo))
             else:
-                msg = 'Not a number: codigo_periodo: {}'.format(codigo_periodo)
-                msg += ',\tconta_index: {}'.format(conta_index)
-                msg += ',\tsaldo: {}'.format(saldo)
-                print(msg)
+                #msg = 'Not a number: codigo_periodo: {}'.format(codigo_periodo)
+                #msg += ',\tconta_index: {}'.format(conta_index)
+                #msg += ',\tsaldo: {}'.format(saldo)
+                #print(msg)
+                pass
 
             #print('saldo: {}'.format(saldo))
             #print('##########################################\n')

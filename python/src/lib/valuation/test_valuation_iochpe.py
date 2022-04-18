@@ -24,8 +24,8 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
         self.assertIsNotNone(self.valuation.get_periodo(identificador))
 
     def test_get_indices_liquidez(self):
-        ano_inicial = 2010
-        trimestre_inicial = 1
+        ano_inicial = 2011
+        trimestre_inicial = 4
         ano_final = 2021
         trimestre_final = 4
         indices_liquidez = self.valuation.get_indices_liquidez(ano_inicial,
@@ -37,8 +37,8 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
             print('indices_liquidez:\n{}'.format(indices_liquidez))
 
     def test_get_indices_atividade(self):
-        ano_inicial = 2010
-        trimestre_inicial = 1
+        ano_inicial = 2011
+        trimestre_inicial = 4
         ano_final = 2021
         trimestre_final = 4
         indices_atividade = self.valuation.get_indices_atividade(ano_inicial,
@@ -48,6 +48,19 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
         if TestValuationIochpe.print_to_stdout:
             print('test_get_indices_atividade')
             print('indices_atividade:\n{}'.format(indices_atividade))
+
+    def test_get_indices_rentabilidade(self):
+        ano_inicial = 2011
+        trimestre_inicial = 4
+        ano_final = 2021
+        trimestre_final = 4
+        indices_rentabilidade = self.valuation.get_indices_rentabilidade(ano_inicial,
+                trimestre_inicial, ano_final, trimestre_final)
+        self.assertIsNotNone(indices_rentabilidade)
+
+        if TestValuationIochpe.print_to_stdout:
+            print('test_get_indices_rentabilidade')
+            print('indices_rentabilidade:\n{}'.format(indices_rentabilidade))
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):

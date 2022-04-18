@@ -1,9 +1,13 @@
 from abc import ABC, abstractmethod
+
 from .indices.liquidez.geral import LiquidezGeral
 from .indices.liquidez.corrente import LiquidezCorrente
 from .indices.liquidez.seca import LiquidezSeca
 from .indices.liquidez.imediata import LiquidezImediata
+from .indices.atividade.prazo_medio_estoques import PrazoMedioEstoques
+from .indices.atividade.prazo_medio_recebimento import PrazoMedioRecebimento
 from .indices.atividade.prazo_medio_pagamento import PrazoMedioPagamento
+from .indices.rentabilidade.giro_ativo import GiroAtivo
 
 
 class Valuation(ABC):
@@ -11,6 +15,7 @@ class Valuation(ABC):
         super().__init__()
         self.empresa = empresa
         self.periodos = []
+
         self.init()
 
     @abstractmethod
@@ -54,68 +59,93 @@ class Valuation(ABC):
         il_imediata_array = []
         trimestre = trimestre_inicial
 
-        for ano in range(ano_inicial, ano_final):
-            #print('ano: {}'.format(ano))
-            while trimestre <= 4:
+        for ano in range(ano_inicial, ano_final + 1):
+            while ((ano < ano_final and trimestre <= 4) or
+                   (ano == ano_final and trimestre <= trimestre_final)):
+                il_geral = liquidez_geral.get_valor(ano, trimestre)
+                il_corrente = liquidez_corrente.get_valor(ano, trimestre)
+                il_seca = liquidez_seca.get_valor(ano, trimestre)
+                il_imediata = liquidez_imediata.get_valor(ano, trimestre)
                 ano_array.append(ano)
                 trimestre_array.append(trimestre)
-                il_geral_array.append(liquidez_geral.get_valor(ano, trimestre))
-                il_corrente_array.append(liquidez_corrente.get_valor(ano, trimestre))
-                il_seca_array.append(liquidez_seca.get_valor(ano, trimestre))
-                il_imediata_array.append(liquidez_imediata.get_valor(ano, trimestre))
+                il_geral_array.append(il_geral)
+                il_corrente_array.append(il_corrente)
+                il_seca_array.append(il_seca)
+                il_imediata_array.append(il_imediata)
                 trimestre += 1
 
             trimestre = 1
 
-        ano = ano_final
-        print('ano: {}'.format(ano))
-
-        for trimestre in range(1, trimestre_final + 1):
-            ano_array.append(ano)
-            trimestre_array.append(trimestre)
-            il_geral_array.append(liquidez_geral.get_valor(ano, trimestre))
-            il_corrente_array.append(liquidez_corrente.get_valor(ano, trimestre))
-            il_seca_array.append(liquidez_seca.get_valor(ano, trimestre))
-            il_imediata_array.append(liquidez_imediata.get_valor(ano, trimestre))
-
         keys = ['ano', 'trimestre', 'liquidez_geral', 'liquidez_corrente',
-                'liquidez_seca', 'liquidez_Imediata']
+                'liquidez_seca', 'liquidez_imediata']
         values = [ano_array, trimestre_array, il_geral_array, il_corrente_array,
-                il_seca_array, il_imediata_array]
+                  il_seca_array, il_imediata_array]
         indices_liquidez = dict(zip(keys, values))
         return indices_liquidez
 
     def get_indices_atividade(self, ano_inicial, trimestre_inicial,
             ano_final, trimestre_final):
         print('Dentro de get_indices_atividade')
+        prazo_medio_estoques = PrazoMedioEstoques(self)
+        prazo_medio_recebimento = PrazoMedioRecebimento(self)
         prazo_medio_pagamento = PrazoMedioPagamento(self)
         ano_array = []
         trimestre_array = []
+        pme_array = []
+        pmr_array = []
         pmp_array = []
+        cc_array = []
         trimestre = trimestre_inicial
 
-        for ano in range(ano_inicial, ano_final):
-            #print('ano: {}'.format(ano))
-            while trimestre <= 4:
+        for ano in range(ano_inicial, ano_final + 1):
+            while ((ano < ano_final and trimestre <= 4) or
+                   (ano == ano_final and trimestre <= trimestre_final)):
+                pme = prazo_medio_estoques.get_valor(ano, trimestre)
+                pmr = prazo_medio_recebimento.get_valor(ano, trimestre)
+                pmp = prazo_medio_pagamento.get_valor(ano, trimestre)
+                cc = pme + pmr - pmp
                 ano_array.append(ano)
                 trimestre_array.append(trimestre)
-                pmp_array.append(prazo_medio_pagamento.get_valor(ano, trimestre))
+                pme_array.append(pme)
+                pmr_array.append(pmr)
+                pmp_array.append(pmp)
+                cc_array.append(cc)
                 trimestre += 1
 
             trimestre = 1
 
-        ano = ano_final
-        print('ano: {}'.format(ano))
-
-        for trimestre in range(1, trimestre_final + 1):
-            ano_array.append(ano)
-            trimestre_array.append(trimestre)
-            pmp_array.append(prazo_medio_pagamento.get_valor(ano, trimestre))
-
-        keys = ['ano', 'trimestre', 'prazo_medio_pagamento']
-        values = [ano_array, trimestre_array, pmp_array]
+        keys = ['ano', 'trimestre', 'prazo_medio_estoques',
+                'prazo_medio_recebimento', 'prazo_medio_pagamento',
+                'ciclo_de_caixa']
+        values = [ano_array, trimestre_array, pme_array, pmr_array, pmp_array,
+                  cc_array]
         indices_atividade = dict(zip(keys, values))
         return indices_atividade
+
+    def get_indices_rentabilidade(self, ano_inicial, trimestre_inicial,
+            ano_final, trimestre_final):
+        print('Dentro de get_indices_rentabilidade')
+        giro_ativo = GiroAtivo(self)
+        ano_array = []
+        trimestre_array = []
+        ga_array = []
+        trimestre = trimestre_inicial
+
+        for ano in range(ano_inicial, ano_final + 1):
+            while ((ano < ano_final and trimestre <= 4) or
+                   (ano == ano_final and trimestre <= trimestre_final)):
+                ga = giro_ativo.get_valor(ano, trimestre)
+                ano_array.append(ano)
+                trimestre_array.append(trimestre)
+                ga_array.append(ga)
+                trimestre += 1
+
+            trimestre = 1
+
+        keys = ['ano', 'trimestre', 'giro_ativo']
+        values = [ano_array, trimestre_array, ga_array]
+        indices_rentabilidade = dict(zip(keys, values))
+        return indices_rentabilidade
 
     # A ideia desse método é dar flexibilidade ao usuário
     # de usar os objetor que o convém sem provocar acoplamento.

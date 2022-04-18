@@ -1,5 +1,3 @@
-from datetime import date
-
 from .prazo_medio import PrazoMedio
 
 

@@ -2,8 +2,6 @@ import unittest
 
 from ..test_indice import TestIndice
 from .prazo_medio_pagamento import PrazoMedioPagamento
-from ....importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
-from ...factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 
 
 class TestPrazoMedioPagamento(TestIndice):
