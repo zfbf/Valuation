@@ -62,6 +62,17 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
             print('test_get_indices_rentabilidade')
             print('indices_rentabilidade:\n{}'.format(indices_rentabilidade))
 
+    def test_get_indices_margens(self):
+        (ano_inicial, trimestre_inicial) = (2011, 4)
+        (ano_final, trimestre_final) = (2021, 4)
+        indices_margens = self.valuation.get_indices_margens(ano_inicial,
+                trimestre_inicial, ano_final, trimestre_final)
+        self.assertIsNotNone(indices_margens)
+
+        if TestValuationIochpe.print_to_stdout:
+            print('test_get_indices_margens')
+            print('indices_margens:\n{}'.format(indices_margens))
+
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):
         print('\nvaluation: {}'.format(self.valuation))

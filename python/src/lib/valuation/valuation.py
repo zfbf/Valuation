@@ -8,6 +8,9 @@ from .indices.atividade.prazo_medio_estoques import PrazoMedioEstoques
 from .indices.atividade.prazo_medio_recebimento import PrazoMedioRecebimento
 from .indices.atividade.prazo_medio_pagamento import PrazoMedioPagamento
 from .indices.rentabilidade.giro_ativo import GiroAtivo
+from .indices.margem.bruta import MargemBruta
+from .indices.margem.operacional import MargemOperacional
+from .indices.margem.liquida import MargemLiquida
 
 
 class Valuation(ABC):
@@ -15,7 +18,6 @@ class Valuation(ABC):
         super().__init__()
         self.empresa = empresa
         self.periodos = []
-
         self.init()
 
     @abstractmethod
@@ -146,6 +148,40 @@ class Valuation(ABC):
         values = [ano_array, trimestre_array, ga_array]
         indices_rentabilidade = dict(zip(keys, values))
         return indices_rentabilidade
+
+    def get_indices_margens(self, ano_inicial, trimestre_inicial,
+            ano_final, trimestre_final):
+        print('Dentro de get_indices_margens')
+        margem_bruta = MargemBruta(self)
+        margem_operacional = MargemOperacional(self)
+        margem_liquida = MargemLiquida(self)
+        ano_array = []
+        trimestre_array = []
+        mb_array = []
+        mo_array = []
+        ml_array = []
+        trimestre = trimestre_inicial
+
+        for ano in range(ano_inicial, ano_final + 1):
+            while ((ano < ano_final and trimestre <= 4) or
+                   (ano == ano_final and trimestre <= trimestre_final)):
+                mb = margem_bruta.get_valor(ano, trimestre)
+                mo = margem_operacional.get_valor(ano, trimestre)
+                ml = margem_liquida.get_valor(ano, trimestre)
+                ano_array.append(ano)
+                trimestre_array.append(trimestre)
+                mb_array.append(mb)
+                mo_array.append(mo)
+                ml_array.append(ml)
+                trimestre += 1
+
+            trimestre = 1
+
+        keys = ['ano', 'trimestre', 'margem_bruta', 'margem_operacional',
+                'margem_liquida']
+        values = [ano_array, trimestre_array, mb_array, mo_array, ml_array]
+        indices_margens = dict(zip(keys, values))
+        return indices_margens
 
     # A ideia desse método é dar flexibilidade ao usuário
     # de usar os objetor que o convém sem provocar acoplamento.
