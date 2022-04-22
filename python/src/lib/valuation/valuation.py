@@ -48,7 +48,7 @@ class Valuation(ABC):
 
     def get_indices_liquidez(self, ano_inicial, trimestre_inicial,
             ano_final, trimestre_final):
-        print('Dentro de get_indices_liquidez')
+        #print('Dentro de get_indices_liquidez')
         liquidez_geral = LiquidezGeral(self)
         liquidez_corrente = LiquidezCorrente(self)
         liquidez_seca = LiquidezSeca(self)
@@ -87,7 +87,7 @@ class Valuation(ABC):
 
     def get_indices_atividade(self, ano_inicial, trimestre_inicial,
             ano_final, trimestre_final):
-        print('Dentro de get_indices_atividade')
+        #print('Dentro de get_indices_atividade')
         prazo_medio_estoques = PrazoMedioEstoques(self)
         prazo_medio_recebimento = PrazoMedioRecebimento(self)
         prazo_medio_pagamento = PrazoMedioPagamento(self)
@@ -126,7 +126,7 @@ class Valuation(ABC):
 
     def get_indices_rentabilidade(self, ano_inicial, trimestre_inicial,
             ano_final, trimestre_final):
-        print('Dentro de get_indices_rentabilidade')
+        #print('Dentro de get_indices_rentabilidade')
         giro_ativo = GiroAtivo(self)
         ano_array = []
         trimestre_array = []
@@ -151,7 +151,7 @@ class Valuation(ABC):
 
     def get_indices_margens(self, ano_inicial, trimestre_inicial,
             ano_final, trimestre_final):
-        print('Dentro de get_indices_margens')
+        #print('Dentro de get_indices_margens')
         margem_bruta = MargemBruta(self)
         margem_operacional = MargemOperacional(self)
         margem_liquida = MargemLiquida(self)
