@@ -1,10 +1,10 @@
 import unittest
 
-from .valuation_default import ValuationDefault
+from ..valuation_default import ValuationDefault
 #from ..contabilidade.periodo_contabil_trimestral import PeriodoContabilTrimestral
-from ..importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
-from .factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
-from .custo_trimestral import CustoTrimestral
+from ...importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
+from ..factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
+from ..custo_trimestral import CustoTrimestral
 
 
 class TestCustoTrimestral(unittest.TestCase):

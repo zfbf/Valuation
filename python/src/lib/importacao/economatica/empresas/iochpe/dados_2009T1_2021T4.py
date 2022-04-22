@@ -1,7 +1,7 @@
 import os.path
 from datetime import datetime
 
-from .dados_trimestrais_anualizados import EconomaticaDadosTrimestraisAnualizados
+from ...dados_trimestrais_anualizados import EconomaticaDadosTrimestraisAnualizados
 
 
 class Iochpe2009T12021T4(EconomaticaDadosTrimestraisAnualizados):

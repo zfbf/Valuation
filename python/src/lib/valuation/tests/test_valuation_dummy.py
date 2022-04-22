@@ -1,7 +1,7 @@
 import unittest
 
-from .valuation_default import ValuationDefault
-from ..contabilidade.periodo_contabil import PeriodoContabil
+from ..valuation_default import ValuationDefault
+from ...contabilidade.periodo_contabil import PeriodoContabil
 
 
 class TestValuationDefault(unittest.TestCase):
