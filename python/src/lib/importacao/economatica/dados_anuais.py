@@ -11,8 +11,8 @@ from .dados import EconomaticaDados
 # que o objeto :PlanoDeContas seja único em cada :CicloContabilAnual.
 #
 class EconomaticaDadosAnuais(EconomaticaDados):
-    def __init__(self, nome_empresa, ano_inicial, ano_final):
-        super().__init__(nome_empresa)
+    def __init__(self, nome_empresa, ticker, ano_inicial, ano_final):
+        super().__init__(nome_empresa, ticker)
         self.ano_inicial = ano_inicial
         self.ano_final = ano_final
 

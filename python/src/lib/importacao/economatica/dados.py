@@ -7,9 +7,10 @@ from abc import ABC, abstractmethod
 
 
 class EconomaticaDados(ABC):
-    def __init__(self, nome_empresa):
+    def __init__(self, nome_empresa, ticker):
         super().__init__()
         self.nome_empresa = nome_empresa
+        self.ticker = ticker
 
     @abstractmethod
     def get_identificador(self):

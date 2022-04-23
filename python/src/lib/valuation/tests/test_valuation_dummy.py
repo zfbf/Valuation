@@ -8,7 +8,7 @@ class TestValuationDefault(unittest.TestCase):
     print_to_stdout = False
 
     def setUp(self):
-        self.valuation = ValuationDefault('Default')
+        self.valuation = ValuationDefault('Default', 'ticker')
         periodo = PeriodoContabil('2021')
         self.valuation.append_periodo(periodo)
 

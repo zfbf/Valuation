@@ -6,7 +6,7 @@ from ...dados_trimestrais_anualizados import EconomaticaDadosTrimestraisAnualiza
 
 class Iochpe2009T12021T4(EconomaticaDadosTrimestraisAnualizados):
     def __init__(self):
-        super().__init__('Iochpe', 2009, 1, 2021, 4)
+        super().__init__('Iochpe', 'MYPK3', 2009, 1, 2021, 4)
 
     def get_dados_empresa_file_path(self):
         relative_path = 'economatica/iochpe/'

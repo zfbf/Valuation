@@ -14,9 +14,10 @@ from .indices.margem.liquida import MargemLiquida
 
 
 class Valuation(ABC):
-    def __init__(self, empresa):
+    def __init__(self, empresa, ticker):
         super().__init__()
         self.empresa = empresa
+        self.ticker = ticker
         self.periodos = []
         self.init()
 
@@ -53,6 +54,7 @@ class Valuation(ABC):
         liquidez_corrente = LiquidezCorrente(self)
         liquidez_seca = LiquidezSeca(self)
         liquidez_imediata = LiquidezImediata(self)
+        ticker_array = []
         ano_array = []
         trimestre_array = []
         il_geral_array = []

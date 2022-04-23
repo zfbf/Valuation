@@ -20,7 +20,8 @@ class ValuationPeriodoTrimestralFactory(ValuationFactory):
         super().__init__()
 
     def build(self, economatica_dados):
-        valuation = ValuationDefault(economatica_dados.nome_empresa)
+        valuation = ValuationDefault(economatica_dados.nome_empresa,
+                                     economatica_dados.ticker)
         trimestre = economatica_dados.trimestre_inicial
 
         for ano in range(economatica_dados.ano_inicial, economatica_dados.ano_final):

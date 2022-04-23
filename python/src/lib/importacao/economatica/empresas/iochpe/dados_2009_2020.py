@@ -6,7 +6,7 @@ from ...dados_anuais import EconomaticaDadosAnuais
 
 class Iochpe20092020(EconomaticaDadosAnuais):
     def __init__(self):
-        super().__init__('Iochpe', 2009, 2020)
+        super().__init__('Iochpe', 'MYPK3', 2009, 2020)
 
     def get_dados_empresa_file_path(self):
         relative_path = 'economatica/iochpe'

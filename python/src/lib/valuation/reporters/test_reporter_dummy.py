@@ -12,7 +12,7 @@ class TestReporter(unittest.TestCase):
         self.reporter = ReporterDefault()
 
     def test_execute(self):
-        valuation = ValuationDefault('Default')
+        valuation = ValuationDefault('Default', 'ticker')
         periodo = PeriodoContabil('2021')
         valuation.append_periodo(periodo)
         report = self.reporter.execute(valuation)

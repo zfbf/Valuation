@@ -20,7 +20,8 @@ class ValuationPeriodoAnualFactory(ValuationFactory):
         super().__init__()
 
     def build(self, economatica_dados):
-        valuation = ValuationDefault(economatica_dados.nome_empresa)
+        valuation = ValuationDefault(economatica_dados.nome_empresa,
+                                     economatica_dados.ticker)
 
         for codigo_periodo in economatica_dados.get_codigos_periodos():
             periodo_cont = PeriodoContabil(codigo_periodo)

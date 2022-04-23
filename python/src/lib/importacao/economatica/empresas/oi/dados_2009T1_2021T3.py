@@ -6,7 +6,7 @@ from ...dados_trimestrais_anualizados import EconomaticaDadosTrimestraisAnualiza
 
 class Oi2009T12021T3(EconomaticaDadosTrimestraisAnualizados):
     def __init__(self):
-        super().__init__('Oi', 2009, 1, 2021, 3)
+        super().__init__('Oi', 'OIBR3', 2009, 1, 2021, 3)
 
     def get_dados_empresa_file_path(self):
         relative_path = 'economatica/oi/'
