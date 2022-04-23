@@ -1,10 +1,10 @@
 import unittest
 
-from ...importacao.economatica.iochpe_dados_trimestrais_anualizados import Iochpe2009T12021T4
+from ...importacao.economatica.empresas.embraer.dados_2009T1_2021T4 import Embraer2009T12021T4
 from ..factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 
 
-class FixtureValuationIochpe2009T12021T4(unittest.TestCase):
+class FixtureValuationEmbraer2009T12021T4(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -12,7 +12,7 @@ class FixtureValuationIochpe2009T12021T4(unittest.TestCase):
 
     @classmethod
     def build_valuation(cls):
-        economatica_dados = Iochpe2009T12021T4()
+        economatica_dados = Embraer2009T12021T4()
         economatica_dados.prepare()
         valuation_factory = ValuationPeriodoTrimestralFactory()
         valuation = valuation_factory.build(economatica_dados)

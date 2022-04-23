@@ -1,13 +1,13 @@
 import unittest
 
-from .fixture_test_valuation_iochpe import FixtureValuationIochpe2009T12021T4
+from .fixture_test_valuation_embraer import FixtureValuationEmbraer2009T12021T4
 
 
-class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
+class TestValuationEmbraer(FixtureValuationEmbraer2009T12021T4):
     print_to_stdout = True
 
     def setUp(self):
-        self.valuation = TestValuationIochpe.valuation
+        self.valuation = TestValuationEmbraer.valuation
 
     def tearDown(self):
         self.valuation = None
@@ -32,7 +32,7 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
                 trimestre_inicial, ano_final, trimestre_final)
         self.assertIsNotNone(indices_liquidez)
 
-        if TestValuationIochpe.print_to_stdout:
+        if TestValuationEmbraer.print_to_stdout:
             print('test_get_indices_liquidez')
             print('indices_liquidez:\n{}'.format(indices_liquidez))
 
@@ -45,7 +45,7 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
                 trimestre_inicial, ano_final, trimestre_final)
         self.assertIsNotNone(indices_atividade)
 
-        if TestValuationIochpe.print_to_stdout:
+        if TestValuationEmbraer.print_to_stdout:
             print('test_get_indices_atividade')
             print('indices_atividade:\n{}'.format(indices_atividade))
 
@@ -58,7 +58,7 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
                 trimestre_inicial, ano_final, trimestre_final)
         self.assertIsNotNone(indices_rentabilidade)
 
-        if TestValuationIochpe.print_to_stdout:
+        if TestValuationEmbraer.print_to_stdout:
             print('test_get_indices_rentabilidade')
             print('indices_rentabilidade:\n{}'.format(indices_rentabilidade))
 
@@ -69,7 +69,7 @@ class TestValuationIochpe(FixtureValuationIochpe2009T12021T4):
                 trimestre_inicial, ano_final, trimestre_final)
         self.assertIsNotNone(indices_margens)
 
-        if TestValuationIochpe.print_to_stdout:
+        if TestValuationEmbraer.print_to_stdout:
             print('test_get_indices_margens')
             print('indices_margens:\n{}'.format(indices_margens))
 
