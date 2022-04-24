@@ -54,8 +54,8 @@ class Valuation(ABC):
         liquidez_corrente = LiquidezCorrente(self)
         liquidez_seca = LiquidezSeca(self)
         liquidez_imediata = LiquidezImediata(self)
-        ticker_array = []
         ano_array = []
+        ano_frac_array = []
         trimestre_array = []
         il_geral_array = []
         il_corrente_array = []
@@ -70,7 +70,9 @@ class Valuation(ABC):
                 il_corrente = liquidez_corrente.get_valor(ano, trimestre)
                 il_seca = liquidez_seca.get_valor(ano, trimestre)
                 il_imediata = liquidez_imediata.get_valor(ano, trimestre)
+                ano_frac = ano + ((trimestre * 3/12) - (3/2/12))
                 ano_array.append(ano)
+                ano_frac_array.append(ano_frac)
                 trimestre_array.append(trimestre)
                 il_geral_array.append(il_geral)
                 il_corrente_array.append(il_corrente)
@@ -80,9 +82,13 @@ class Valuation(ABC):
 
             trimestre = 1
 
-        keys = ['ano', 'trimestre', 'liquidez_geral', 'liquidez_corrente',
-                'liquidez_seca', 'liquidez_imediata']
-        values = [ano_array, trimestre_array, il_geral_array, il_corrente_array,
+        keys = ['empresa', 'ticker', 'ano', 'ano_frac', 'trimestre',
+                'liquidez_geral', 'liquidez_corrente', 'liquidez_seca',
+                'liquidez_imediata']
+        empresa_array = [self.empresa] * len(ano_array)
+        ticker_array = [self.ticker] * len(ano_array)
+        values = [empresa_array, ticker_array, ano_array, ano_frac_array,
+                  trimestre_array, il_geral_array, il_corrente_array,
                   il_seca_array, il_imediata_array]
         indices_liquidez = dict(zip(keys, values))
         return indices_liquidez
@@ -94,6 +100,7 @@ class Valuation(ABC):
         prazo_medio_recebimento = PrazoMedioRecebimento(self)
         prazo_medio_pagamento = PrazoMedioPagamento(self)
         ano_array = []
+        ano_frac_array = []
         trimestre_array = []
         pme_array = []
         pmr_array = []
@@ -108,7 +115,9 @@ class Valuation(ABC):
                 pmr = prazo_medio_recebimento.get_valor(ano, trimestre)
                 pmp = prazo_medio_pagamento.get_valor(ano, trimestre)
                 cc = pme + pmr - pmp
+                ano_frac = ano + ((trimestre * 3/12) - (3/2/12))
                 ano_array.append(ano)
+                ano_frac_array.append(ano_frac)
                 trimestre_array.append(trimestre)
                 pme_array.append(pme)
                 pmr_array.append(pmr)
@@ -118,11 +127,13 @@ class Valuation(ABC):
 
             trimestre = 1
 
-        keys = ['ano', 'trimestre', 'prazo_medio_estoques',
-                'prazo_medio_recebimento', 'prazo_medio_pagamento',
-                'ciclo_de_caixa']
-        values = [ano_array, trimestre_array, pme_array, pmr_array, pmp_array,
-                  cc_array]
+        keys = ['empresa', 'ticker', 'ano', 'ano_frac', 'trimestre',
+                'prazo_medio_estoques', 'prazo_medio_recebimento',
+                'prazo_medio_pagamento', 'ciclo_de_caixa']
+        empresa_array = [self.empresa] * len(ano_array)
+        ticker_array = [self.ticker] * len(ano_array)
+        values = [empresa_array, ticker_array, ano_array, ano_frac_array,
+                  trimestre_array, pme_array, pmr_array, pmp_array, cc_array]
         indices_atividade = dict(zip(keys, values))
         return indices_atividade
 
@@ -131,6 +142,7 @@ class Valuation(ABC):
         #print('Dentro de get_indices_rentabilidade')
         giro_ativo = GiroAtivo(self)
         ano_array = []
+        ano_frac_array = []
         trimestre_array = []
         ga_array = []
         trimestre = trimestre_inicial
@@ -139,25 +151,31 @@ class Valuation(ABC):
             while ((ano < ano_final and trimestre <= 4) or
                    (ano == ano_final and trimestre <= trimestre_final)):
                 ga = giro_ativo.get_valor(ano, trimestre)
+                ano_frac = ano + ((trimestre * 3/12) - (3/2/12))
                 ano_array.append(ano)
+                ano_frac_array.append(ano_frac)
                 trimestre_array.append(trimestre)
                 ga_array.append(ga)
                 trimestre += 1
 
             trimestre = 1
 
-        keys = ['ano', 'trimestre', 'giro_ativo']
-        values = [ano_array, trimestre_array, ga_array]
+        keys = ['empresa', 'ticker', 'ano', 'ano_franc',
+                'trimestre', 'giro_ativo']
+        empresa_array = [self.empresa] * len(ano_array)
+        ticker_array = [self.ticker] * len(ano_array)
+        values = [empresa_array, ticker_array, ano_array, ano_frac_array,
+                  trimestre_array, ga_array]
         indices_rentabilidade = dict(zip(keys, values))
         return indices_rentabilidade
 
     def get_indices_margens(self, ano_inicial, trimestre_inicial,
             ano_final, trimestre_final):
-        #print('Dentro de get_indices_margens')
         margem_bruta = MargemBruta(self)
         margem_operacional = MargemOperacional(self)
         margem_liquida = MargemLiquida(self)
         ano_array = []
+        ano_frac_array = []
         trimestre_array = []
         mb_array = []
         mo_array = []
@@ -170,7 +188,9 @@ class Valuation(ABC):
                 mb = margem_bruta.get_valor(ano, trimestre)
                 mo = margem_operacional.get_valor(ano, trimestre)
                 ml = margem_liquida.get_valor(ano, trimestre)
+                ano_frac = ano + ((trimestre * 3/12) - (3/2/12))
                 ano_array.append(ano)
+                ano_frac_array.append(ano_frac)
                 trimestre_array.append(trimestre)
                 mb_array.append(mb)
                 mo_array.append(mo)
@@ -179,9 +199,12 @@ class Valuation(ABC):
 
             trimestre = 1
 
-        keys = ['ano', 'trimestre', 'margem_bruta', 'margem_operacional',
-                'margem_liquida']
-        values = [ano_array, trimestre_array, mb_array, mo_array, ml_array]
+        keys = ['empresa', 'ticker', 'ano', 'ano_frac', 'trimestre',
+                'margem_bruta', 'margem_operacional', 'margem_liquida']
+        empresa_array = [self.empresa] * len(ano_array)
+        ticker_array = [self.ticker] * len(ano_array)
+        values = [empresa_array, ticker_array, ano_array, ano_frac_array,
+                  trimestre_array, mb_array, mo_array, ml_array]
         indices_margens = dict(zip(keys, values))
         return indices_margens
 
