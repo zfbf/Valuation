@@ -27,19 +27,19 @@ class DFCLoader(EconomaticaDadosLoader):
 
         self.load_conta_credora(
                 dfc.efeito_cambial,
-                ('dfc', 'efeito_cambial'),
+                'dfc.efeito_cambial',
                 periodo,
                 economatica_dados
         )
 
         self.load_conta_credora(
                 dfc.outras_variacoes,
-                ('dfc', 'outras_variacoes'),
+                'dfc.outras_variacoes',
                 periodo,
                 economatica_dados
         )
 
-        var_liq_caixa_index = ('dfc', 'var_liquida_de_caixa')
+        var_liq_caixa_index = 'dfc.var_liquida_de_caixa'
         saldo = economatica_dados.get_valor(var_liq_caixa_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -49,14 +49,14 @@ class DFCLoader(EconomaticaDadosLoader):
                          operacional,
                          periodo,
                          economatica_dados):
-        base_index = ('dfc', 'operacional')
+        base_index = 'dfc.operacional'
         saldo = economatica_dados.get_valor(base_index, periodo)
 
         if isinstance(saldo, numbers.Number):
             operacional.valor_verificacao = saldo
 
         operacao = operacional.get_conta('operacao')
-        operacao_index = base_index + ('operacao', )
+        operacao_index = base_index + '.operacao'
         saldo = economatica_dados.get_valor(operacao_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -76,13 +76,13 @@ class DFCLoader(EconomaticaDadosLoader):
         for code in contas_credoras_codes:
             self.load_conta_credora(
                     operacao.get_conta(code),
-                    operacao_index + (code, ),
+                    operacao_index + '.' + code,
                     periodo,
                     economatica_dados
             )
 
         var_atv_pass = operacional.get_conta('variacao_ativos_passivos')
-        var_atv_pass_index = base_index + ('variacao_ativos_passivos', )
+        var_atv_pass_index = base_index + '.variacao_ativos_passivos'
         saldo = economatica_dados.get_valor(var_atv_pass_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -99,14 +99,14 @@ class DFCLoader(EconomaticaDadosLoader):
         for code in contas_credoras_codes:
             self.load_conta_credora(
                     var_atv_pass.get_conta(code),
-                    var_atv_pass_index + (code, ),
+                    var_atv_pass_index + '.' + code,
                     periodo,
                     economatica_dados
             )
 
         self.load_conta_credora(
                 operacional.get_conta('outros'),
-                base_index + ('outros', ),
+                base_index + '.outros',
                 periodo,
                 economatica_dados
         )
@@ -115,7 +115,7 @@ class DFCLoader(EconomaticaDadosLoader):
                            investimentos,
                            periodo,
                            economatica_dados):
-        base_index = ('dfc', 'investimentos')
+        base_index = 'dfc.investimentos'
         saldo = economatica_dados.get_valor(base_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -123,8 +123,8 @@ class DFCLoader(EconomaticaDadosLoader):
 
         compra_liq_atv_permnt = investimentos.get_conta(
                 'compra_liquida_ativos_permanentes')
-        compra_liq_atv_permnt_index = base_index + (
-                'compra_liquida_ativos_permanentes', )
+        compra_liq_atv_permnt_index = (base_index +
+                '.compra_liquida_ativos_permanentes')
         saldo = economatica_dados.get_valor(compra_liq_atv_permnt_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -138,7 +138,7 @@ class DFCLoader(EconomaticaDadosLoader):
         for code in contas_credoras_codes:
             self.load_conta_credora(
                     compra_liq_atv_permnt.get_conta(code),
-                    compra_liq_atv_permnt_index + (code, ),
+                    compra_liq_atv_permnt_index + '.' + code,
                     periodo,
                     economatica_dados
             )
@@ -151,7 +151,7 @@ class DFCLoader(EconomaticaDadosLoader):
         for code in contas_credoras_codes:
             self.load_conta_credora(
                     investimentos.get_conta(code),
-                    base_index + (code, ),
+                    base_index + '.' + code,
                     periodo,
                     economatica_dados
             )
@@ -160,14 +160,14 @@ class DFCLoader(EconomaticaDadosLoader):
                             financiamentos,
                             periodo,
                             economatica_dados):
-        base_index = ('dfc', 'financiamentos')
+        base_index = 'dfc.financiamentos'
         saldo = economatica_dados.get_valor(base_index, periodo)
 
         if isinstance(saldo, numbers.Number):
             financiamentos.valor_verificacao = saldo
 
         financiamentos_liq = financiamentos.get_conta('financiamentos_liquido')
-        financiamentos_liq_index = base_index + ('financiamentos_liquido', )
+        financiamentos_liq_index = base_index + '.financiamentos_liquido'
         saldo = economatica_dados.get_valor(financiamentos_liq_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -180,13 +180,13 @@ class DFCLoader(EconomaticaDadosLoader):
         for code in contas_credoras_codes:
             self.load_conta_credora(
                     financiamentos_liq.get_conta(code),
-                    financiamentos_liq_index + (code, ),
+                    financiamentos_liq_index + '.' + code,
                     periodo,
                     economatica_dados
             )
 
         aumnt_liq_capital = financiamentos.get_conta('aumento_liquido_de_capital')
-        aumnt_liq_capital_index = base_index + ('aumento_liquido_de_capital', )
+        aumnt_liq_capital_index = base_index + '.aumento_liquido_de_capital'
         saldo = economatica_dados.get_valor(aumnt_liq_capital_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -199,7 +199,7 @@ class DFCLoader(EconomaticaDadosLoader):
         for code in contas_credoras_codes:
             self.load_conta_credora(
                     aumnt_liq_capital.get_conta(code),
-                    aumnt_liq_capital_index + (code, ),
+                    aumnt_liq_capital_index + '.' + code,
                     periodo,
                     economatica_dados
             )
@@ -211,7 +211,7 @@ class DFCLoader(EconomaticaDadosLoader):
         for code in contas_credoras_codes:
             self.load_conta_credora(
                     financiamentos.get_conta(code),
-                    base_index + (code, ),
+                    base_index + '.' + code,
                     periodo,
                     economatica_dados
             )

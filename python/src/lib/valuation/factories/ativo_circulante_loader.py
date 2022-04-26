@@ -14,7 +14,7 @@ class AtivoCirculanteIFRSLoader():
     def load(self, ativo_circulante, periodo, economatica_dados):
         # Usar economatica_dados para buscar os dados das contas
         # abaixo para o periodo passado
-        ativo_circulante_index = ('bp', 'ativo', 'circulante')
+        ativo_circulante_index = 'bp.ativo.circulante'
         saldo = economatica_dados.get_valor(ativo_circulante_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -32,7 +32,7 @@ class AtivoCirculanteIFRSLoader():
         ano = int(periodo[:4])
 
         for conta in contas:
-            conta_index = ativo_circulante_index + (conta, )
+            conta_index = ativo_circulante_index + '.' + conta
             saldo = economatica_dados.get_valor(conta_index, periodo)
 
             if isinstance(saldo, numbers.Number):

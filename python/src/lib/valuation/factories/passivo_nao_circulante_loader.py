@@ -9,10 +9,11 @@ from ...contabilidade.lancamento_contabil import LancamentoContabil
 class PassivoNaoCirculanteIFRSLoader():
     def __init__(self):
         super().__init__()
+        self.passivo_nao_circulante_index = 'bp.passivo.nao_circulante'
 
     def load(self, passivo_nao_circulante, periodo, economatica_dados):
-        passivo_nao_circulante_index = ('bp', 'passivo', 'nao_circulante')
-        saldo = economatica_dados.get_valor(passivo_nao_circulante_index, periodo)
+        saldo = economatica_dados.get_valor(self.passivo_nao_circulante_index,
+                periodo)
 
         if isinstance(saldo, numbers.Number):
             passivo_nao_circulante.valor_verificacao = saldo
@@ -22,7 +23,7 @@ class PassivoNaoCirculanteIFRSLoader():
                   'lucros_e_receitas_a_apropriar')
 
         for conta in contas:
-            conta_index = passivo_nao_circulante_index + (conta, )
+            conta_index = self.passivo_nao_circulante_index + '.' + conta
             saldo = economatica_dados.get_valor(conta_index, periodo)
 
             if isinstance(saldo, numbers.Number):
@@ -44,8 +45,8 @@ class PassivoNaoCirculanteIFRSLoader():
                                          periodo,
                                          economatica_dados):
 
-        emp_e_fin_index = ('bp', 'passivo', 'nao_circulante',
-                           'emprestimos_e_financiamentos')
+        emp_e_fin_index = (self.passivo_nao_circulante_index +
+                '.emprestimos_e_financiamentos')
         saldo = economatica_dados.get_valor(emp_e_fin_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -55,7 +56,7 @@ class PassivoNaoCirculanteIFRSLoader():
                   'arrendamento_financeiro')
 
         for conta in contas:
-            conta_index = emp_e_fin_index + (conta, )
+            conta_index = emp_e_fin_index + '.' + conta
             saldo = economatica_dados.get_valor(conta_index, periodo)
 
             if isinstance(saldo, numbers.Number):
@@ -66,9 +67,9 @@ class PassivoNaoCirculanteIFRSLoader():
                 #print('Not a number: conta_index: {}, saldo: {}'.format(
                 #        conta_index, saldo))
 
-        financiamentos_index = emp_e_fin_index + ('financiamentos', )
-        financiamentos = emprestimos_e_financiamentos.get_conta('financiamentos')
-
+        financiamentos_index = emp_e_fin_index + '.financiamentos'
+        financiamentos = emprestimos_e_financiamentos.get_conta(
+                'financiamentos')
         saldo = economatica_dados.get_valor(financiamentos_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -78,7 +79,7 @@ class PassivoNaoCirculanteIFRSLoader():
                   'estrangeiro')
 
         for conta in contas:
-            conta_index = financiamentos_index + (conta, )
+            conta_index = financiamentos_index + '.' + conta
             saldo = economatica_dados.get_valor(conta_index, periodo)
 
             if isinstance(saldo, numbers.Number):
@@ -93,8 +94,8 @@ class PassivoNaoCirculanteIFRSLoader():
                                outras_obrigacoes,
                                periodo,
                                economatica_dados):
-        outras_obrigacoes_index = ('bp', 'passivo', 'nao_circulante',
-                                   'outras_obrigacoes')
+        outras_obrigacoes_index = (self.passivo_nao_circulante_index +
+                '.outras_obrigacoes')
         saldo = economatica_dados.get_valor(outras_obrigacoes_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -104,7 +105,7 @@ class PassivoNaoCirculanteIFRSLoader():
                   'outros_lp')
 
         for conta in contas:
-            conta_index = outras_obrigacoes_index + (conta, )
+            conta_index = outras_obrigacoes_index + '.' + conta
             saldo = economatica_dados.get_valor(conta_index, periodo)
 
             if isinstance(saldo, numbers.Number):

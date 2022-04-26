@@ -37,15 +37,35 @@ class EconomaticaDados(ABC):
         return df
 
     def prepare(self):
-        multi_index = ['codigo_0', 'codigo_1', 'codigo_2', 'codigo_3',
-                       'codigo_4', 'codigo_5', 'codigo_6', 'codigo_7']
-        aux_df = self.import_from_excel().set_index(multi_index).sort_index()
-        aux_index = aux_df.index.dropna(how='all')
-        self.df = aux_df.loc[aux_index]
-        self.df.sort_index(inplace=True)
+        codigos = ['codigo_0', 'codigo_1', 'codigo_2', 'codigo_3',
+                   'codigo_4', 'codigo_5', 'codigo_6', 'codigo_7']
+        aux_df = self.import_from_excel()
+        aux_df['id'] = aux_df.apply(lambda x: self.build_id_from_codigos(
+                x.codigo_0, x.codigo_1, x.codigo_2, x.codigo_3, x.codigo_4,
+                x.codigo_5, x.codigo_6, x.codigo_7), axis=1)
+        #aux_df = aux_df.set_index(multi_index).sort_index()
+        #aux_index = aux_df.index.dropna(how='all')
+        #self.df = aux_df.loc[aux_index]
+        aux_df = aux_df.set_index('id')
+        aux_df = aux_df.sort_index()
+        aux_df = aux_df.dropna(subset=codigos, how='all')
+        #self.df = aux_df.sort_index()
+        self.df = aux_df
+        #self.df.sort_index(inplace=True)
 
-    def query(self, codigos):
-        result = self.df.loc[codigos, :]
+    def build_id_from_codigos(self, c0, c1, c2, c3, c4, c5, c6, c7):
+        c_aux_array = [c0, c1, c2, c3, c4, c5, c6, c7]
+        c_array = []
+
+        for c in c_aux_array:
+            if isinstance(c, str):
+                c_array.append(c)
+
+        codigos = '.'.join(c_array)
+        return codigos
+
+    def query(self, id):
+        result = self.df.loc[id, :]
         return result
 
     def get_valor(self, index, codigo_periodo):
@@ -54,9 +74,13 @@ class EconomaticaDados(ABC):
         valor = None
 
         try:
-            valor = self.df.loc[index, codigo_periodo].values[-1]
-        except:
-            pass
+            #valor = self.df.loc[index, codigo_periodo].values[-1]
+            valor = self.df.at[index, codigo_periodo]
+        except Exception as e:
+            msg = 'EconomaticaDados.get_valor() = #except Exception'
+            msg += '\n\tindex: {}'.format(index)
+            msg += '\n\tcodigo_periodo: {}'.format(codigo_periodo)
+            raise Exception(msg) from e
         finally:
             return valor
 

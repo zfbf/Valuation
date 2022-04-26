@@ -2,9 +2,9 @@ from ..reporter import Reporter
 
 
 class IndiceReporter(Reporter):
-    def __init__(self):
-        super().__init__()
-
+    def __init__(self, nome, valuation):
+        super().__init__(nome)
+        self.valuation = valuation
 
     #
     # Verificar os argumentos: ano_inicial, trimestre_inicial, ano_final,
@@ -16,7 +16,7 @@ class IndiceReporter(Reporter):
     #           o modo será a média
     #
     #
-    def execute(self, valuation, **kwargs):
+    def execute(self, **kwargs):
         modo = self.guess_modo(kwargs)
         print('modo: {}'.format(modo))
         return 1
@@ -41,15 +41,15 @@ class IndiceReporter(Reporter):
 
         return modo
 
-    def ensure_args_inicio_fim(self, valuation, kwargs):
+    def ensure_args_inicio_fim(self, kwargs):
         if not 'ano_inicial' in kwargs:
-            kwargs['ano_inicial'] = valuation.periodos[0].ano + 1
+            kwargs['ano_inicial'] = self.valuation.periodos[0].ano + 1
 
         if not 'trimestre_inicial' in kwargs:
-            kwargs['trimestre_inicial'] = valuation.periodos[0].trimestre
+            kwargs['trimestre_inicial'] = self.valuation.periodos[0].trimestre
 
         if not 'ano_final' in kwargs:
-            kwargs['ano_final'] = valuation.periodos[-1].ano
+            kwargs['ano_final'] = self.valuation.periodos[-1].ano
 
         if not 'trimestre_final' in kwargs:
-            kwargs['trimestre_final'] = valuation.periodos[-1].trimestre
+            kwargs['trimestre_final'] = self.valuation.periodos[-1].trimestre

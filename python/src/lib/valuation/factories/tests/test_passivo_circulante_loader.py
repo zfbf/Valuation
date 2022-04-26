@@ -1,8 +1,8 @@
 import unittest
 
-from .valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
-from .passivo_circulante_loader import PassivoCirculanteIFRSLoader
-from ...importacao.economatica.iochpe_dados_trimestrais_anualizados import Iochpe2009T12021T4
+from ..valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
+from ..passivo_circulante_loader import PassivoCirculanteIFRSLoader
+from ....importacao.economatica.empresas.iochpe.dados_2009T1_2021T4 import Iochpe2009T12021T4
 
 
 class TestPassivoCirculanteIFRSLoader(unittest.TestCase):
@@ -26,6 +26,14 @@ class TestPassivoCirculanteIFRSLoader(unittest.TestCase):
         self.passivo_circulante_loader.load(self.passivo_circulante_2021T4,
                                             '2021T4',
                                             self.economatica_dados)
+        passivo_circulante = self.passivo_circulante_2021T4
+        self.assertIsNotNone(passivo_circulante.valor_verificacao)
+        emp_e_fin = passivo_circulante.get_conta('emprestimos_e_financiamentos')
+        self.assertIsNotNone(emp_e_fin.valor_verificacao)
+        outras_obrigacoes = passivo_circulante.get_conta('outras_obrigacoes')
+        self.assertIsNotNone(outras_obrigacoes.valor_verificacao)
+        outros_cp = outras_obrigacoes.get_conta('outros_cp')
+        self.assertIsNotNone(outros_cp.valor_verificacao)
 
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):

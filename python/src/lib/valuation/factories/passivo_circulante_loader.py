@@ -12,7 +12,7 @@ class PassivoCirculanteIFRSLoader():
         super().__init__()
 
     def load(self, passivo_circulante, codigo_periodo, economatica_dados):
-        passivo_circulante_index = ('bp', 'passivo', 'circulante')
+        passivo_circulante_index = 'bp.passivo.circulante'
         saldo = economatica_dados.get_valor(passivo_circulante_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -24,7 +24,7 @@ class PassivoCirculanteIFRSLoader():
                   'provisoes')
 
         for conta in contas:
-            conta_index = passivo_circulante_index + (conta, )
+            conta_index = passivo_circulante_index + '.' + conta
             saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
@@ -46,8 +46,7 @@ class PassivoCirculanteIFRSLoader():
                                          codigo_periodo,
                                          economatica_dados):
 
-        emp_e_fin_index = ('bp', 'passivo', 'circulante',
-                           'emprestimos_e_financiamentos')
+        emp_e_fin_index = 'bp.passivo.circulante.emprestimos_e_financiamentos'
         saldo = economatica_dados.get_valor(emp_e_fin_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -58,7 +57,7 @@ class PassivoCirculanteIFRSLoader():
                           'arrendamento_financeiro')
 
         for codigo_conta in codigos_contas:
-            conta_index = emp_e_fin_index + (codigo_conta, )
+            conta_index = emp_e_fin_index + '.' + codigo_conta
             saldo = economatica_dados.get_valor(conta_index, codigo_periodo)
 
             if isinstance(saldo, numbers.Number):
@@ -73,18 +72,15 @@ class PassivoCirculanteIFRSLoader():
                                outras_obrigacoes,
                                codigo_periodo,
                                economatica_dados):
-        outras_obrigacoes_index = ('bp', 'passivo', 'circulante',
-                                   'outras_obrigacoes')
-        saldo = economatica_dados.get_valor(outras_obrigacoes_index, codigo_periodo)
-
-        #print('type(outras_obrigacoes: {})'.format(type(outras_obrigacoes)))
+        outras_obrigacoes_index = 'bp.passivo.circulante.outras_obrigacoes'
+        saldo = economatica_dados.get_valor(outras_obrigacoes_index,
+                codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
             outras_obrigacoes.valor_verificacao = saldo
 
         outros_cp = outras_obrigacoes.get_conta('outros_cp')
-        outros_cp_index = ('bp', 'passivo', 'circulante',
-                           'outras_obrigacoes', 'outros_cp')
+        outros_cp_index = 'bp.passivo.circulante.outras_obrigacoes.outros_cp'
         saldo = economatica_dados.get_valor(outros_cp_index, codigo_periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -94,7 +90,7 @@ class PassivoCirculanteIFRSLoader():
                           'outros')
 
         for codigo_conta in codigos_contas:
-            conta_index = outros_cp_index + (codigo_conta, )
+            conta_index = outros_cp_index + '.' + codigo_conta
             #print('\n##########################################')
             #print('codigo_periodo: {}'.format(codigo_periodo))
             #print('codigo_conta: {}'.format(codigo_conta))

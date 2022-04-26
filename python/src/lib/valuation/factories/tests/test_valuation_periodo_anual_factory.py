@@ -1,16 +1,16 @@
 import unittest
 
-from .valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
-from ...importacao.economatica.iochpe_dados_trimestrais_anualizados import Iochpe2009T12021T4
+from ..valuation_periodo_anual_factory import ValuationPeriodoAnualFactory
+from ....importacao.economatica.empresas.iochpe.dados_2009_2020 import Iochpe20092020
 
 
 class TestValuationPeriodoTrimestralFactory(unittest.TestCase):
     print_to_stdout = True
 
     def setUp(self):
-        self.economatica_dados = Iochpe2009T12021T4()
+        self.economatica_dados = Iochpe20092020()
         self.economatica_dados.prepare()
-        self.valuation_factory = ValuationPeriodoTrimestralFactory()
+        self.valuation_factory = ValuationPeriodoAnualFactory()
 
     def test_build(self):
         valuation = self.valuation_factory.build(self.economatica_dados)

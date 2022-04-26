@@ -1,7 +1,7 @@
 import unittest
 
-from .valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
-from ...importacao.economatica.iochpe_dados_trimestrais_anualizados import Iochpe2009T12021T4
+from ..valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
+from ....importacao.economatica.empresas.iochpe.dados_2009T1_2021T4 import Iochpe2009T12021T4
 
 
 class TestValuationPeriodoTrimestralFactory(unittest.TestCase):

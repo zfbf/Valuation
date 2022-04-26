@@ -11,7 +11,7 @@ class PatrimonioLiquidoIFRSLoader():
         super().__init__()
 
     def load(self, patrimonio_liquido, periodo, economatica_dados):
-        patrimonio_liquido_index = ('bp', 'patrimonio_liquido')
+        patrimonio_liquido_index = 'bp.patrimonio_liquido'
         saldo = economatica_dados.get_valor(patrimonio_liquido_index, periodo)
 
         if isinstance(saldo, numbers.Number):
@@ -27,7 +27,7 @@ class PatrimonioLiquidoIFRSLoader():
                   'outros_resultados_abrangentes')
 
         for conta in contas:
-            conta_index = patrimonio_liquido_index + (conta, )
+            conta_index = patrimonio_liquido_index + '.' + conta
             #print('conta_index: {}'.format(conta_index))
             saldo = economatica_dados.get_valor(conta_index, periodo)
             #print('saldo: {}'.format(saldo))
