@@ -36,6 +36,9 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             empresa_base = {'nome': self.valuation.empresa,
                     'liquidez_geral': indices_liquidez['liquidez_geral']}
             report['empresa_base'] = empresa_base
+            report['ano'] = indices_liquidez['ano']
+            report['trimestre'] = indices_liquidez['trimestre']
+            report['ano_frac'] = indices_liquidez['ano_frac']
 
             if modo == 'COMPARACAO_SIMPLES':
                 self.feed_comparacao_simples(report, kwargs['outros'])
