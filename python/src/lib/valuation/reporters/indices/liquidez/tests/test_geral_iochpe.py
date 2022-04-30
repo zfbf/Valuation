@@ -4,6 +4,7 @@ from ..geral import IndiceLiquidezGeralReporter
 from .....factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 from ......importacao.economatica.empresas.iochpe.dados_2009T1_2021T4 import Iochpe2009T12021T4
 from ......importacao.economatica.empresas.embraer.dados_2009T1_2021T4 import Embraer2009T12021T4
+from ......importacao.economatica.empresas.marcopolo.dados_2009T1_2021T4 import Marcopolo2009T12021T4
 
 
 class TestIndiceLiquidezGeralReporter(unittest.TestCase):
@@ -25,12 +26,17 @@ class TestIndiceLiquidezGeralReporter(unittest.TestCase):
 
     @classmethod
     def build_valuation_outros(cls):
-        economatica_dados = Embraer2009T12021T4()
-        economatica_dados.prepare()
+        dados_array = [Embraer2009T12021T4(), Marcopolo2009T12021T4()]
         valuation_factory = ValuationPeriodoTrimestralFactory()
-        valuation = valuation_factory.build(economatica_dados)
-        valuation_factory.load(valuation, economatica_dados)
-        return [valuation]
+        valuation_array = []
+
+        for dados in dados_array:
+            dados.prepare()
+            valuation = valuation_factory.build(dados)
+            valuation_factory.load(valuation, dados)
+            valuation_array.append(valuation)
+
+        return valuation_array
 
     @classmethod
     def tearDownClass(cls):

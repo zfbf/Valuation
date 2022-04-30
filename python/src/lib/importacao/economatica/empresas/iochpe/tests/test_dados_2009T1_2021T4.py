@@ -42,36 +42,33 @@ class TestIochpeDadosTrimestraisAnualizados(unittest.TestCase):
 
     def test_query(self):
         print('\ntest_query')
-        filter = ('bp', 'ativo', 'circulante')
+        filter = 'bp.ativo.circulante'
         result  = self.iochpe_dta.query(filter)
         print('result: \n{}'.format(result))
         print('filtered result to {}: \n{}'.format(filter, result.filter(
-                axis='columns',
                 items=['conta', '2010T1', '2010T2', '2021T1', '2021T2'])))
 
     def test_query_ativo(self):
         print('\ntest_query_ativo')
-        filter = ('bp', 'ativo')
+        filter = 'bp.ativo'
         result  = self.iochpe_dta.query(filter)
 
         if TestIochpeDadosTrimestraisAnualizados.print_to_stdout:
             print('result: \n{}'.format(result))
             print('filtered result to {}: \n{}'.format(filter, result.filter(
-                    axis='columns',
                     items=['conta', '2010T1', '2010T2', '2021T1', '2021T2'])))
 
     def test_query_ativo_nao_circulante(self):
         print('\ntest_query_ativo_nao_circulante')
-        index = ('bp', 'ativo', 'nao_circulante')
+        index = 'bp.ativo.nao_circulante'
         result = self.iochpe_dta.query(index)
 
         if TestIochpeDadosTrimestraisAnualizados.print_to_stdout:
             print('result: \n{}'.format(result))
             print('filtered result to {}: \n{}'.format(index, result.filter(
-                    axis='columns',
                     items=['conta', '2010T1', '2010T2', '2021T1', '2021T2'])))
 
-            index = ('bp', 'ativo', 'nao_circulante', 'intangiveis_liquido')
+            index = 'bp.ativo.nao_circulante.intangiveis_liquido'
             identificador_periodo = '2020T4'
             saldo = self.iochpe_dta.get_valor(index, identificador_periodo)
 
@@ -86,19 +83,15 @@ class TestIochpeDadosTrimestraisAnualizados(unittest.TestCase):
             s = '\n\t'.join(['index: {}',
                              'identificador_periodo: {}',
                              'type(result): {}',
-                             'result:\n{}',
-                             'result[0]:\n{}',
-                             'result[-1]:\n{}'])
+                             'result:\n{}'])
             print(s.format(index,
                            identificador_periodo,
                            type(result),
-                           result,
-                           result[0],
-                           result[-1]))
+                           result))
 
     def test_get_valor(self):
         print('\ntest_get_valor')
-        index = ('bp', 'ativo', 'circulante', 'caixa_e_equivalentes')
+        index = 'bp.ativo.circulante.caixa_e_equivalentes'
         periodo = '2010T4'
         result = self.iochpe_dta.get_valor(index, periodo)
         print('result: \n{}'.format(result))

@@ -1,3 +1,4 @@
+import numpy as np
 from ..indice_reporter import IndiceReporter
 
 
@@ -18,6 +19,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
         modo = self.guess_modo(kwargs)
         self.ensure_args_inicio_fim(kwargs)
         report = {}
+        outros = None
 
         try:
             report['ano_inicial'] = kwargs['ano_inicial']
@@ -40,8 +42,10 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             report['trimestre'] = indices_liquidez['trimestre']
             report['ano_frac'] = indices_liquidez['ano_frac']
 
-            if modo == 'COMPARACAO_SIMPLES':
-                self.feed_comparacao_simples(report, kwargs['outros'])
+            if 'outros' in kwargs:
+                outros = kwargs['outros']
+                self.feed_comparacao_simples(report, outros )
+                self.feed_estatisticas(report)
 
             #print('type(report): {}'.format(type(report)))
             #print('len(report): {}'.format(len(report)))
@@ -53,8 +57,13 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
                 msg += '\n\tvaluation is none'
             else:
                 msg += '\n\ttype(valuation): {}'.format(type(self.valuation))
-                msg += '\n\tempresa: {}'.format(type(self.valuation.empresa))
+                msg += '\n\tempresa: {}'.format(self.valuation.empresa)
                 msg += '\n\tmodo: {}'.format(modo)
+
+                if (outros is not None):
+                    msg += '\n\tlen(outros): {}'.format(len(outros))
+                else:
+                    msg += '\n\toutros is None'
 
             raise Exception(msg) from e
 
@@ -81,6 +90,51 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             report['outras_empresas'] = outras_empresas
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.execute() = #except Exception'
+            msg += '\n\treport: {}'.format(report)
+
+            if outros is not None:
+                msg += '\n\ttype(outros): {}'.format(type(outros))
+                msg += '\n\tlen(outros): {}'.format(len(outros))
+                msg += '\n\ttype(outros[0]): {}'.format(type(outros[0]))
+
+            raise Exception(msg) from e
+
+        return report
+
+    def feed_estatisticas(self, report):
+        #print('feed_estatisticas')
+        try:
+            indices_liq_geral = report['empresa_base']['liquidez_geral']
+            report['empresa_base']['estatisticas'] = {
+                'min': np.min(indices_liq_geral),
+                'max': np.max(indices_liq_geral),
+                'media': np.mean(indices_liq_geral),
+                'quartil_1': np.percentile(indices_liq_geral, 25),
+                'quartil_2': np.percentile(indices_liq_geral, 50),
+                'quartil_3': np.percentile(indices_liq_geral, 75)
+            }
+
+            indices_outras_empresas = [indice['liquidez_geral']
+                    for indice in report['outras_empresas']]
+
+            #print('type(indices_outras_empresas): {}'.format(type(
+            #        indices_outras_empresas)))
+            #print('len(indices_outras_empresas): {}'.format(len(
+            #        indices_outras_empresas)))
+
+            for outra_empresa in report['outras_empresas']:
+                indices_liq_geral = outra_empresa['liquidez_geral']
+                outra_empresa['estatisticas'] = {
+                    'min': np.min(indices_liq_geral),
+                    'max': np.max(indices_liq_geral),
+                    'media': np.mean(indices_liq_geral),
+                    'quartil_1': np.percentile(indices_liq_geral, 25),
+                    'quartil_2': np.percentile(indices_liq_geral, 50),
+                    'quartil_3': np.percentile(indices_liq_geral, 75)
+                }
+        except Exception as e:
+            msg = 'IndiceLiquidezGeralReporter.feed_estatisticas()'
+            msg += ' = #except Exception'
             msg += '\n\treport: {}'.format(report)
 
             if outros is not None:
