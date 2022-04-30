@@ -1,7 +1,7 @@
 import unittest
 
-from ..test_indice import TestIndice
-from .geral import LiquidezGeral
+from ...test_indice import TestIndice
+from ..geral import LiquidezGeral
 
 
 class TestLiquidezGeral(TestIndice):

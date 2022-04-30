@@ -19,11 +19,6 @@ class EconomaticaDadosTrimestraisAnualizados(EconomaticaDados):
         self.ano_final = ano_final
         self.trimestre_final = trimestre_final
 
-    def get_dados_dir(self):
-        dados_dir = os.environ['VALUATION_DADOS_DIR']
-        return dados_dir
-        #return os.environ.abspath('/home/zenon/dev/projects/Valuation/dados')
-
     def get_identificador(self):
         return '{}_{}T{}_{}T{}'.format(self.nome_empresa,
                                  self.ano_inicial,

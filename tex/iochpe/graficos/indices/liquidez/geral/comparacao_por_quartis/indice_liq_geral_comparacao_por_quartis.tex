@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, left=3cm, top=3cm, right=2cm, bottom=2cm]{geometry}
+
+%================================================================
+%==== Packages ==================================================
+%================================================================
+
+%---- encoding ------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}         % Pacote para acentuação
+%--------------------------------------
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb, dsfont, mathtools}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+
+%================================================================
+%==== Configurações dos pacotes =================================
+%================================================================
+
+\pgfplotsset{width=16cm,compat=1.17}
+
+
+%================================================================
+%==== Preâmbulo =================================================
+%================================================================
+
+
+
+
+\title{Grafico_Linha}
+\author{Zenon Farias Braga F}
+\date{April 2022}
+
+\begin{document}
+
+\begin{tikzpicture}
+	\begin{axis}[
+			title=Índice de Liquidez Geral,
+			axis lines = left,
+			xlabel={$x$},
+			ylabel={$y$},
+			ymin=0, ymax=5,
+			xmin=2010, xmax=2023,
+		    x tick label style={
+		        /pgf/number format/1000 sep={},
+		        fixed
+            }
+		]
+		\addplot [blue] table {iochpe_liq_geral.dat};
+		\addplot [orange] table {embraer_liq_geral.dat};
+		\addplot [green] table {marcopolo_liq_geral.dat};
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}
+
+
+
+
+
+\documentclass[12pt]{article}
+\usepackage[a4paper, left=3cm, top=3cm, right=2cm, bottom=2cm]{geometry}
+
+%---- encoding ------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}         % Pacote para acentuação
+%--------------------------------------
+
+\usepackage[brazilian]{babel}
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb, dsfont, mathtools}
+\usepackage{lipsum}
+
+\title{Lista de Exercícios 1}
+\author{Zenon Farias Braga F}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item Questão 1
+    \item Questão 2
+\end{enumerate}
+
+\lipsum
+\end{document}

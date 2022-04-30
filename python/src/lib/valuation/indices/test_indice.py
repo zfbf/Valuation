@@ -1,7 +1,7 @@
 import unittest
 
-from ...importacao.economatica.iochpe_dados_trimestrais_anualizados import Iochpe2009T12021T4
-#from ...importacao.economatica.oi_dados_trimestrais_anualizados import Oi2009T12021T3
+from ...importacao.economatica.empresas.iochpe.dados_2009T1_2021T4 import Iochpe2009T12021T4
+#from ...importacao.economatica.empresas.oi.dados_2009T1_2021T3 import Oi2009T12021T3
 from ..factories.valuation_periodo_trimestral_factory import ValuationPeriodoTrimestralFactory
 
 

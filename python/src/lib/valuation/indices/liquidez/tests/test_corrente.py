@@ -1,7 +1,7 @@
 import unittest
 
-from ..test_indice import TestIndice
-from .corrente import LiquidezCorrente
+from ...test_indice import TestIndice
+from ..corrente import LiquidezCorrente
 
 
 class TestLiquidezCorrente(TestIndice):

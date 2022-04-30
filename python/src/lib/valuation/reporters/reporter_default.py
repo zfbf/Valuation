@@ -1,9 +1,10 @@
 from .reporter import Reporter
 from ...contabilidade.periodo_contabil import PeriodoContabil
 
+
 class ReporterDefault(Reporter):
     def __init__(self):
-        super().__init__()
+        super().__init__('Default')
 
     def execute(self, valuation):
         report = []

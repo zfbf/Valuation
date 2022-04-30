@@ -1,7 +1,7 @@
 from datetime import datetime
 import unittest
 
-from .empresas.embraer.dados_2009T1_2021T4 import Embraer2009T12021T4
+from ..empresas.embraer.dados_2009T1_2021T4 import Embraer2009T12021T4
 
 
 class TestEmbraerDadosTrimestraisAnualizados(unittest.TestCase):

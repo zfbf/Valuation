@@ -20,6 +20,10 @@ class EconomaticaDados(ABC):
     def get_codigos_periodos(self):
         pass
 
+    def get_dados_dir(self):
+        dados_dir = os.environ['VALUATION_DADOS_DIR']
+        return dados_dir
+
     def import_from_excel(self):
         dados_empresa_file_name = os.path.join(self.get_dados_empresa_file_path(),
                                                self.get_dados_empresa_file_name())

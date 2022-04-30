@@ -11,5 +11,9 @@ class Reporter(ABC):
         self.nome = nome
 
     @abstractmethod
-    def execute(self, **kwargs):
+    def execute(self, to_export=False, **kwargs):
         pass
+
+    def get_dados_dir(self):
+        output_dir = os.environ['VALUATION_OUTPUT_DIR']
+        return output_dir

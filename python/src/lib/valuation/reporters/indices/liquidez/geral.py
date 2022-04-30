@@ -8,14 +8,14 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
 
     #
     # Verificar os argumentos: ano_inicial, trimestre_inicial, ano_final,
-    #                          trimestre_final, modo, outros
+    #                          trimestre_final, modo, outros, export
     # OBS: Caso outros seja um então o modo será de apenas comparação.
     #      Caso outros seja entre 2 e um número mínimo parametrizáve, então
     #           o modo será a média
     #      #      Caso outros seja entre 2 e um número mínimo parametrizáve, então
     #           o modo será a média
     #
-    def execute(self, **kwargs):
+    def execute(self, to_export=False, **kwargs):
         modo = self.guess_modo(kwargs)
         self.ensure_args_inicio_fim(kwargs)
         report = {}
@@ -27,6 +27,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             report['ano_final'] = kwargs['ano_final']
             report['trimestre_final'] = kwargs['trimestre_final']
             report['modo'] = modo
+
             #print('report: {}'.format(report))
 
             indices_liquidez = self.valuation.get_indices_liquidez(
@@ -46,6 +47,9 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
                 outros = kwargs['outros']
                 self.feed_comparacao_simples(report, outros )
                 self.feed_estatisticas(report)
+
+            if to_export:
+                print('to_export')
 
             #print('type(report): {}'.format(type(report)))
             #print('len(report): {}'.format(len(report)))
@@ -114,8 +118,20 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
                 'quartil_3': np.percentile(indices_liq_geral, 75)
             }
 
-            indices_outras_empresas = [indice['liquidez_geral']
+            indices_outras_empresas_seq_list_list = [indice['liquidez_geral']
                     for indice in report['outras_empresas']]
+            indices_outras_empresas_paralel_list_tuple = list(zip(
+                    *indices_outras_empresas_seq_list_list))
+            aux = indices_outras_empresas_paralel_list_tuple
+
+            report['estatisticas'] = {
+                'min': [np.min(a) for a in aux],
+                'max': [np.max(a) for a in aux],
+                'media': [np.mean(a) for a in aux],
+                'quartil_1': [np.percentile(a, 25) for a in aux],
+                'quartil_2': [np.percentile(a, 50) for a in aux],
+                'quartil_3': [np.percentile(a, 75) for a in aux]
+            }
 
             #print('type(indices_outras_empresas): {}'.format(type(
             #        indices_outras_empresas)))

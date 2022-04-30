@@ -16,11 +16,6 @@ class EconomaticaDadosAnuais(EconomaticaDados):
         self.ano_inicial = ano_inicial
         self.ano_final = ano_final
 
-    def get_dados_dir(self):
-        dados_dir = os.environ['VALUATION_DADOS_DIR']
-        return dados_dir
-        #return os.environ.abspath('/home/zenon/dev/projects/Valuation/dados')
-
     def get_identificador(self):
         return '{}_{}_{}'.format(self.nome_empresa,
                                  self.ano_inicial,

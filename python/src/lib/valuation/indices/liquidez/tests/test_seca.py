@@ -1,7 +1,7 @@
 import unittest
 
-from ..test_indice import TestIndice
-from .seca import LiquidezSeca
+from ...test_indice import TestIndice
+from ..seca import LiquidezSeca
 
 
 class TestLiquidezSeca(TestIndice):

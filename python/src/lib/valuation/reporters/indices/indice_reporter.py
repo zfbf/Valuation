@@ -16,7 +16,7 @@ class IndiceReporter(Reporter):
     #           o modo será a média
     #
     #
-    def execute(self, **kwargs):
+    def execute(self, to_export=False, **kwargs):
         modo = self.guess_modo(kwargs)
         print('modo: {}'.format(modo))
         return 1

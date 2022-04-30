@@ -1,8 +1,8 @@
 import unittest
 
-from .reporter_default import ReporterDefault
-from ..valuation_default import ValuationDefault
-from ...contabilidade.periodo_contabil import PeriodoContabil
+from ..reporter_default import ReporterDefault
+from ...valuation_default import ValuationDefault
+from ....contabilidade.periodo_contabil import PeriodoContabil
 
 
 class TestReporter(unittest.TestCase):

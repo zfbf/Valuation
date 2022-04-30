@@ -1,7 +1,7 @@
 import unittest
 
-from ..test_indice import TestIndice
-from .imediata import LiquidezImediata
+from ...test_indice import TestIndice
+from ..imediata import LiquidezImediata
 
 
 class TestLiquidezImediata(TestIndice):
