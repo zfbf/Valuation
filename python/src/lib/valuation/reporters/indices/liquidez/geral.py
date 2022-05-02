@@ -15,7 +15,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
     #      #      Caso outros seja entre 2 e um número mínimo parametrizáve, então
     #           o modo será a média
     #
-    def execute(self, to_export=False, **kwargs):
+    def execute(self, **kwargs):
         modo = self.guess_modo(kwargs)
         self.ensure_args_inicio_fim(kwargs)
         report = {}
@@ -48,8 +48,10 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
                 self.feed_comparacao_simples(report, outros )
                 self.feed_estatisticas(report)
 
-            if to_export:
-                print('to_export')
+            save_to_latex = kwargs.get('save_to_latex', False)
+
+            if save_to_latex:
+                print('save_to_latex')
 
             #print('type(report): {}'.format(type(report)))
             #print('len(report): {}'.format(len(report)))
@@ -158,6 +160,19 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
                 msg += '\n\tlen(outros): {}'.format(len(outros))
                 msg += '\n\ttype(outros[0]): {}'.format(type(outros[0]))
 
+            raise Exception(msg) from e
+
+        return report
+
+    def save_to_latex(self, report):
+        print('save_to_latex')
+        try:
+            output_dir = self.get_output_dir()
+            print('output_dir: {}'.format(output_dir))
+        except Exception as e:
+            msg = 'IndiceLiquidezGeralReporter.save_to_latex()'
+            msg += ' = #except Exception'
+            msg += '\n\treport: {}'.format(report)
             raise Exception(msg) from e
 
         return report
