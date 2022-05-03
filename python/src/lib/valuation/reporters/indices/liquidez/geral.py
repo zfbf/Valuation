@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from ..indice_reporter import IndiceReporter
 
@@ -51,7 +52,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             save_to_latex = kwargs.get('save_to_latex', False)
 
             if save_to_latex:
-                print('save_to_latex')
+                self.save_to_latex(report)
 
             #print('type(report): {}'.format(type(report)))
             #print('len(report): {}'.format(len(report)))
@@ -169,6 +170,17 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
         try:
             output_dir = self.get_output_dir()
             print('output_dir: {}'.format(output_dir))
+            directories = [self.valuation.empresa, 'tex', 'indices', 'liquidez',
+                           'geral']
+            aux_dir = os.path.join(output_dir, *directories)
+            print('aux_dir: {}'.format(aux_dir))
+            os.makedirs(aux_dir)
+
+            file = os.path.join(aux_dir, 'empresa_base.dat')
+            f = open(file, 'w')
+            f.write('Teste')
+            f.close()
+
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.save_to_latex()'
             msg += ' = #except Exception'
