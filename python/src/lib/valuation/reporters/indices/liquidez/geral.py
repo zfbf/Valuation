@@ -167,6 +167,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
 
     def save_to_latex(self, report):
         print('save_to_latex')
+
         try:
             output_dir = self.get_output_dir()
             print('output_dir: {}'.format(output_dir))
@@ -174,13 +175,32 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
                            'geral']
             aux_dir = os.path.join(output_dir, *directories)
             print('aux_dir: {}'.format(aux_dir))
-            os.makedirs(aux_dir)
+            #os.makedirs(aux_dir)
 
-            file = os.path.join(aux_dir, 'empresa_base.dat')
-            f = open(file, 'w')
-            f.write('Teste')
-            f.close()
+            ano_frac = report['ano_frac']
+            liq_geral = report['empresa_base']['liquidez_geral']
+            nome = report['empresa_base']['nome']
+            desc = '{} - min: {}, max: {}'.format(nome,
+                    report['empresa_base']['estatisticas']['min'],
+                    report['empresa_base']['estatisticas']['max'])
+            file_name = os.path.join(aux_dir, '{}.dat'.format(nome))
+            self.save_to_latex_aux(file_name, ano_frac, liq_geral, desc)
 
+            for empresa in report['outras_empresas']:
+                liq_geral = empresa['liquidez_geral']
+                nome = empresa['nome']
+                desc = '{} - min: {}, max: {}'.format(nome,
+                        empresa['estatisticas']['min'],
+                        empresa['estatisticas']['max'])
+                file_name = os.path.join(aux_dir, '{}.dat'.format(nome))
+                self.save_to_latex_aux(file_name, ano_frac, liq_geral, desc)
+
+            estatistica_dict = report['estatisticas']
+
+            for estatistica_key in estatistica_dict.keys():
+                estatistica = estatistica_dict[estatistica_key]
+                file_name = os.path.join(aux_dir, '{}.dat'.format(estatistica_key))
+                self.save_to_latex_aux(file_name, ano_frac, estatistica)
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.save_to_latex()'
             msg += ' = #except Exception'
@@ -188,3 +208,14 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             raise Exception(msg) from e
 
         return report
+
+    def save_to_latex_aux(self, file_name, ano_frac, liq_geral, desc=None):
+        lines = ['x_0 f(x)']
+        lines.append('#{}'.format(desc))
+
+        for x, y in zip(ano_frac, liq_geral):
+            lines.append('{} {}'.format(x, y))
+
+        f = open(file_name, 'w')
+        f.write('\n'.join(lines))
+        f.close()
