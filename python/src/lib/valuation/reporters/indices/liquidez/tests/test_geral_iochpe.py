@@ -7,11 +7,17 @@ from ......importacao.economatica.empresas.embraer.dados_2009T1_2021T4 import Em
 from ......importacao.economatica.empresas.frasle.dados_2009T1_2021T4 import FrasLe2009T12021T4
 from ......importacao.economatica.empresas.mahle_metal_leve.dados_2009T1_2021T4 import MahleMetalLeve2009T12021T4
 from ......importacao.economatica.empresas.marcopolo.dados_2009T1_2021T4 import Marcopolo2009T12021T4
+from ......importacao.economatica.empresas.metisa.dados_2010T4_2021T4 import Metisa2010T42021T4
 from ......importacao.economatica.empresas.randon.dados_2009T1_2021T4 import Randon2009T12021T4
+from ......importacao.economatica.empresas.romi.dados_2009T1_2021T4 import Romi2009T12021T4
+from ......importacao.economatica.empresas.schulz.dados_2009T4_2021T4 import Schulz2009T42021T4
+from ......importacao.economatica.empresas.tupy.dados_2009T1_2021T4 import Tupy2009T12021T4
+from ......importacao.economatica.empresas.weg.dados_2009T1_2022T1 import Weg2009T12022T1
+from ......importacao.economatica.empresas.whirlpool.dados_2009T4_2021T4 import Whirlpool2009T42021T4
 
 
 class TestIndiceLiquidezGeralReporter(unittest.TestCase):
-    print_to_stdout = True
+    print_to_stdout = False
 
     @classmethod
     def setUpClass(cls):
@@ -33,7 +39,13 @@ class TestIndiceLiquidezGeralReporter(unittest.TestCase):
                        FrasLe2009T12021T4(),
                        MahleMetalLeve2009T12021T4(),
                        Marcopolo2009T12021T4(),
-                       Randon2009T12021T4()]
+                       Metisa2010T42021T4(),
+                       Randon2009T12021T4(),
+                       Romi2009T12021T4(),
+                       Schulz2009T42021T4(),
+                       Tupy2009T12021T4(),
+                       Weg2009T12022T1(),
+                       Whirlpool2009T42021T4()]
         valuation_factory = ValuationPeriodoTrimestralFactory()
         valuation_array = []
 
@@ -59,7 +71,8 @@ class TestIndiceLiquidezGeralReporter(unittest.TestCase):
     def test_execute(self):
         reporter = IndiceLiquidezGeralReporter(self.valuation_base)
         outros_valuations = self.valuation_outros
-        report = reporter.execute(outros=outros_valuations)
+        report = reporter.execute(ano_inicial=2011, trimestre_inicial=4,
+                outros=outros_valuations)
         self.assertIsNotNone(report)
         return report
 
@@ -75,7 +88,8 @@ class TestIndiceLiquidezGeralReporter(unittest.TestCase):
     def test_save_to_latex(self):
         reporter = IndiceLiquidezGeralReporter(self.valuation_base)
         outros_valuations = self.valuation_outros
-        report = reporter.execute(outros=outros_valuations, save_to_latex=True)
+        report = reporter.execute(outros=outros_valuations, ano_inicial=2011,
+                trimestre_inicial=4, save_to_latex=True)
         self.assertIsNotNone(report)
         return report
 

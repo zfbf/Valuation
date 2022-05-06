@@ -97,7 +97,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             report['outras_empresas'] = outras_empresas
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.execute() = #except Exception'
-            msg += '\n\treport: {}'.format(report)
+            msg += '\n\treport ano inicial: {}'.format(report['ano_inicial'])
 
             if outros is not None:
                 msg += '\n\ttype(outros): {}'.format(type(outros))
@@ -154,7 +154,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.feed_estatisticas()'
             msg += ' = #except Exception'
-            msg += '\n\treport: {}'.format(report)
+            msg += '\n\treport ano inicial: {}'.format(report['ano_inicial'])
 
             if outros is not None:
                 msg += '\n\ttype(outros): {}'.format(type(outros))
@@ -204,7 +204,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.save_to_latex()'
             msg += ' = #except Exception'
-            msg += '\n\treport: {}'.format(report)
+            msg += '\n\treport ano inicial: {}'.format(report['ano_inicial'])
             raise Exception(msg) from e
 
         return report
