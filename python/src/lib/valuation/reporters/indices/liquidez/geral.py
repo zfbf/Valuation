@@ -17,6 +17,10 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
     #           o modo será a média
     #
     def execute(self, **kwargs):
+        print('IndiceLiquidezGeralReporter.execute')
+        d = kwargs
+        print('\n\n'.join('{}:\n\t{}'.format(k, v) for k, v in d.items()))
+
         modo = self.guess_modo(kwargs)
         self.ensure_args_inicio_fim(kwargs)
         report = {}
@@ -46,7 +50,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
 
             if 'outros' in kwargs:
                 outros = kwargs['outros']
-                self.feed_comparacao_simples(report, outros )
+                self.feed_comparacao_simples(report, outros)
                 self.feed_estatisticas(report)
 
             save_to_latex = kwargs.get('save_to_latex', False)
@@ -77,10 +81,12 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
         return report
 
     def feed_comparacao_simples(self, report, outros):
-        #print('feed_comparacao_simples')
-        #print('report: {}'.format(report))
-        #print('type(outros): {}'.format(type(outros)))
-        #print('outros: {}'.format(outros))
+        print('feed_comparacao_simples')
+        print('report:')
+        d = report
+        print('\n\n'.join('{}:\n\t{}'.format(k, v) for k, v in d.items()))
+        print('type(outros): {}'.format(type(outros)))
+        print('len(outros): {}'.format(len(outros)))
         outras_empresas = []
 
         try:
@@ -106,60 +112,103 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
 
             raise Exception(msg) from e
 
+        print('No final de feed_comparacao_simples')
+        print('report:')
+        d = report
+        print('\n\n'.join('{}:\n\t{}'.format(k, v) for k, v in d.items()))
+
         return report
 
     def feed_estatisticas(self, report):
-        #print('feed_estatisticas')
+        print('feed_estatisticas')
+        outras_empresas = None
+
         try:
-            indices_liq_geral = report['empresa_base']['liquidez_geral']
+            emp_base_liq_geral = report['empresa_base']['liquidez_geral']
+            emp_base_liq_geral = [i for i in emp_base_liq_geral if i]
+
             report['empresa_base']['estatisticas'] = {
-                'min': np.min(indices_liq_geral),
-                'max': np.max(indices_liq_geral),
-                'media': np.mean(indices_liq_geral),
-                'quartil_1': np.percentile(indices_liq_geral, 25),
-                'quartil_2': np.percentile(indices_liq_geral, 50),
-                'quartil_3': np.percentile(indices_liq_geral, 75)
+                'min': np.min(emp_base_liq_geral),
+                'max': np.max(emp_base_liq_geral),
+                'media': np.mean(emp_base_liq_geral),
+                'quartil_1': np.percentile(emp_base_liq_geral, 25),
+                'quartil_2': np.percentile(emp_base_liq_geral, 50),
+                'quartil_3': np.percentile(emp_base_liq_geral, 75)
             }
 
-            indices_outras_empresas_seq_list_list = [indice['liquidez_geral']
-                    for indice in report['outras_empresas']]
-            indices_outras_empresas_paralel_list_tuple = list(zip(
-                    *indices_outras_empresas_seq_list_list))
-            aux = indices_outras_empresas_paralel_list_tuple
+            outras_empresas = report.get('outras_empresas', None)
 
-            report['estatisticas'] = {
-                'min': [np.min(a) for a in aux],
-                'max': [np.max(a) for a in aux],
-                'media': [np.mean(a) for a in aux],
-                'quartil_1': [np.percentile(a, 25) for a in aux],
-                'quartil_2': [np.percentile(a, 50) for a in aux],
-                'quartil_3': [np.percentile(a, 75) for a in aux]
-            }
+            if outras_empresas is not None:
+                indices_outras_empresas_seq_list_list = [indice['liquidez_geral']
+                        for indice in outras_empresas]
+                indices_outras_empresas_paralel_list_tuple = list(zip(
+                        *indices_outras_empresas_seq_list_list))
+                corte_transversal_array = \
+                        indices_outras_empresas_paralel_list_tuple
 
-            #print('type(indices_outras_empresas): {}'.format(type(
-            #        indices_outras_empresas)))
-            #print('len(indices_outras_empresas): {}'.format(len(
-            #        indices_outras_empresas)))
+                min_array = []
+                max_array = []
+                media_array = []
+                quartil_1_array = []
+                quartil_2_array = []
+                quartil_3_array = []
 
-            for outra_empresa in report['outras_empresas']:
-                indices_liq_geral = outra_empresa['liquidez_geral']
-                outra_empresa['estatisticas'] = {
-                    'min': np.min(indices_liq_geral),
-                    'max': np.max(indices_liq_geral),
-                    'media': np.mean(indices_liq_geral),
-                    'quartil_1': np.percentile(indices_liq_geral, 25),
-                    'quartil_2': np.percentile(indices_liq_geral, 50),
-                    'quartil_3': np.percentile(indices_liq_geral, 75)
+                for corte_transversal in corte_transversal_array:
+                    (min, max, media) = (None, None, None)
+                    (q1, q2, q3) = (None, None, None)
+                    aux = [i for i in corte_transversal if i]
+
+                    if len(aux) > 0:
+                        min = np.min(aux)
+                        max = np.max(aux)
+                        media = np.mean(aux)
+                        quartil_1 = np.percentile(aux, 25)
+                        quartil_2 = np.percentile(aux, 50)
+                        quartil_3 = np.percentile(aux, 75)
+
+                    min_array.append(min)
+                    max_array.append(max)
+                    media_array.append(media)
+                    quartil_1_array.append(q1)
+                    quartil_2_array.append(q2)
+                    quartil_3_array.append(q3)
+
+                report['estatisticas'] = {
+                    'min': min_array,
+                    'max': max_array,
+                    'media': media_array,
+                    'quartil_1': quartil_1_array,
+                    'quartil_2': quartil_2_array,
+                    'quartil_3': quartil_3_array
                 }
+
+                #print('type(indices_outras_empresas): {}'.format(type(
+                #        indices_outras_empresas)))
+                #print('len(indices_outras_empresas): {}'.format(len(
+                #        indices_outras_empresas)))
+
+                for outra_empresa in outras_empresas:
+                    outra_emp_liq_geral = outra_empresa['liquidez_geral']
+                    outra_emp_liq_geral = [i for i in outra_emp_liq_geral if i]
+                    outra_empresa['estatisticas'] = {
+                        'min': np.min(outra_emp_liq_geral),
+                        'max': np.max(outra_emp_liq_geral),
+                        'media': np.mean(outra_emp_liq_geral),
+                        'quartil_1': np.percentile(outra_emp_liq_geral, 25),
+                        'quartil_2': np.percentile(outra_emp_liq_geral, 50),
+                        'quartil_3': np.percentile(outra_emp_liq_geral, 75)
+                    }
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.feed_estatisticas()'
             msg += ' = #except Exception'
             msg += '\n\treport ano inicial: {}'.format(report['ano_inicial'])
 
-            if outros is not None:
-                msg += '\n\ttype(outros): {}'.format(type(outros))
-                msg += '\n\tlen(outros): {}'.format(len(outros))
-                msg += '\n\ttype(outros[0]): {}'.format(type(outros[0]))
+            if outras_empresas is not None:
+                msg += '\n\ttype(outras_empresas): {}'.format(type(outras_empresas))
+                msg += '\n\tlen(outras_empresas): {}'.format(len(outras_empresas))
+                msg += '\n\ttype(outras_empresas[0]): {}'.format(type(outras_empresas[0]))
+            else:
+                msg += '\n\toutras_empresas is None'
 
             raise Exception(msg) from e
 
@@ -167,6 +216,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
 
     def save_to_latex(self, report):
         print('save_to_latex')
+        outras_empresas = None
 
         try:
             output_dir = self.get_output_dir()
@@ -186,7 +236,12 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
             file_name = os.path.join(aux_dir, '{}.dat'.format(nome))
             self.save_to_latex_aux(file_name, ano_frac, liq_geral, desc)
 
-            for empresa in report['outras_empresas']:
+            outras_empresas = report.get('outras_empresas', [])
+            #print('outras_empresas: {}'.format(outras_empresas))
+            #d = report
+            #print('\n\n'.join('{}:\n\t{}'.format(k, v) for k, v in d.items()))
+
+            for empresa in outras_empresas:
                 liq_geral = empresa['liquidez_geral']
                 nome = empresa['nome']
                 desc = '{} - min: {}, max: {}'.format(nome,
@@ -195,7 +250,7 @@ class IndiceLiquidezGeralReporter(IndiceReporter):
                 file_name = os.path.join(aux_dir, '{}.dat'.format(nome))
                 self.save_to_latex_aux(file_name, ano_frac, liq_geral, desc)
 
-            estatistica_dict = report['estatisticas']
+            estatistica_dict = report.get('estatisticas', {})
 
             for estatistica_key in estatistica_dict.keys():
                 estatistica = estatistica_dict[estatistica_key]

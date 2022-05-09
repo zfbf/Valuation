@@ -31,6 +31,15 @@ class LiquidezGeral(Indice):
             msg += '\n\tliquidez_geral: {}'.format(liquidez_geral)
             print(msg)
             raise Exception(msg) from err
+        except AttributeError as err:
+            msg = 'AttributeError em LiquidezGeral'
+            msg += '\n\tano: {}, trimestre: {}'.format(ano, trimestre)
+            msg += '\n\tsaldo_ac: {}'.format(saldo_ac)
+            msg += '\n\tsaldo_rlp: {}'.format(saldo_rlp)
+            msg += '\n\tsaldo_pc: {}'.format(saldo_pc)
+            msg += '\n\tsaldo_pnc: {}'.format(saldo_pnc)
+            msg += '\n\tliquidez_geral: {}'.format(liquidez_geral)
+            print(msg)
         except Exception as e:
             msg = 'Exception em LiquidezGeral'
             msg += '\n\tano: {}, trimestre: {}'.format(ano, trimestre)

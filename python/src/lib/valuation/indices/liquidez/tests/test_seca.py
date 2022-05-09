@@ -21,6 +21,12 @@ class TestLiquidezSeca(TestIndice):
             print('{} - {}T{}: {}'.format(self.liquidez_seca, ano,
                     trimestre, valor))
 
+    def test_get_valor_2030T4(self):
+        ano = 2030
+        trimestre = 4
+        valor = self.liquidez_seca.get_valor(ano, trimestre)
+        self.assertIsNone(valor)
+
     @unittest.skipUnless(print_to_stdout, 'making clean tests')
     def test_to_str(self):
         print('\nliquidez_seca: {}'.format(self.liquidez_seca))

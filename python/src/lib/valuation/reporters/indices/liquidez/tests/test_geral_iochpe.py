@@ -68,13 +68,13 @@ class TestIndiceLiquidezGeralReporter(unittest.TestCase):
     def tearDown(self):
         self.valuation_base = None
 
-    def test_execute(self):
-        reporter = IndiceLiquidezGeralReporter(self.valuation_base)
-        outros_valuations = self.valuation_outros
-        report = reporter.execute(ano_inicial=2011, trimestre_inicial=4,
-                outros=outros_valuations)
-        self.assertIsNotNone(report)
-        return report
+    #def test_execute(self):
+    #    reporter = IndiceLiquidezGeralReporter(self.valuation_base)
+    #    outros_valuations = self.valuation_outros
+    #    report = reporter.execute(ano_inicial=2011, trimestre_inicial=4,
+    #            outros=outros_valuations)
+    #    self.assertIsNotNone(report)
+    #    return report
 
     def test_ensure_args_inicio_fim(self):
         kwargs = {}
@@ -88,8 +88,10 @@ class TestIndiceLiquidezGeralReporter(unittest.TestCase):
     def test_save_to_latex(self):
         reporter = IndiceLiquidezGeralReporter(self.valuation_base)
         outros_valuations = self.valuation_outros
-        report = reporter.execute(outros=outros_valuations, ano_inicial=2011,
+        report = reporter.execute(outros=outros_valuations, ano_inicial=2007,
                 trimestre_inicial=4, save_to_latex=True)
+        #report = reporter.execute(outros=outros_valuations, ano_inicial=2011,
+        #        trimestre_inicial=4, save_to_latex=True)
         self.assertIsNotNone(report)
         return report
 

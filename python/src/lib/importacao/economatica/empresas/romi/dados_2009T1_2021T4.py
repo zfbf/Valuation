@@ -9,7 +9,7 @@ class Romi2009T12021T4(EconomaticaDadosTrimestraisAnualizados):
         super().__init__('Romi', 'ROMI3', 2009, 1, 2021, 4)
 
     def get_dados_empresa_file_path(self):
-        relative_path = 'economatica/Romi/'
+        relative_path = 'economatica/romi/'
         return os.path.join(super().get_dados_dir(), relative_path)
 
     def get_dados_empresa_file_name(self):

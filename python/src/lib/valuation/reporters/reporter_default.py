@@ -16,7 +16,6 @@ class ReporterDefault(Reporter):
         ativo_nao_circulante_valores = []
         ativo_verificacao_saldos = []
 
-
         for periodo in periodos:
             identificadores.append(periodo.identificador)
             bp_ifrs = periodo.bp_ifrs
@@ -35,9 +34,8 @@ class ReporterDefault(Reporter):
         report.append(ativo_verificacao_saldos)
 
         #periodo_contabil
-
-        print('type(report): {}'.format(type(report)))
-        print('len(report): {}'.format(len(report)))
-        print('report: {}'.format(report))
+        #print('type(report): {}'.format(type(report)))
+        #print('len(report): {}'.format(len(report)))
+        #print('report: {}'.format(report))
 
         return report
