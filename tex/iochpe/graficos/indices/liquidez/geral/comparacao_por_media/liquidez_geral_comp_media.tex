@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, left=3cm, top=3cm, right=2cm, bottom=2cm]{geometry}
+
+
+%================================================================
+%==== Packages ==================================================
+%================================================================
+
+%---- encoding ------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}         % Pacote para acentuação
+%--------------------------------------
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb, dsfont, mathtools}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+
+%================================================================
+%==== Configurações dos pacotes =================================
+%================================================================
+
+\pgfplotsset{width=16cm,compat=1.17}
+
+
+%================================================================
+%==== Preâmbulo =================================================
+%================================================================
+
+\title{Índice de Liquidez Geral - Visualização por Quartis}
+\author{Zenon Farias Braga F}
+\date{April 2022}
+
+
+\begin{document}
+
+\begin{center}
+    \begin{tikzpicture}
+    	\begin{axis}[
+    			axis lines = left,
+    			ylabel={Índice de Liquidez Geral},
+    			ymin=0, ymax=2.6,
+    			xmin=2010, xmax=2023,
+    		    x tick label style={
+    		        /pgf/number format/1000 sep={}
+                },
+                legend columns=4,
+                legend to name=liq_geral_comp_quartis
+    		]
+
+    		\addplot [blue!30!white, lightgray, densely dotted] table {quartil_3.dat};
+    		\addlegendentry{3º Quartil};
+
+    		\addplot [lightgray, densely dotted] table {quartil_2.dat};
+    		\addlegendentry{2º Quartil};
+
+    		\addplot [red!30!white, densely dotted] table {quartil_1.dat};
+    		\addlegendentry{1º Quartil};
+
+    		\addplot [blue, thick] table {Iochpe.dat};
+    		\addlegendentry{Iochpe};
+    	\end{axis}
+    \end{tikzpicture}
+\end{center}
+
+\begin{center}
+    \ref{liq_geral_comp_quartis}
+\end{center}
+
+\end{document}

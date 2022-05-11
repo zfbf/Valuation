@@ -26,7 +26,7 @@ class LiquidezImediata(Indice):
             msg += '\n\tbp is None: {}'.format(bp is None)
             msg += '\n\tliquidez_imediata: {}'.format(liquidez_imediata)
             print(msg)
-            raise Exception(msg) from err
+            #raise Exception(msg) from err
         except AttributeError as err:
             msg = 'AttributeError em LiquidezImediata'
             msg += '\n\tano: {}, trimestre: {}'.format(ano, trimestre)

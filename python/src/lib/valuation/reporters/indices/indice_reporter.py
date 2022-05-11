@@ -2,8 +2,9 @@ from ..reporter import Reporter
 
 
 class IndiceReporter(Reporter):
-    def __init__(self, nome, valuation):
+    def __init__(self, nome, indice_key, valuation):
         super().__init__(nome)
+        self.indice_key = indice_key
         self.valuation = valuation
 
     #

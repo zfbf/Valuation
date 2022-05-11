@@ -30,7 +30,7 @@ class LiquidezCorrente(Indice):
             msg += '\n\tsaldo_pc: {}'.format(saldo_pc)
             msg += '\n\tliquidez_corrente: {}'.format(liquidez_corrente)
             print(msg)
-            raise Exception(msg) from err
+            #raise Exception(msg) from err
         except AttributeError as err:
             msg = 'AttributeError em LiquidezCorrente'
             msg += '\n\tano: {}, trimestre: {}'.format(ano, trimestre)

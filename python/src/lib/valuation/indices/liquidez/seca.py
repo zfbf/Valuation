@@ -26,7 +26,7 @@ class LiquidezSeca(Indice):
             msg += '\n\tbp is None: {}'.format(bp is None)
             msg += '\n\tliquidez_seca: {}'.format(liquidez_seca)
             print(msg)
-            raise Exception(msg) from err
+            #raise Exception(msg) from err
         except AttributeError as err:
             msg = 'AttributeError em LiquidezSeca'
             msg += '\n\tano: {}, trimestre: {}'.format(ano, trimestre)
