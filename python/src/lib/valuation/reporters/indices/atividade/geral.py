@@ -16,7 +16,6 @@ class IndiceAtividadeGeralReporter(IndiceReporter):
             ativo_nao_circulante_valores = []
             ativo_verificacao_saldos = []
 
-
             for periodo in periodos:
                 identificadores.append(periodo.identificador)
                 bp_ifrs = periodo.bp_ifrs

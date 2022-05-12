@@ -28,7 +28,7 @@
 %==== Preâmbulo =================================================
 %================================================================
 
-\title{Índice de Liquidez Geral - Visualização por Quartis}
+\title{Índice de Liquidez Geral - Visualização por Média}
 \author{Zenon Farias Braga F}
 \date{April 2022}
 
@@ -40,32 +40,39 @@
     	\begin{axis}[
     			axis lines = left,
     			ylabel={Índice de Liquidez Geral},
-    			ymin=0, ymax=2.6,
+    			ymin=0, ymax=5.25,
     			xmin=2010, xmax=2023,
     		    x tick label style={
     		        /pgf/number format/1000 sep={}
                 },
                 legend columns=4,
-                legend to name=liq_geral_comp_quartis
+                legend cell align = left,
+                legend style={draw=lightgray},
+                legend style={/tikz/every even column/.append style={column sep=0.4cm}},
+                legend to name=liq_geral_comp_media
     		]
 
-    		\addplot [blue!30!white, lightgray, densely dotted] table {quartil_3.dat};
-    		\addlegendentry{3º Quartil};
+            \begin{scope}
+                \clip (2010, 0) rectangle (2022, 5.25);
 
-    		\addplot [lightgray, densely dotted] table {quartil_2.dat};
-    		\addlegendentry{2º Quartil};
+                \addplot [blue!30!white, lightgray, densely dashed] table {dados/max.dat};
+    		    \addlegendentry{Máximo};
 
-    		\addplot [red!30!white, densely dotted] table {quartil_1.dat};
-    		\addlegendentry{1º Quartil};
+    		    \addplot [lightgray, densely dashed] table {dados/media.dat};
+    		    \addlegendentry{Média};
 
-    		\addplot [blue, thick] table {Iochpe.dat};
+    		    \addplot [red!30!white, densely dashed] table {dados/min.dat};
+    		    \addlegendentry{Mínimo};
+            \end{scope}
+
+    		\addplot [blue, thick] table {dados/Iochpe.dat};
     		\addlegendentry{Iochpe};
     	\end{axis}
     \end{tikzpicture}
 \end{center}
 
 \begin{center}
-    \ref{liq_geral_comp_quartis}
+    \ref{liq_geral_comp_media}
 \end{center}
 
 \end{document}

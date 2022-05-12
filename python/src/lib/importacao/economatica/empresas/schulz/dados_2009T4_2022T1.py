@@ -6,7 +6,7 @@ from ...dados_trimestrais_anualizados import EconomaticaDadosTrimestraisAnualiza
 
 class Schulz2009T42022T1(EconomaticaDadosTrimestraisAnualizados):
     def __init__(self):
-        super().__init__('Schulz', 'SHUL3', 2009, 4, 2021, 4)
+        super().__init__('Schulz', 'SHUL3', 2009, 4, 2022, 1)
 
     def get_dados_empresa_file_path(self):
         relative_path = 'economatica/schulz/'

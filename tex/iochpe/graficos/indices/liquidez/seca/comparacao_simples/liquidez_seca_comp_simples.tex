@@ -1,0 +1,94 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, left=3cm, top=3cm, right=2cm, bottom=2cm]{geometry}
+
+
+%================================================================
+%==== Packages ==================================================
+%================================================================
+
+%---- encoding ------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}         % Pacote para acentuação
+%--------------------------------------
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb, dsfont, mathtools}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+
+%================================================================
+%==== Configurações dos pacotes =================================
+%================================================================
+
+\pgfplotsset{width=16cm,compat=1.17}
+
+
+%================================================================
+%==== Preâmbulo =================================================
+%================================================================
+
+\title{Grafico_Linha}
+\author{Zenon Farias Braga F}
+\date{May 2022}
+
+\begin{document}
+
+\begin{center}
+    \begin{tikzpicture}
+    	\begin{axis}[
+    			axis lines = left,
+    			ylabel={Índice de Liquidez Seca},
+    			ymin=0, ymax=8.25,
+    			xmin=2011, xmax=2023,
+    		    x tick label style={
+    		        /pgf/number format/1000 sep={}
+                },
+                legend columns=4,
+                legend to name=liq_seca_comp_simples
+    		]
+
+    		\addplot [red] table {dados/Embraer.dat};
+    		\addlegendentry{Embraer};
+
+    		\addplot [green] table {dados/Fras-Le.dat};
+    		\addlegendentry{Fras-Le};
+
+    		\addplot [cyan] table {dados/Mahle_Metal_Leve.dat};
+    		\addlegendentry{Mahle Metal Leve};
+
+    		\addplot [magenta] table {dados/Marcopolo.dat};
+    		\addlegendentry{Marcopolo};
+
+    		\addplot [yellow] table {dados/Metisa.dat};
+    		\addlegendentry{Metisa};
+
+    		\addplot [brown] table {dados/Randon.dat};
+    		\addlegendentry{Randon};
+
+    		\addplot [lime] table {dados/Romi.dat};
+    		\addlegendentry{Romi};
+
+    		\addplot [olive] table {dados/Schulz.dat};
+    		\addlegendentry{Schulz};
+
+    		\addplot [orange] table {dados/Tupy.dat};
+    		\addlegendentry{Tupy};
+
+    		\addplot [pink] table {dados/Weg.dat};
+    		\addlegendentry{Weg};
+
+    	    \addplot [purple] table {dados/Whirlpool.dat};
+    		\addlegendentry{Whirlpool};
+
+    		\addplot [blue, thick] table {dados/Iochpe.dat};
+    		\addlegendentry{Iochpe};
+    	\end{axis}
+    \end{tikzpicture}
+\end{center}
+
+\begin{center}
+    \ref{liq_seca_comp_simples}
+\end{center}
+
+\end{document}

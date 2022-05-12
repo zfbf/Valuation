@@ -129,16 +129,16 @@ class IndiceLiquidezReporter(IndiceReporter, ABC):
 
         try:
             indice_key = self.indice_key
-            emp_base_liq_geral = report['empresa_base'][indice_key]
-            emp_base_liq_geral = [i for i in emp_base_liq_geral if i]
+            ind_liq_emp_base = report['empresa_base'][indice_key]
+            ind_liq_emp_base = [i for i in ind_liq_emp_base if i]
 
             report['empresa_base']['estatisticas'] = {
-                'min': np.min(emp_base_liq_geral),
-                'max': np.max(emp_base_liq_geral),
-                'media': np.mean(emp_base_liq_geral),
-                'quartil_1': np.percentile(emp_base_liq_geral, 25),
-                'quartil_2': np.percentile(emp_base_liq_geral, 50),
-                'quartil_3': np.percentile(emp_base_liq_geral, 75)
+                'min': np.min(ind_liq_emp_base),
+                'max': np.max(ind_liq_emp_base),
+                'media': np.mean(ind_liq_emp_base),
+                'quartil_1': np.percentile(ind_liq_emp_base, 25),
+                'quartil_2': np.percentile(ind_liq_emp_base, 50),
+                'quartil_3': np.percentile(ind_liq_emp_base, 75)
             }
 
             outras_empresas = report.get('outras_empresas', None)
@@ -196,16 +196,16 @@ class IndiceLiquidezReporter(IndiceReporter, ABC):
                     (min, max, media) = (None, None, None)
                     (q1, q2, q3) = (None, None, None)
 
-                    outra_emp_ind_liquidez = outra_empresa[indice_key]
-                    outra_emp_ind_liquidez = [i for i in outra_emp_ind_liquidez if i]
+                    ind_liq_outra_emp = outra_empresa[indice_key]
+                    ind_liq_outra_emp = [i for i in ind_liq_outra_emp if i]
 
-                    if len(outra_emp_ind_liquidez) > 0:
-                        min = np.min(outra_emp_ind_liquidez)
-                        max = np.max(outra_emp_ind_liquidez),
-                        media = np.mean(outra_emp_ind_liquidez)
-                        quartil_1 = np.percentile(outra_emp_ind_liquidez, 25),
-                        quartil_2 = np.percentile(outra_emp_ind_liquidez, 50),
-                        quartil_3 = np.percentile(outra_emp_ind_liquidez, 75)
+                    if len(ind_liq_outra_emp) > 0:
+                        min = np.min(ind_liq_outra_emp)
+                        max = np.max(ind_liq_outra_emp),
+                        media = np.mean(ind_liq_outra_emp)
+                        quartil_1 = np.percentile(ind_liq_outra_emp, 25),
+                        quartil_2 = np.percentile(ind_liq_outra_emp, 50),
+                        quartil_3 = np.percentile(ind_liq_outra_emp, 75)
 
                     outra_empresa['estatisticas'] = {
                         'min': min,
@@ -251,7 +251,9 @@ class IndiceLiquidezReporter(IndiceReporter, ABC):
             indice_key = self.indice_key
             liq_geral = report['empresa_base'][indice_key]
             nome = report['empresa_base']['nome']
-            desc = '{} - min: {}, max: {}'.format(nome,
+            desc = '{}.{} - min: {}, max: {}'.format(
+                    indice_key,
+                    nome,
                     report['empresa_base']['estatisticas']['min'],
                     report['empresa_base']['estatisticas']['max'])
             file_name = os.path.join(aux_dir, '{}.dat'.format(nome))
@@ -265,7 +267,9 @@ class IndiceLiquidezReporter(IndiceReporter, ABC):
             for empresa in outras_empresas:
                 liq_geral = empresa[indice_key]
                 nome = empresa['nome']
-                desc = '{} - min: {}, max: {}'.format(nome,
+                desc = '{}.{} - min: {}, max: {}'.format(
+                        indice_key,
+                        nome,
                         empresa['estatisticas']['min'],
                         empresa['estatisticas']['max'])
                 file_name = os.path.join(aux_dir, '{}.dat'.format(nome))
@@ -275,8 +279,13 @@ class IndiceLiquidezReporter(IndiceReporter, ABC):
 
             for estatistica_key in estatistica_dict.keys():
                 estatistica = estatistica_dict[estatistica_key]
+                desc = '{}.{} - min: {}, max: {}'.format(
+                        indice_key,
+                        estatistica_key,
+                        np.min([i for i in estatistica if i]),
+                        np.max([i for i in estatistica if i]))
                 file_name = os.path.join(aux_dir, '{}.dat'.format(estatistica_key))
-                self.save_to_latex_aux(file_name, ano_frac, estatistica)
+                self.save_to_latex_aux(file_name, ano_frac, estatistica, desc)
         except Exception as e:
             msg = 'IndiceLiquidezGeralReporter.save_to_latex()'
             msg += ' = #except Exception'
